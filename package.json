@@ -1,0 +1,19 @@
+{
+  "name": "fable-react-native",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "prebuild": "npm install",
+    "build": "fable",
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "fable-core": "^0.2.3",
+    "react": "15.2.1",
+    "react-native": "0.30.0"
+  },
+  "devDependencies": {
+    "fable-compiler": "^0.4.4",
+    "fable-import-react": "^0.1.0"
+  }
+}
