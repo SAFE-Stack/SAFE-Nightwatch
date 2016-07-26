@@ -1,25 +1,50 @@
 module HelloWorld
 
+open System
 open Fable.Core
 open Fable.Import
-type RN = ReactNative.Globals
+open Fable.Import.ReactNative
+open Fable.Import.ReactImagePicker
 
-type HelloWorldApp (props) =
-    inherit React.Component<obj,obj>(props)
+type RN = ReactNative.Globals
+type IP = ReactImagePicker.Globals
+
+type HelloWorldState = {
+    uri: string
+}
+
+type HelloWorldApp (props) as this =
+    inherit React.Component<obj,HelloWorldState>(props)
+    do this.state <- { uri = "Click me" }
 
     member x.render () =
-        let props =
-            createObj [
-                "Aspect" ==> "fill"
-                "style" ==>
-                    createObj [
-                        "width" ==> 100
-                        "height" ==> 100
-                    ]
-                ]
+
+        let buttonProps =
+             let t = createEmpty<TouchableHighlightProperties>
+             t.onPress 
+                <- (fun () -> 
+                        let p = createEmpty<ImagePickerOptions>
+                        p.title <- unbox "Meter device"
+                        p.allowsEditing <- unbox true
+
+                        IP.ImagePicker.showImagePicker(p, fun result -> 
+                            x.setState { 
+                                uri = 
+                                    if not result.didCancel then
+                                        if String.IsNullOrEmpty result.error then
+                                            result.uri
+                                        else
+                                            result.error
+                                    else
+                                        "dialog canceled" }))
+                    |> unbox
+             t
+
+
+        let highlight = React.createElement(RN.TouchableHighlight, buttonProps, [| React.createElement(RN.Text, unbox null, unbox x.state.uri) |> unbox |])      
+
         React.createElement(RN.View, unbox null,
             [|
-                React.createElement(ReactNativeCamera.Globals.Camera , props) |> unbox
-                React.createElement(RN.Text, unbox null, unbox "Hello World") |> unbox
+                highlight |> unbox
             |]
         )

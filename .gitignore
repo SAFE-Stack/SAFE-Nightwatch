@@ -44,3 +44,8 @@ out
 obj
 bin
 typings
+
+launchReactNative.js
+debuggerWorker.js
+index.android.bundle
+index.android.map

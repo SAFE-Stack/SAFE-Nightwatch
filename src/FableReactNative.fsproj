@@ -42,8 +42,8 @@
   <ItemGroup>
     <Compile Include="../node_modules/fable-import-react/Fable.Import.React.fs" />
     <Compile Include="../node_modules/fable-import-react/Fable.Helpers.React.fs" />
-    <Compile Include="Fable.Import.ReactNative.fs" />
-    <Compile Include="Fable.Import.ReactNativeCamera.fs" />
+    <Compile Include="../node_modules/fable-import-react-native/Fable.Import.ReactNative.fs" />
+    <Compile Include="../node_modules/fable-import-react-native-image-picker/Fable.Import.ReactNativeImagePicker.fs" />
     <Compile Include="HelloWorld.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
