@@ -8,11 +8,12 @@ open Fable.Import.Browser
 
 module ReactImageCropPicker =
 
-    type CameraStatic =
-        inherit React.ComponentClass<CameraProperties>
+    type ImagePicker =
+        abstract member openPicker: ImagePickerOptions -> Promise<ImagePickerResult>
 
-    and CameraProperties = obj
+    and ImagePickerOptions = obj
+    and ImagePickerResult = obj
 
     type Globals =
-        [<Import("default", from="react-native-image-crop-picker")>]
-        static member ImagePicker with get(): CameraStatic = failwith "JS only" and set(v: CameraStatic): unit = failwith "JS only"
+        [<Import("ImagePicker", from="react-native-image-crop-picker")>]
+        static member ImagePicker with get(): ImagePicker = failwith "JS only" and set(v: ImagePicker): unit = failwith "JS only"
