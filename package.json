@@ -10,7 +10,8 @@
   "dependencies": {
     "fable-core": "^0.2.3",
     "react": "15.2.1",
-    "react-native": "0.30.0"
+    "react-native": "0.30.0",
+    "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git"
   },
   "devDependencies": {
     "fable-compiler": "^0.4.4",
