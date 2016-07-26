@@ -9,8 +9,7 @@
             "platform": "android",
             "internalDebuggerPort": 9090,
             "sourceMaps": true,
-            "outDir": "${workspaceRoot}/.vscode/.react",
-            "preLaunchTask": "build"
+            "outDir": "${workspaceRoot}/.vscode/.react"
         },
         {
             "name": "Debug iOS",
@@ -21,8 +20,7 @@
             "target": "iPhone 5s",
             "internalDebuggerPort": 9090,
             "sourceMaps": true,
-            "outDir": "${workspaceRoot}/.vscode/.react",
-            "preLaunchTask": "build"
+            "outDir": "${workspaceRoot}/.vscode/.react"
         }
     ]
 }

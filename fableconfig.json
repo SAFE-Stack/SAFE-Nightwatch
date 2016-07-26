@@ -3,9 +3,8 @@
     "ecma": "es2015",
     "outDir": "out",
     "sourceMaps": true,
-    "projFile": "src/FableReactNative.fsproj",
+    "projFile": "src/ImagePickerApp.fsproj",
     "babelPlugins": [],
     "scripts": {
-        "prebuild": "npm install"
     }
 }

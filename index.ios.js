@@ -1,6 +1,6 @@
 import {AppRegistry} from 'react-native';
-import {HelloWorldApp} from './out/HelloWorld';
+import {ImagePickerApp} from './out/ImagePickerApp';
 
-AppRegistry.registerComponent('FableReactNative', () => HelloWorldApp);
+AppRegistry.registerComponent('ImagePickerApp', () => ImagePickerApp);
 
 
