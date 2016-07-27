@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "prebuild": "npm install",
-    "build": "fable --watch",
+    "build": "fable",
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {

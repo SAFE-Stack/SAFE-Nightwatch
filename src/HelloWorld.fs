@@ -39,7 +39,7 @@ type HelloWorldApp (props) as this =
                                         else
                                             result.error
                                     else
-                                        "dialog canceld" }))
+                                        "dialog canceled" }))
                     |> unbox
              t
 
