@@ -12,15 +12,18 @@ type HelloWorldApp (props) =
     inherit React.Component<obj,obj>(props)
 
     member x.render () =
+
         let buttonProps =
             let t = createEmpty<TextProperties>
             let p = createEmpty<ImagePickerOptions>
-            t.onPress <- unbox (fun () -> IP.ImagePicker.showImagePicker(p, fun result -> failwithf "%s" (result.ToString()) ))
+            p.title <- unbox "Select meter picture"
+            t.onPress <- unbox (fun () -> IP.ImagePicker.showImagePicker(p, fun result -> () ))
             t
+
+        let textBox = React.createElement(RN.Text, buttonProps, unbox "Hello World") 
 
         React.createElement(RN.View, unbox null,
             [|
-                React.createElement(RN.Text, buttonProps, unbox "Hello World") |> unbox
-                //React.createElement(RN.TouchableHighlight, buttonProps, unbox "Click me" ) |> unbox
+                textBox |> unbox
             |]
         )
