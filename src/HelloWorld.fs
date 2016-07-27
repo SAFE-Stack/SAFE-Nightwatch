@@ -20,6 +20,6 @@ type HelloWorldApp (props) =
         React.createElement(RN.View, unbox null,
             [|
                 React.createElement(RN.Text, unbox null, unbox "Hello World") |> unbox
-                React.createElement(RN.TouchableHighlight, buttonProps, unbox "Click me" ) |> unbox
+                React.createElement(RN.TouchableHighlight, unbox buttonProps, unbox "Click me" ) |> unbox
             |]
         )

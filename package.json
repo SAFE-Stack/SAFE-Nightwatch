@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "fable-core": "^0.2.3",
+    "fable-import-react": "^0.1.1",
     "react": "15.2.1",
     "react-native": "0.30.0",
     "react-native-image-crop-picker": "^0.4.4"
