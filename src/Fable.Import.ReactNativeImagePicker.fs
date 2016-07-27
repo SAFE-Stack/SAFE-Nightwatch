@@ -13,7 +13,10 @@ module ReactImagePicker =
         abstract member launchCamera: (ImagePickerOptions * (ImagePickerResult -> unit)) -> unit
         abstract member launchImageLibrary: (ImagePickerOptions * (ImagePickerResult -> unit)) -> unit
 
-    and ImagePickerOptions = obj
+    and ImagePickerOptions =
+        abstract title: string option with get, set
+        abstract cancelButtonTitle: string option with get, set
+
     and ImagePickerResult = obj
 
     type Globals =
