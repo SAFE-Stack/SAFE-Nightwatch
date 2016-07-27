@@ -10,6 +10,8 @@ module ReactImagePicker =
 
     type ImagePicker =
         abstract member showImagePicker: (ImagePickerOptions * (ImagePickerResult -> unit)) -> unit
+        abstract member launchCamera: (ImagePickerOptions * (ImagePickerResult -> unit)) -> unit
+        abstract member launchImageLibrary: (ImagePickerOptions * (ImagePickerResult -> unit)) -> unit
 
     and ImagePickerOptions = obj
     and ImagePickerResult = obj
