@@ -6,6 +6,5 @@
     "projFile": "src/FableReactNative.fsproj",
     "babelPlugins": [],
     "scripts": {
-        "prebuild": "npm install"
     }
 }

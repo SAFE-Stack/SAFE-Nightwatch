@@ -1,5 +1,6 @@
 module HelloWorld
 
+open System
 open Fable.Core
 open Fable.Import
 open Fable.Import.ReactNative
@@ -8,19 +9,41 @@ open Fable.Import.ReactImagePicker
 type RN = ReactNative.Globals
 type IP = ReactImagePicker.Globals
 
-type HelloWorldApp (props) =
-    inherit React.Component<obj,obj>(props)
+type HelloWorldState = {
+    uri: string
+}
+
+type HelloWorldApp (props) as this =
+    inherit React.Component<obj,HelloWorldState>(props)
+    do this.state <- { uri = "Click me" }
 
     member x.render () =
 
         let buttonProps =
-            let t = createEmpty<TextProperties>
-            let p = createEmpty<ImagePickerOptions>
-            p.title <- unbox "Select meter picture"
-            t.onPress <- unbox (fun () -> IP.ImagePicker.showImagePicker p (fun result -> ()))
-            t
+             let t = createEmpty<TextProperties>
+             let p = createEmpty<ImagePickerOptions>             
+             p.title <- unbox "Meter device"
+             p.allowsEditing <- unbox true
 
-        let textBox = React.createElement(RN.Text, buttonProps, unbox "Hello World") 
+             t.onPress 
+                <- (fun () -> 
+                        let p = createEmpty<ImagePickerOptions>             
+                        p.title <- unbox "Meter device"
+                        p.allowsEditing <- unbox true
+                        IP.ImagePicker.showImagePicker(p, fun result -> 
+                            x.setState { 
+                                uri = 
+                                    if not result.didCancel then
+                                        if String.IsNullOrEmpty result.error then
+                                            result.uri
+                                        else
+                                            result.error
+                                    else
+                                        "dialog canceld" }))
+                    |> unbox
+             t
+
+        let textBox = React.createElement(RN.Text, buttonProps, unbox x.state.uri) 
 
         React.createElement(RN.View, unbox null,
             [|
