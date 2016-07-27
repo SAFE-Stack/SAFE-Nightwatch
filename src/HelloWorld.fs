@@ -17,7 +17,7 @@ type HelloWorldApp (props) =
             let t = createEmpty<TextProperties>
             let p = createEmpty<ImagePickerOptions>
             p.title <- unbox "Select meter picture"
-            t.onPress <- unbox (fun () -> IP.ImagePicker.showImagePicker(p, fun result -> () ))
+            t.onPress <- unbox (fun () -> IP.ImagePicker.showImagePicker p (fun result -> ()))
             t
 
         let textBox = React.createElement(RN.Text, buttonProps, unbox "Hello World") 

@@ -77845,10 +77845,14 @@ var buttonProps=function(){
 var t={};
 var p={};
 p.title="Select meter picture";
+p.takePhotoButtonTitle="";
 
-t.onPress=function(unitVar0){
-_reactNativeImagePicker2.default.showImagePicker([p,function(result){}]);
-};
+t.onPress=function(unitVar0){return function(){
+var objectArg=_reactNativeImagePicker2.default;
+return function(arg00){return function(arg10){
+objectArg.showImagePicker(arg00,arg10);
+};};
+}()(p)(function(result){});};
 
 return t;
 }();
