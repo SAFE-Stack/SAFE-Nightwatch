@@ -15,7 +15,7 @@ type HelloWorldApp (props) =
         let buttonProps =
             let t = createEmpty<TextProperties>
             let p = createEmpty<ImagePickerOptions>
-            t.onPress <- unbox (fun () -> IP.ImagePicker.showImagePicker(p) )
+            t.onPress <- unbox (fun () -> IP.ImagePickerManager.showImagePicker(p) )
             t
 
         React.createElement(RN.View, unbox null,

@@ -77832,7 +77832,7 @@ module.exports=ReactMount.renderSubtreeIntoContainer;
 }, "react/lib/renderSubtreeIntoContainer.js");
 __d(630 /* fable-react-native/out/HelloWorld.js */, function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.HelloWorldApp=undefined;var _react=require(397 /* react */);var
 
-$import2=babelHelpers.interopRequireWildcard(_react);var _reactNativeImageCropPicker=require(631 /* react-native-image-crop-picker */);var _reactNativeImageCropPicker2=babelHelpers.interopRequireDefault(_reactNativeImageCropPicker);
+$import2=babelHelpers.interopRequireWildcard(_react);var _reactNativeImagePicker=require(631 /* react-native-image-picker */);var _reactNativeImagePicker2=babelHelpers.interopRequireDefault(_reactNativeImagePicker);
 var _reactNative=require(12 /* react-native */);var $import3=babelHelpers.interopRequireWildcard(_reactNative);
 var _fableCore=require(632 /* fable-core */);
 var HelloWorldApp=exports.HelloWorldApp=function(_$import){babelHelpers.inherits(HelloWorldApp,_$import);
@@ -77845,7 +77845,7 @@ var buttonProps=function(){
 var t={};
 var p={};
 
-t.onPress=function(unitVar0){return _reactNativeImageCropPicker2.default.openPicker(p);};
+t.onPress=function(unitVar0){return _reactNativeImagePicker2.default.showImagePicker(p);};
 
 return t;
 }();
@@ -77856,11 +77856,29 @@ return $import2.createElement($import3.View,null,$import2.createElement.apply($i
 
 _fableCore.Util.setInterfaces(HelloWorldApp.prototype,[],"HelloWorld.HelloWorldApp");
 }, "fable-react-native/out/HelloWorld.js");
-__d(631 /* react-native-image-crop-picker/index.js */, function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(397 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+__d(631 /* react-native-image-picker/index.js */, function(global, require, module, exports) {'use strict';var _require=
 
-var _reactNative=require(12 /* react-native */);exports.default=
-_reactNative.NativeModules.ImageCropPicker;
-}, "react-native-image-crop-picker/index.js");
+require(12 /* react-native */);var NativeModules=_require.NativeModules;var
+ImagePickerManager=NativeModules.ImagePickerManager;
+var DEFAULT_OPTIONS={
+title:'Select a Photo',
+cancelButtonTitle:'Cancel',
+takePhotoButtonTitle:'Take Photo…',
+chooseFromLibraryButtonTitle:'Choose from Library…',
+quality:1.0,
+allowsEditing:false};
+
+
+module.exports=babelHelpers.extends({},
+ImagePickerManager,{
+showImagePicker:function showImagePicker(options,callback){
+if(typeof options==='function'){
+callback=options;
+options={};
+}
+return ImagePickerManager.showImagePicker(babelHelpers.extends({},DEFAULT_OPTIONS,options),callback);
+}});
+}, "react-native-image-picker/index.js");
 __d(632 /* fable-core/fable-core.js */, function(global, require, module, exports) {(function(global,factory){
 if(typeof define==="function"&&define.amd){
 define(["exports"],factory);
