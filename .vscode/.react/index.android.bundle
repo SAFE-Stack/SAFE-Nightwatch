@@ -77832,9 +77832,10 @@ module.exports=ReactMount.renderSubtreeIntoContainer;
 }, "react/lib/renderSubtreeIntoContainer.js");
 __d(630 /* fable-react-native/out/HelloWorld.js */, function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.HelloWorldApp=undefined;var _react=require(397 /* react */);var
 
-$import2=babelHelpers.interopRequireWildcard(_react);var _reactNativeImagePicker=require(631 /* react-native-image-picker */);var _reactNativeImagePicker2=babelHelpers.interopRequireDefault(_reactNativeImagePicker);
-var _reactNative=require(12 /* react-native */);var $import3=babelHelpers.interopRequireWildcard(_reactNative);
-var _fableCore=require(632 /* fable-core */);
+
+$import3=babelHelpers.interopRequireWildcard(_react);var _reactNativeImagePicker=require(631 /* react-native-image-picker */);var _reactNativeImagePicker2=babelHelpers.interopRequireDefault(_reactNativeImagePicker);var _fableCore=require(632 /* fable-core */);
+var _reactNative=require(12 /* react-native */);var $import4=babelHelpers.interopRequireWildcard(_reactNative);
+
 var HelloWorldApp=exports.HelloWorldApp=function(_$import){babelHelpers.inherits(HelloWorldApp,_$import);
 function HelloWorldApp(props){babelHelpers.classCallCheck(this,HelloWorldApp);return babelHelpers.possibleConstructorReturn(this,Object.getPrototypeOf(HelloWorldApp).call(this,
 props));
@@ -77845,12 +77846,23 @@ var buttonProps=function(){
 var t={};
 var p={};
 
-t.onPress=function(unitVar0){return _reactNativeImagePicker2.default.showImagePicker(p);};
+t.onPress=function(unitVar0){
+_reactNativeImagePicker2.default.showImagePicker([p,function(result){
+(function(){
+var clo1=_fableCore.String.fsFormat("%s")(function(x){
+throw x;
+});
+return function(arg10){
+clo1(arg10);
+};
+})()(result.toString());
+}]);
+};
 
 return t;
 }();
 
-return $import2.createElement($import3.View,null,$import2.createElement.apply($import2,[$import3.Text,buttonProps].concat(babelHelpers.toConsumableArray("Hello World"))));
+return $import3.createElement($import4.View,null,$import3.createElement.apply($import3,[$import4.Text,buttonProps].concat(babelHelpers.toConsumableArray("Hello World"))));
 }}]);return HelloWorldApp;}(_react.Component);
 
 

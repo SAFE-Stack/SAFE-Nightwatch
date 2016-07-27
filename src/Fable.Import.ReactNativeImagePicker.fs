@@ -9,7 +9,7 @@ open Fable.Import.Browser
 module ReactImagePicker =
 
     type ImagePickerManager =
-        abstract member showImagePicker: ImagePickerOptions -> Promise<ImagePickerResult>
+        abstract member showImagePicker: (ImagePickerOptions * (ImagePickerResult -> unit)) -> unit
 
     and ImagePickerOptions = obj
     and ImagePickerResult = obj
