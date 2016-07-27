@@ -15,5 +15,5 @@ module ReactImageCropPicker =
     and ImagePickerResult = obj
 
     type Globals =
-        [<Import("ImagePicker", from="react-native-image-crop-picker")>]
+        [<Import("default", from="react-native-image-crop-picker")>]
         static member ImagePicker with get(): ImagePicker = failwith "JS only" and set(v: ImagePicker): unit = failwith "JS only"
