@@ -77843,13 +77843,14 @@ props));
 {
 var buttonProps=function(){
 var t={};
+var p={};
 
-t.onPress=function(unitVar0){return _reactNativeImageCropPicker.ImagePicker.openPicker();};
+t.onPress=function(unitVar0){return _reactNativeImageCropPicker.ImagePicker.openPicker(p);};
 
 return t;
 }();
 
-return $import2.createElement($import3.View,null,$import2.createElement.apply($import2,[$import3.Text,null].concat(babelHelpers.toConsumableArray("Hello World"))),$import2.createElement.apply($import2,[$import3.TouchableHighlight,buttonProps].concat(babelHelpers.toConsumableArray("Click me"))));
+return $import2.createElement($import3.View,null,$import2.createElement.apply($import2,[$import3.Text,buttonProps].concat(babelHelpers.toConsumableArray("Hello World"))));
 }}]);return HelloWorldApp;}(_react.Component);
 
 

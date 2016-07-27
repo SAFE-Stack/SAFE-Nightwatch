@@ -13,13 +13,14 @@ type HelloWorldApp (props) =
 
     member x.render () =
         let buttonProps =
-            let t = createEmpty<TouchableHighlightProperties>
-            t.onPress <- unbox (fun () -> IP.ImagePicker.openPicker(null) )
+            let t = createEmpty<TextProperties>
+            let p = createEmpty<ImagePickerOptions>
+            t.onPress <- unbox (fun () -> IP.ImagePicker.openPicker(p) )
             t
 
         React.createElement(RN.View, unbox null,
             [|
-                React.createElement(RN.Text, unbox null, unbox "Hello World") |> unbox
-                React.createElement(RN.TouchableHighlight, unbox buttonProps, unbox "Click me" ) |> unbox
+                React.createElement(RN.Text, buttonProps, unbox "Hello World") |> unbox
+                //React.createElement(RN.TouchableHighlight, buttonProps, unbox "Click me" ) |> unbox
             |]
         )
