@@ -77832,7 +77832,7 @@ module.exports=ReactMount.renderSubtreeIntoContainer;
 }, "react/lib/renderSubtreeIntoContainer.js");
 __d(630 /* fable-react-native/out/HelloWorld.js */, function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.HelloWorldApp=undefined;var _react=require(397 /* react */);var
 
-$import2=babelHelpers.interopRequireWildcard(_react);var _reactNativeImageCropPicker=require(631 /* react-native-image-crop-picker */);
+$import2=babelHelpers.interopRequireWildcard(_react);var _reactNativeImageCropPicker=require(631 /* react-native-image-crop-picker */);var _reactNativeImageCropPicker2=babelHelpers.interopRequireDefault(_reactNativeImageCropPicker);
 var _reactNative=require(12 /* react-native */);var $import3=babelHelpers.interopRequireWildcard(_reactNative);
 var _fableCore=require(632 /* fable-core */);
 var HelloWorldApp=exports.HelloWorldApp=function(_$import){babelHelpers.inherits(HelloWorldApp,_$import);
@@ -77845,7 +77845,7 @@ var buttonProps=function(){
 var t={};
 var p={};
 
-t.onPress=function(unitVar0){return _reactNativeImageCropPicker.ImagePicker.openPicker(p);};
+t.onPress=function(unitVar0){return _reactNativeImageCropPicker2.default.openPicker(p);};
 
 return t;
 }();

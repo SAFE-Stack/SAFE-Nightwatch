@@ -6,14 +6,14 @@ open Fable.Import
 open Fable.Import.JS
 open Fable.Import.Browser
 
-module ReactImageCropPicker =
+module ReactImagePicker =
 
     type ImagePicker =
-        abstract member openPicker: ImagePickerOptions -> Promise<ImagePickerResult>
+        abstract member showImagePicker: ImagePickerOptions -> Promise<ImagePickerResult>
 
     and ImagePickerOptions = obj
     and ImagePickerResult = obj
 
     type Globals =
-        [<Import("default", from="react-native-image-crop-picker")>]
+        [<Import("default", from="react-native-image-picker")>]
         static member ImagePicker with get(): ImagePicker = failwith "JS only" and set(v: ImagePicker): unit = failwith "JS only"
