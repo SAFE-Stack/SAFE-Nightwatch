@@ -46,4 +46,6 @@ bin
 typings
 
 launchReactNative.js
-.vscode\.react
+debuggerWorker.js
+index.android.bundle
+index.android.map
