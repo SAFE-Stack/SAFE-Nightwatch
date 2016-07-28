@@ -28,8 +28,8 @@ type ImagePickerApp (props) as this =
              t.onPress 
                 <- (fun () -> 
                         let p = createEmpty<ImagePickerOptions>
-                        p.title <- unbox "Image picker"
-                        p.allowsEditing <- unbox true
+                        p.title <- Some "Image picker"
+                        p.allowsEditing <- Some true
 
                         IP.ImagePicker.showImagePicker(p, fun result -> 
                             x.setState { 
