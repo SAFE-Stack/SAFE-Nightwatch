@@ -19,7 +19,7 @@ type ImageSource =
 
 type ImagePickerApp (props) as this =
     inherit React.Component<obj,ImagePickerAppState>(props)
-    do this.state <- { uri = "" }
+    do this.state <- { uri = "http://facebook.github.io/react/img/logo_og.png" }
 
     member x.render () =
 
@@ -54,13 +54,28 @@ type ImagePickerApp (props) as this =
             let source = createEmpty<ImageSource>
             source.uri <- Some x.state.uri
             source.isStatic <- Some true
-
             p.source <- unbox source
             p
 
         React.createElement(RN.View, unbox null,
             [|
+                // OK this is stupid way to make the image bigger
+                React.createElement(RN.Image, unbox imageProps,
+                     [| React.createElement(RN.View, unbox null, unbox "") |> unbox
+                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
+                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
+                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
+                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
+                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
+                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
+                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
+                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
+                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
+                        React.createElement(RN.Text, unbox null, unbox "") |> unbox  |]) 
+                 |> unbox
+
+
                 highlight |> unbox
-                React.createElement(RN.Image, unbox imageProps, [| React.createElement(RN.Text, unbox null, unbox "") |> unbox |])  |> unbox
+              
             |]
         )
