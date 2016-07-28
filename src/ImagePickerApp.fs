@@ -13,12 +13,15 @@ type ImagePickerAppState = {
     uri: string
 }
 
-let createText properties text =
-  React.createElement(RN.Text, properties, unbox text) |> unbox
+type ReactElement = obj
 
-let defaultProperties<'a> = unbox null
+let createText properties text : ReactElement = React.createElement(RN.Text, properties, unbox text) |> unbox
 
-let createTouchableHighlight properties child = React.createElement(RN.TouchableHighlight, properties, [| child |])
+let createTouchableHighlight properties (child:ReactElement) : ReactElement  = React.createElement(RN.TouchableHighlight, properties, [| unbox child |]) |> unbox
+
+let createView properties (childs:ReactElement []) : ReactElement = React.createElement(RN.View, properties, childs |> unbox) |> unbox
+
+let createImage properties (childs:ReactElement []) : ReactElement = React.createElement(RN.Image, properties, childs |> unbox) |> unbox 
 
 type ImageSource =
     abstract uri: string option with get, set
@@ -55,7 +58,7 @@ type ImagePickerApp (props) as this =
 
 
         let button =
-            createText defaultProperties "click me to select image!"
+            createText (unbox null) "click me to select image!"
             |> createTouchableHighlight buttonProps
 
         let imageProps = 
@@ -66,24 +69,24 @@ type ImagePickerApp (props) as this =
             p.source <- unbox source
             p
 
-        React.createElement(RN.View, unbox null,
-            [|
+        let image =
+            createImage 
+                imageProps
                 // OK this is stupid way to make the image bigger
-                React.createElement(RN.Image, unbox imageProps,
-                     [| React.createElement(RN.View, unbox null, unbox "") |> unbox
-                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
-                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
-                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
-                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
-                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
-                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
-                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
-                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
-                        React.createElement(RN.Text, unbox null, unbox "") |> unbox
-                        React.createElement(RN.Text, unbox null, unbox "") |> unbox  |]) 
-                 |> unbox
+                [| createText (unbox null) ""
+                   createText (unbox null) ""
+                   createText (unbox null) ""
+                   createText (unbox null) ""
+                   createText (unbox null) ""
+                   createText (unbox null) ""
+                   createText (unbox null) ""
+                   createText (unbox null) ""
+                   createText (unbox null) ""
+                   createText (unbox null) ""
+                   createText (unbox null) ""  |]
 
-                button |> unbox
-              
+        createView (unbox null)
+            [|
+                image
+                button              
             |]
-        )
