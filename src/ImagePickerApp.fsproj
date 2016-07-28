@@ -43,6 +43,7 @@
     <Compile Include="../node_modules/fable-import-react/Fable.Import.React.fs" />
     <Compile Include="../node_modules/fable-import-react/Fable.Helpers.React.fs" />
     <Compile Include="../node_modules/fable-import-react-native/Fable.Import.ReactNative.fs" />
+    <Compile Include="Fable.Helpers.ReactNative.fs" />
     <Compile Include="../node_modules/fable-import-react-native-image-picker/Fable.Import.ReactNativeImagePicker.fs" />
     <Compile Include="ImagePickerApp.fs" />
   </ItemGroup>
