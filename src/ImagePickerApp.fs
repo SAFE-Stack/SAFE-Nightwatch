@@ -13,13 +13,22 @@ type ImagePickerAppState = {
     uri: string
 }
 
+let createText properties text =
+  React.createElement(RN.Text, properties, unbox text) |> unbox
+
+let defaultProperties<'a> = unbox null
+
+let createTouchableHighlight properties child = React.createElement(RN.TouchableHighlight, properties, [| child |])
+
 type ImageSource =
     abstract uri: string option with get, set
     abstract isStatic: bool option with get, set        
 
+let baseUrl = "http://facebook.github.io/react/img/logo_og.png"
+
 type ImagePickerApp (props) as this =
     inherit React.Component<obj,ImagePickerAppState>(props)
-    do this.state <- { uri = "http://facebook.github.io/react/img/logo_og.png" }
+    do this.state <- { uri = baseUrl }
 
     member x.render () =
 
@@ -40,14 +49,14 @@ type ImagePickerApp (props) as this =
                                         else
                                             result.error
                                     else
-                                        "dialog canceled" }))
+                                        baseUrl }))
                     |> unbox
              t
 
 
-        let highlight = React.createElement(RN.TouchableHighlight, buttonProps, [| React.createElement(RN.Text, unbox null, unbox "click me") |> unbox |])
-
-
+        let button =
+            createText defaultProperties "click me to select image!"
+            |> createTouchableHighlight buttonProps
 
         let imageProps = 
             let p = createEmpty<ImageProperties>
@@ -74,8 +83,7 @@ type ImagePickerApp (props) as this =
                         React.createElement(RN.Text, unbox null, unbox "") |> unbox  |]) 
                  |> unbox
 
-
-                highlight |> unbox
+                button |> unbox
               
             |]
         )
