@@ -4,12 +4,14 @@ open System
 open Fable.Core
 open Fable.Import
 open Fable.Import.ReactNative
-open Fable.Import.ReactImagePicker
+open Fable.Import.ReactNativeImagePicker
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
+open Fable.Helpers.ReactNativeImagePicker
+open Fable.Helpers.ReactNativeImagePicker.Props
 
 type RN = ReactNative.Globals
-type IP = ReactImagePicker.Globals
+type IP = ReactNativeImagePicker.Globals
 
 
 type ImagePickerAppState = {
@@ -29,21 +31,19 @@ type ImagePickerApp (props) as this =
             text [] "click me to select image!"
             |> touchableHighlight [
                 OnPress 
-                    (fun () -> 
-                        let p = createEmpty<ImagePickerOptions>
-                        p.title <- Some "Image picker"
-                        p.allowsEditing <- Some true
-
-                        IP.ImagePicker.showImagePicker(p, fun result -> 
-                            x.setState { 
-                                uri = 
-                                    if not result.didCancel then
-                                        if String.IsNullOrEmpty result.error then
-                                            result.uri
+                    (fun () ->
+                        (showImagePicker
+                            [Title "Image picker"; AllowsEditing true] 
+                            (fun result -> 
+                                x.setState { 
+                                    uri = 
+                                        if not result.didCancel then
+                                            if String.IsNullOrEmpty result.error then
+                                                result.uri
+                                            else
+                                                result.error
                                         else
-                                            result.error
-                                    else
-                                        baseUrl }))]
+                                            baseUrl })))]
 
 
         let image =
