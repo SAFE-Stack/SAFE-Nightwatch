@@ -15,13 +15,29 @@ type ImagePickerAppState = {
 
 type ReactElement = obj
 
-let createText properties text : ReactElement = React.createElement(RN.Text, properties, unbox text) |> unbox
+let createText changeProperties text : ReactElement = 
+    React.createElement(
+        RN.Text, 
+        createEmpty<TextProperties> |> changeProperties,
+        unbox text) |> unbox
 
-let createTouchableHighlight properties (child:ReactElement) : ReactElement  = React.createElement(RN.TouchableHighlight, properties, [| unbox child |]) |> unbox
+let createTouchableHighlight changeProperties (child:ReactElement) : ReactElement = 
+    React.createElement(
+        RN.TouchableHighlight, 
+        createEmpty<TouchableHighlightProperties> |> changeProperties,
+        [| unbox child |]) |> unbox
 
-let createView properties (childs:ReactElement []) : ReactElement = React.createElement(RN.View, properties, childs |> unbox) |> unbox
+let createView changeProperties (childs:ReactElement []) : ReactElement = 
+    React.createElement(
+        RN.View, 
+        createEmpty<ViewProperties> |> changeProperties,
+        childs |> unbox) |> unbox
 
-let createImage properties (childs:ReactElement []) : ReactElement = React.createElement(RN.Image, properties, childs |> unbox) |> unbox 
+let createImage changeProperties (childs:ReactElement []) : ReactElement = 
+    React.createElement(
+            RN.Image, 
+            createEmpty<ImageProperties> |> changeProperties, 
+            childs |> unbox) |> unbox 
 
 type ImageSource =
     abstract uri: string option with get, set
@@ -35,58 +51,52 @@ type ImagePickerApp (props) as this =
 
     member x.render () =
 
-        let buttonProps =
-             let t = createEmpty<TouchableHighlightProperties>
-             t.onPress 
-                <- (fun () -> 
-                        let p = createEmpty<ImagePickerOptions>
-                        p.title <- Some "Image picker"
-                        p.allowsEditing <- Some true
-
-                        IP.ImagePicker.showImagePicker(p, fun result -> 
-                            x.setState { 
-                                uri = 
-                                    if not result.didCancel then
-                                        if String.IsNullOrEmpty result.error then
-                                            result.uri
-                                        else
-                                            result.error
-                                    else
-                                        baseUrl }))
-                    |> unbox
-             t
-
-
         let button =
-            createText (unbox null) "click me to select image!"
-            |> createTouchableHighlight buttonProps
+            createText id "click me to select image!"
+            |> createTouchableHighlight (fun t ->
+                t.onPress 
+                    <- (fun () -> 
+                            let p = createEmpty<ImagePickerOptions>
+                            p.title <- Some "Image picker"
+                            p.allowsEditing <- Some true
 
-        let imageProps = 
-            let p = createEmpty<ImageProperties>
-            let source = createEmpty<ImageSource>
-            source.uri <- Some x.state.uri
-            source.isStatic <- Some true
-            p.source <- unbox source
-            p
+                            IP.ImagePicker.showImagePicker(p, fun result -> 
+                                x.setState { 
+                                    uri = 
+                                        if not result.didCancel then
+                                            if String.IsNullOrEmpty result.error then
+                                                result.uri
+                                            else
+                                                result.error
+                                        else
+                                            baseUrl }))
+                        |> unbox
+                t)
+
 
         let image =
             createImage 
-                imageProps
+                (fun p ->
+                    let source = createEmpty<ImageSource>
+                    source.uri <- Some x.state.uri
+                    source.isStatic <- Some true
+                    p.source <- unbox source
+                    p)
                 // OK this is stupid way to make the image bigger
-                [| createText (unbox null) ""
-                   createText (unbox null) ""
-                   createText (unbox null) ""
-                   createText (unbox null) ""
-                   createText (unbox null) ""
-                   createText (unbox null) ""
-                   createText (unbox null) ""
-                   createText (unbox null) ""
-                   createText (unbox null) ""
-                   createText (unbox null) ""
-                   createText (unbox null) ""  |]
+                [| createText id ""
+                   createText id ""
+                   createText id ""
+                   createText id ""
+                   createText id ""
+                   createText id ""
+                   createText id ""
+                   createText id ""
+                   createText id ""
+                   createText id ""
+                   createText id ""  |]
 
-        createView (unbox null)
+        createView id
             [|
                 image
-                button              
+                button
             |]
