@@ -30,6 +30,7 @@ type ImagePickerApp (props) as this =
         let button =
             text [] "click me to select image!"
             |> touchableHighlight [
+                TouchableHighlightProperties.Style []
                 OnPress 
                     (fun () ->
                         (showImagePicker
