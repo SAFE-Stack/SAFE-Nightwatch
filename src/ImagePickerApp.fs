@@ -30,7 +30,9 @@ type ImagePickerApp (props) as this =
         let button =
             text [] "click me to select image!"
             |> touchableHighlight [
-                TouchableHighlightProperties.Style [ ]
+                TouchableHighlightProperties.Style [
+                    ViewStyle.BackgroundColor "#AA00AA"
+                 ]
                 OnPress 
                     (fun () ->
                         (showImagePicker
@@ -49,7 +51,11 @@ type ImagePickerApp (props) as this =
 
         let image =
             image 
-                [ Source [ Uri x.state.uri; IsStatic true ]]
+                [ Source [ Uri x.state.uri; IsStatic true]
+                  Style [
+                    ImageStyle.BorderColor "#000000"
+                  ]
+                ]
                 // OK this is stupid way to make the image bigger
                 [ text [] ""
                   text [] ""
