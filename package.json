@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "firstbuild": "npm install && fable",
     "prebuild": "npm install",
-    "build": "fable"
+    "build": "fable --watch"
   },
   "dependencies": {
     "fable-core": "^0.2.3",

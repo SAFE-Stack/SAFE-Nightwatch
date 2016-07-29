@@ -16,17 +16,10 @@ If you want to try it out then please do the following:
 * Run "npm install" from command prompt
 * Open Android Simulator
 * Open VS Code
-* Press F5
-* Wait until device is ready and you will see:
-
-[![error message](https://cloud.githubusercontent.com/assets/57396/17221919/1053c422-54f6-11e6-9b15-0701074a7b33.png)
-
-(this is still an issue and discussed in [https://github.com/Krzysztof-Cieslak/fable-react_native-demo/issues/3]. We will get rid of this.)
-
-* Press Ctrl-Shift-B
-* Go to android deice and press r+r
+* Press F5 to start debug
+* Go to android device simulator and you should see
 
 ![Device Running](https://cloud.githubusercontent.com/assets/57396/17221985/6568f806-54f6-11e6-8913-e3f4230094d3.png)
 
 * Go to the F# source in VS Code make a change and save the file
-* Go to android deice and press r+r - change should be visible
+* Go to android device simulator and press r+r - change should be visible
