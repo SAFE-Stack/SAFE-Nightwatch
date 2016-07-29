@@ -28,7 +28,7 @@ type ImagePickerApp (props) as this =
     member x.render () =
 
         let button =
-            text [] "click me to select image!"
+            text [] "Click me to select image!"
             |> touchableHighlight [
                 TouchableHighlightProperties.Style [
                     ViewStyle.BackgroundColor "#AA00AA"
