@@ -6,6 +6,7 @@ If you want to try it out then please do the following:
 
 ### Make sure React Native works
 
+* Install the Ionide [VS Code extenstion for F#](https://github.com/ionide/ionide-vscode-fsharp)
 * Install the [VS Code extension for React Native](https://github.com/Microsoft/vscode-react-native)
 * Go to https://facebook.github.io/react-native/ and do all steps of the [getting started tutorial](https://facebook.github.io/react-native/docs/getting-started.html#content) 
 * At this point you should have the default Javascript React Native "Hello World" running
