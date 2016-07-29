@@ -25,3 +25,7 @@ If you want to try it out then please do the following:
 * Go to the F# source in VS Code make a change and save the file
 * Fable watch should pick up this change automatically and compile it
 * Go to android device simulator and press r+r - change should be visible
+
+This could look like:
+
+![Hot loading](https://cloud.githubusercontent.com/assets/57396/17248364/5f88f0b8-559a-11e6-95cc-774664d266e7.gif)
