@@ -17,9 +17,9 @@ If you want to try it out then please do the following:
 * Open Android Simulator
 * Open VS Code
 * Press F5 to start debug
-* Go to android device simulator and you should see
+* Go to android device simulator and you should see something like
 
-![Device Running](https://cloud.githubusercontent.com/assets/57396/17221985/6568f806-54f6-11e6-8913-e3f4230094d3.png)
+![Device Running](https://cloud.githubusercontent.com/assets/57396/17247642/e46d3452-5594-11e6-92de-afd68ea9cde2.png)
 
 * Go to VS Code and hit Ctrl+Shift+B this will activate fable watch 
 * Go to the F# source in VS Code make a change and save the file
