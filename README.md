@@ -21,5 +21,7 @@ If you want to try it out then please do the following:
 
 ![Device Running](https://cloud.githubusercontent.com/assets/57396/17221985/6568f806-54f6-11e6-8913-e3f4230094d3.png)
 
+* Go to VS Code and hit Ctrl+Shift+B this will activate fable watch 
 * Go to the F# source in VS Code make a change and save the file
+* Fable watch should pick up this change automatically and compile it
 * Go to android device simulator and press r+r - change should be visible
