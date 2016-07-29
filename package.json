@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "prebuild": "npm install",
-    "build": "fable --watch"
+    "build": "fable"
   },
   "dependencies": {
     "fable-core": "^0.2.3",
