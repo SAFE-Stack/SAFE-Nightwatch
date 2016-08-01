@@ -11,98 +11,35 @@ open Fable.Helpers.ReactNativeImagePicker
 open Fable.Helpers.ReactNativeImagePicker.Props
 
 type RN = ReactNative.Globals
-type IP = ReactNativeImagePicker.Globals
 
-
-type ImagePickerAppState = {
-    uri: string
-}
-
-let baseUrl = "http://facebook.github.io/react/img/logo_og.png"
-
-type ImagePickerApp (props) as this =
-    inherit React.Component<obj,ImagePickerAppState>(props)
-    do this.state <- { uri = baseUrl }
+type ImagePickerApp (props) =
+    inherit React.Component<obj,obj>(props)
 
     member x.render () =
-
-        let button =
-            text [] "Click me to select image!"
-            |> touchableHighlight [
-                TouchableHighlightProperties.Style [
-                    ViewStyle.BackgroundColor "#AA00AA"
-                    ViewStyle.Flex 1
-                 ]
-                OnPress 
-                    (fun () ->
-                        (showImagePicker
-                            [Title "Image picker"; AllowsEditing true] 
-                            (fun result -> 
-                                x.setState { 
-                                    uri = 
-                                        if not result.didCancel then
-                                            if String.IsNullOrEmpty result.error then
-                                                result.uri
-                                            else
-                                                result.error
-                                        else
-                                            baseUrl })))]
-
-
-        let image =
-            image 
-                [ Source [ Uri x.state.uri; IsStatic true]
-                  ImageProperties.Style [
-                    ImageStyle.BorderColor "#000000"
-                    ImageStyle.Flex 2
-                  ]
-                ]
-                [ ]
-
-        let mainView = 
-            view [ ViewProperties.Style [ViewStyle.Flex 1]] 
-             [ image
-               button ]
-
-        let routes =
-            let r = createEmpty<Route>
-            r.title <- Some "First Scene"
-            r.index <- Some 0
-
-            let r2 = createEmpty<Route>
-            r2.title <- Some "Second Scene"
-            r2.index <- Some 1
-
-            [|r; r2|]
-
-        let nav =
-           navigator 
-             [NavigatorProperties.InitialRoute routes.[0]
-              NavigatorProperties.InitialRouteStack routes
-              NavigatorProperties.RenderScene
-                (Func<_,_,_>(fun route navigator ->
-                    text [] (sprintf "Hello %s!" route.title) 
-                    |> touchableHighlight [
-                        TouchableHighlightProperties.Style [
-                            ViewStyle.BackgroundColor "#AA00AA"
-                            ViewStyle.Flex 1
-                        ]                    
-                        OnPress
-                            (fun () ->
-                                if route.index = 0 then
-                                    navigator.push(routes.[1])
-                                else
-                                    navigator.pop() 
-                            )])
-                )
-              NavigatorProperties.NavigationBar 
-                (navigationBar [
-                    NavigationBarProperties.Style [ViewStyle.BackgroundColor "#00ff00"]
-                    RouteMapper [
-                        NavigationBarRouteMapperProperties.LeftButton (Func<_,_,_,_,_>(fun route navigator index navState -> text [] "Cancel"))
-                        NavigationBarRouteMapperProperties.RightButton (Func<_,_,_,_,_>(fun route navigator index navState -> text [] "Done"))
-                        NavigationBarRouteMapperProperties.Title (Func<_,_,_,_,_>(fun route navigator index navState -> text [] "Awesome Nav Bar"))
-                    ] 
-                ])
-             ]
-        nav
+        navigator [
+            InitialRoute (createRoute("Main",0))
+            RenderScene (Func<_,_,_>(fun route navigator -> 
+                match route.index with
+                | 1 ->
+                    createScene<ImagePickerScene.ImagePickerScene,_,_>(
+                        {
+                            title = route.title
+                            onDone = 
+                                (fun () ->
+                                    if route.index > 0 then
+                                        navigator.pop()
+                                )                        
+                        })
+                | _ ->                        
+                    createScene<MainScene.MainScene,_,_>(
+                        {
+                            title = route.title
+                            onGoToImagePicker = 
+                                (fun () ->
+                                    let nextIndex = route.index + 1 
+                                    createRoute("Scene " + nextIndex.ToString(),nextIndex)
+                                    |> navigator.push
+                                )                  
+                        }))
+            )
+        ]
