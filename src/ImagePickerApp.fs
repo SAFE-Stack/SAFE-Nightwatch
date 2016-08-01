@@ -53,7 +53,7 @@ type ImagePickerApp (props) as this =
         let image =
             image 
                 [ Source [ Uri x.state.uri; IsStatic true]
-                  Style [
+                  ImageProperties.Style [
                     ImageStyle.BorderColor "#000000"
                     ImageStyle.Flex 2
                   ]
