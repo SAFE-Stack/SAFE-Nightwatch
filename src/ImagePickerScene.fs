@@ -10,10 +10,8 @@ open Fable.Helpers.ReactNative.Props
 open Fable.Helpers.ReactNativeImagePicker
 open Fable.Helpers.ReactNativeImagePicker.Props
 
-type IP = ReactNativeImagePicker.Globals
-
 type ImagePickerSceneProperties = {
-    title: string
+    initUri : string
     onDone: unit -> unit
 }
 
@@ -21,12 +19,10 @@ type ImagePickerState = {
     uri: string
 }
 
-let baseUrl = "http://facebook.github.io/react/img/logo_og.png"
-
 type ImagePickerScene (props) as this =
     inherit React.Component<ImagePickerSceneProperties,ImagePickerState>(props)
 
-    do this.state <- { uri = baseUrl }
+    do this.state <- { uri = this.props.initUri }
 
     member x.render () =
         let selectImageButton =
@@ -49,7 +45,7 @@ type ImagePickerScene (props) as this =
                                             else
                                                 result.error
                                         else
-                                            baseUrl })))]
+                                            this.props.initUri })))]
 
         let doneButton =
             text [] "Tap me to go back"
