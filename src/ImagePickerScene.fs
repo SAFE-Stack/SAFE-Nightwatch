@@ -36,16 +36,11 @@ type ImagePickerScene (props) as this =
                     (fun () ->
                         (showImagePicker
                             [Title "Image picker"; AllowsEditing true] 
-                            (fun result -> 
-                                x.setState { 
-                                    uri = 
-                                        if not result.didCancel then
-                                            if String.IsNullOrEmpty result.error then
-                                                result.uri
-                                            else
-                                                result.error
-                                        else
-                                            this.props.initUri })))]
+                            (fun result ->    
+                                if not result.didCancel then
+                                    if String.IsNullOrEmpty result.error then
+                                            x.setState { uri = result.uri } )))
+            ]
 
         let doneButton =
             text [] "Tap me to go back"
@@ -68,5 +63,4 @@ type ImagePickerScene (props) as this =
         view [ ViewProperties.Style [ViewStyle.Flex 1]] 
             [ image
               selectImageButton
-              doneButton ]    
-
+              doneButton ]

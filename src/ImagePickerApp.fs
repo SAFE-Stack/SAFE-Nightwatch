@@ -18,7 +18,7 @@ type ImagePickerApp (props) =
         navigator [
             InitialRoute routeStack.[0]
             InitialRouteStack routeStack
-            RenderScene (Func<_,_,_>(fun route navigator -> 
+            RenderScene (Func<_,_,_>(fun route navigator ->
                 match route.title with
                 | "ImagePicker" ->
                     createScene<ImagePickerScene.ImagePickerScene,_,_>(
@@ -33,7 +33,10 @@ type ImagePickerApp (props) =
                 | _ ->
                     createScene<MainScene.MainScene,_,_>(
                         {
-                            onGoToImagePicker = (fun () -> navigator.push routeStack.[1])                  
-                        }))
-            )
+                            onGoToImagePicker = (fun () -> navigator.push routeStack.[1])
+                        })
+            ))
+            
         ]
+
+        
