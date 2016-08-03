@@ -8,15 +8,15 @@
     "build": "fable --watch"
   },
   "dependencies": {
-    "fable-core": "^0.2.3",
+    "fable-core": "^0.5.0",
     "react": "15.2.1",
     "react-native": "0.30.0",
-    "react-native-image-picker": "^0.21.2"
+    "react-native-image-picker": "^0.21.4"
   },
   "devDependencies": {
-    "fable-compiler": "^0.4.4",
-    "fable-import-react": "^0.1.1",
-    "fable-import-react-native": "^0.3.2",
-    "fable-import-react-native-image-picker": "^0.1.0"
+    "fable-compiler": "^0.5.0",
+    "fable-import-react": "^0.5.0",
+    "fable-import-react-native": "^0.5.0",
+    "fable-import-react-native-image-picker": "^0.1.1"
   }
 }
