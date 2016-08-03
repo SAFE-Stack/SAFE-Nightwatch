@@ -24,7 +24,7 @@ type MainScene (props) =
                   ]
                 ]
 
-        view [ Styles.sceneBackground ] 
-          [ text [ Styles.titleText ] "Image picker"
+        view [ Styles.getSceneBackground() ] 
+          [ text [ Styles.getTitleText() ] "Image picker"
             logo
             Styles.button "Tap me to go to image picker scene" x.props.onGoToImagePicker ]

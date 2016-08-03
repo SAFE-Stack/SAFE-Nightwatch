@@ -43,7 +43,7 @@ type ImagePickerScene (props) as this =
                   ]
                 ]
 
-        view [ Styles.sceneBackground ]
+        view [ Styles.getSceneBackground() ]
             [ image
               selectImageButton
               Styles.button "Tap me to go back" x.props.onDone ]

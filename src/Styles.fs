@@ -7,33 +7,36 @@ open Fable.Import.ReactNative
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 
-let brandPrimary = "#428bca"
-let brandInfo = "#5bc0de"
-let brandSuccess = "#5cb85c"
-let brandDanger = "#d9534f"
-let brandWarning = "#f0ad4e"
-let brandSidebar = "#252932"
+let [<Literal>] brandPrimary = "#428bca"
+let [<Literal>] brandInfo = "#5bc0de"
+let [<Literal>] brandSuccess = "#5cb85c"
+let [<Literal>] brandDanger = "#d9534f"
+let [<Literal>] brandWarning = "#f0ad4e"
+let [<Literal>] brandSidebar = "#252932"
 
-let inverseTextColor = "#000"
-let textColor = "#fff"
-let shadowColor = "#000000"
-let backgroundColor = "#615A5B"
+let [<Literal>] inverseTextColor = "#000"
 
-let touched = "#5499C4"
+let [<Literal>] textColor = "#fff"
 
-let fontSizeBase = 15.
-let titleFontSize = 17.
+let [<Literal>] shadowColor = "#000000"
 
-let borderRadius = 4.
+let [<Literal>] backgroundColor = "#615A5B"
 
-let buttonStyle =
+let [<Literal>] touched = "#5499C4"
+
+let [<Literal>] fontSizeBase = 15.
+let [<Literal>] titleFontSize = 17.
+
+let [<Literal>] borderRadius = 4.
+
+let inline getButtonStyle() =
     TouchableHighlightProperties.Style [
         ViewStyle.BackgroundColor brandPrimary
         ViewStyle.BorderRadius borderRadius
         ViewStyle.MarginBottom 5.
       ]
 
-let defaultText =
+let inline getDefaultText() =
     TextProperties.Style [ 
         TextStyle.Color textColor
         TextStyle.TextAlign TextAlignment.Center
@@ -41,7 +44,7 @@ let defaultText =
         TextStyle.FontSize fontSizeBase
       ]
 
-let titleText =
+let inline getTitleText() =
     TextProperties.Style [ 
         TextStyle.Color textColor
         TextStyle.TextAlign TextAlignment.Center
@@ -50,7 +53,7 @@ let titleText =
       ] 
       
 
-let sceneBackground =
+let inline getSceneBackground() =
     ViewProperties.Style [ 
         ViewStyle.AlignSelf Alignment.Stretch
         ViewStyle.Padding 20.
@@ -63,8 +66,8 @@ let sceneBackground =
       ]
 
 let inline button label onPress =
-    text [ defaultText ] label
+    text [ getDefaultText() ] label
     |> touchableHighlight [
-        buttonStyle
+        getButtonStyle()
         TouchableHighlightProperties.UnderlayColor touched
         OnPress onPress]
