@@ -14,7 +14,7 @@
     "react-native-image-picker": "^0.21.4"
   },
   "devDependencies": {
-    "fable-compiler": "^0.5.0",
+    "fable-compiler": "^0.5.1",
     "fable-import-react": "^0.5.0",
     "fable-import-react-native": "^0.5.0",
     "fable-import-react-native-image-picker": "^0.1.1"
