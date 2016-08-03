@@ -15,10 +15,23 @@ type MainScene (props) =
     inherit React.Component<MainSceneProperties,obj>(props)
 
     member x.render () =
-        let nextButton =
-            text [] "Tap me to go to image picker scene"
-            |> touchableHighlight [OnPress x.props.onGoToImagePicker]
+        let logo =
+            image 
+                [ Source (localImage "../images/logo.png")
+                  ImageProperties.Style [
+                    ImageStyle.AlignSelf Alignment.Center
+                    ImageStyle.MarginBottom 15.
+                  ]
+                ]
 
-        view [  ]
-          [ text [] "Image picker app"
+        let nextButton =
+            text [ Styles.defaultText ] "Tap me to go to image picker scene"
+            |> touchableHighlight [
+                Styles.buttonStyle
+                TouchableHighlightProperties.UnderlayColor Styles.touched
+                OnPress x.props.onGoToImagePicker]
+
+        view [ Styles.sceneBackground ] 
+          [ text [ Styles.titleText ] "Image picker app"
+            logo
             nextButton ]

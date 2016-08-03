@@ -28,10 +28,8 @@ type ImagePickerScene (props) as this =
         let selectImageButton =
             text [] "Click me to select image!"
             |> touchableHighlight [
-                TouchableHighlightProperties.Style [
-                    ViewStyle.BackgroundColor "#AA00AA"
-                    ViewStyle.Flex 1
-                 ]
+                Styles.buttonStyle
+                TouchableHighlightProperties.UnderlayColor Styles.touched
                 OnPress 
                     (fun () ->
                         (showImagePicker
@@ -43,12 +41,10 @@ type ImagePickerScene (props) as this =
             ]
 
         let doneButton =
-            text [] "Tap me to go back"
+            text [ Styles.defaultText ] "Tap me to go back"
             |> touchableHighlight [
-                TouchableHighlightProperties.Style [
-                    ViewStyle.BackgroundColor "#AA00AA"
-                    ViewStyle.Flex 2
-                 ]
+                Styles.buttonStyle
+                TouchableHighlightProperties.UnderlayColor Styles.touched
                 OnPress x.props.onDone]
 
         let image =
@@ -60,7 +56,7 @@ type ImagePickerScene (props) as this =
                   ]
                 ]
 
-        view [ ViewProperties.Style [ViewStyle.Flex 1]] 
+        view [ Styles.sceneBackground ]
             [ image
               selectImageButton
               doneButton ]
