@@ -23,9 +23,9 @@ type ImagePickerApp (props) =
                 | "ImagePicker" ->
                     createScene<ImagePickerScene.ImagePickerScene,_,_>(
                         {
-                            initUri = "http://facebook.github.io/react/img/logo_og.png"
+                            initState = { uri = "http://facebook.github.io/react/img/logo_og.png" }
                             onDone = 
-                                (fun () ->
+                                (fun imagePickerState ->
                                     if route.index > 0 then
                                         navigator.pop()
                                 )                        

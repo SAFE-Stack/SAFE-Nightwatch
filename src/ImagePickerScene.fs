@@ -10,19 +10,19 @@ open Fable.Helpers.ReactNative.Props
 open Fable.Helpers.ReactNativeImagePicker
 open Fable.Helpers.ReactNativeImagePicker.Props
 
-type ImagePickerSceneProperties = {
-    initUri : string
-    onDone: unit -> unit
-}
-
 type ImagePickerState = {
     uri: string
+}
+
+type ImagePickerSceneProperties = {
+    initState : ImagePickerState
+    onDone: ImagePickerState -> unit
 }
 
 type ImagePickerScene (props) as this =
     inherit React.Component<ImagePickerSceneProperties,ImagePickerState>(props)
 
-    do this.state <- { uri = this.props.initUri }
+    do this.state <- this.props.initState
 
     member x.render () =
         let selectImageButton =
@@ -46,4 +46,4 @@ type ImagePickerScene (props) as this =
         view [ Styles.sceneBackground ]
             [ image
               selectImageButton
-              Styles.button "Tap me to go back" x.props.onDone ]
+              Styles.button "Tap me to go back" (fun () -> x.props.onDone x.state) ]
