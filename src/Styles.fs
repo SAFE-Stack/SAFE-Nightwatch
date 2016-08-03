@@ -16,7 +16,7 @@ let [<Literal>] brandSidebar = "#252932"
 
 let [<Literal>] inverseTextColor = "#000"
 
-let [<Literal>] textColor = "#fff"
+let [<Literal>] textColor = "#FFFFFF"
 
 let [<Literal>] shadowColor = "#000000"
 
@@ -29,14 +29,14 @@ let [<Literal>] titleFontSize = 17.
 
 let [<Literal>] borderRadius = 4.
 
-let inline getButtonStyle() =
+let inline buttonStyle<'a> =
     TouchableHighlightProperties.Style [
         ViewStyle.BackgroundColor brandPrimary
         ViewStyle.BorderRadius borderRadius
         ViewStyle.MarginBottom 5.
       ]
 
-let inline getDefaultText() =
+let inline defaultText<'a> =
     TextProperties.Style [ 
         TextStyle.Color textColor
         TextStyle.TextAlign TextAlignment.Center
@@ -44,16 +44,15 @@ let inline getDefaultText() =
         TextStyle.FontSize fontSizeBase
       ]
 
-let inline getTitleText() =
+let inline titleText<'a> =
     TextProperties.Style [ 
         TextStyle.Color textColor
         TextStyle.TextAlign TextAlignment.Center
         TextStyle.MarginBottom 15.
         TextStyle.FontSize titleFontSize
       ] 
-      
 
-let inline getSceneBackground() =
+let inline sceneBackground<'a> =
     ViewProperties.Style [ 
         ViewStyle.AlignSelf Alignment.Stretch
         ViewStyle.Padding 20.
@@ -66,8 +65,8 @@ let inline getSceneBackground() =
       ]
 
 let inline button label onPress =
-    text [ getDefaultText() ] label
+    text [ defaultText ] label
     |> touchableHighlight [
-        getButtonStyle()
+        buttonStyle
         TouchableHighlightProperties.UnderlayColor touched
         OnPress onPress]
