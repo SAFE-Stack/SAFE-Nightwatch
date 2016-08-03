@@ -26,27 +26,14 @@ type ImagePickerScene (props) as this =
 
     member x.render () =
         let selectImageButton =
-            text [] "Click me to select image!"
-            |> touchableHighlight [
-                Styles.buttonStyle
-                TouchableHighlightProperties.UnderlayColor Styles.touched
-                OnPress 
-                    (fun () ->
-                        (showImagePicker
-                            [Title "Image picker"; AllowsEditing true] 
-                            (fun result ->    
-                                if not result.didCancel then
-                                    if String.IsNullOrEmpty result.error then
-                                            x.setState { uri = result.uri } )))
-            ]
-
-        let doneButton =
-            text [ Styles.defaultText ] "Tap me to go back"
-            |> touchableHighlight [
-                Styles.buttonStyle
-                TouchableHighlightProperties.UnderlayColor Styles.touched
-                OnPress x.props.onDone]
-
+            Styles.button "Click me to select image!"
+                (fun () ->
+                    (showImagePicker
+                        [Title "Image picker"; AllowsEditing true] 
+                        (fun result ->    
+                            if not result.didCancel then
+                                if String.IsNullOrEmpty result.error then
+                                        x.setState { uri = result.uri } )))
         let image =
             image 
                 [ Source [ Uri x.state.uri; IsStatic true]
@@ -59,4 +46,4 @@ type ImagePickerScene (props) as this =
         view [ Styles.sceneBackground ]
             [ image
               selectImageButton
-              doneButton ]
+              Styles.button "Tap me to go back" x.props.onDone ]

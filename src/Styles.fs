@@ -60,4 +60,11 @@ let sceneBackground =
         ViewStyle.JustifyContent Alignment.Center
         ViewStyle.Flex 1
         ViewStyle.BackgroundColor backgroundColor
-      ]    
+      ]
+
+let inline button label onPress =
+    text [ defaultText ] label
+    |> touchableHighlight [
+        buttonStyle
+        TouchableHighlightProperties.UnderlayColor touched
+        OnPress onPress]

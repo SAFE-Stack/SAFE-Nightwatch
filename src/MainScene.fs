@@ -24,14 +24,7 @@ type MainScene (props) =
                   ]
                 ]
 
-        let nextButton =
-            text [ Styles.defaultText ] "Tap me to go to image picker scene"
-            |> touchableHighlight [
-                Styles.buttonStyle
-                TouchableHighlightProperties.UnderlayColor Styles.touched
-                OnPress x.props.onGoToImagePicker]
-
         view [ Styles.sceneBackground ] 
           [ text [ Styles.titleText ] "Image picker app"
             logo
-            nextButton ]
+            Styles.button "Tap me to go to image picker scene" x.props.onGoToImagePicker ]
