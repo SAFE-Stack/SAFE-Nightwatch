@@ -20,6 +20,10 @@ If you want to try it out then please do the following:
 * Press F5 to start debug
 * Go to android device simulator and you should see something like
 
+> Note: Fable needs some ES6 features that are not compatible with React Native, like [Symbol](https://babeljs.io/docs/learn-es2015/#symbols).
+Because of this, it's necessary to load a polyfill like [core-js](https://github.com/zloirock/core-js).
+In this demo, this is done on top of `index.android.js` and `index.ios.js`.
+
 ![Device Running](https://cloud.githubusercontent.com/assets/57396/17247642/e46d3452-5594-11e6-92de-afd68ea9cde2.png)
 
 * Go to VS Code and hit Ctrl+Shift+B this will activate fable watch 
