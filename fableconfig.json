@@ -3,7 +3,7 @@
     "ecma": "es2015",
     "outDir": "out",
     "sourceMaps": true,
-    "projFile": "src/ImagePickerApp.fsproj",
+    "projFile": "src/Nightwatch.fsproj",
     "babelPlugins": [],
     "scripts": {
     }

@@ -1,5 +1,5 @@
 {
-  "name": "image-picker-app",
+  "name": "meter-app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "prebuild": "npm install",
     "build": "fable --watch"
   },
-  "dependencies": {
+  "dependencies": {   
     "core-js": "^2.4.1",
     "fable-core": "^0.5.1",
     "react": "~15.2.0",
@@ -17,7 +17,7 @@
   "devDependencies": {
     "fable-compiler": "^0.5.1",
     "fable-import-react": "^0.5.0",
-    "fable-import-react-native": "^0.6.10",
+    "fable-import-react-native": "^0.6.11",
     "fable-react-native-simple-store": "^0.2.11",
     "fable-import-react-native-image-picker": "^0.1.1"
   }

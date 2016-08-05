@@ -1,4 +1,4 @@
-package com.ImagePickerApp;
+package com.Nightwatch;
 
 import android.app.Application;
 import android.util.Log;

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "ImagePickerApp.app"
-               BlueprintName = "ImagePickerApp"
-               ReferencedContainer = "container:ImagePickerApp.xcodeproj">
+               BuildableName = "Nightwatch.app"
+               BlueprintName = "Nightwatch"
+               ReferencedContainer = "container:Nightwatch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "ImagePickerAppTests.xctest"
-               BlueprintName = "ImagePickerAppTests"
-               ReferencedContainer = "container:ImagePickerApp.xcodeproj">
+               BuildableName = "NightwatchTests.xctest"
+               BlueprintName = "NightwatchTests"
+               ReferencedContainer = "container:Nightwatch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "ImagePickerAppTests.xctest"
-               BlueprintName = "ImagePickerAppTests"
-               ReferencedContainer = "container:ImagePickerApp.xcodeproj">
+               BuildableName = "NightwatchTests.xctest"
+               BlueprintName = "NightwatchTests"
+               ReferencedContainer = "container:Nightwatch.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "ImagePickerApp.app"
-            BlueprintName = "ImagePickerApp"
-            ReferencedContainer = "container:ImagePickerApp.xcodeproj">
+            BuildableName = "Nightwatch.app"
+            BlueprintName = "Nightwatch"
+            ReferencedContainer = "container:Nightwatch.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "ImagePickerApp.app"
-            BlueprintName = "ImagePickerApp"
-            ReferencedContainer = "container:ImagePickerApp.xcodeproj">
+            BuildableName = "Nightwatch.app"
+            BlueprintName = "Nightwatch"
+            ReferencedContainer = "container:Nightwatch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "ImagePickerApp.app"
-            BlueprintName = "ImagePickerApp"
-            ReferencedContainer = "container:ImagePickerApp.xcodeproj">
+            BuildableName = "Nightwatch.app"
+            BlueprintName = "Nightwatch"
+            ReferencedContainer = "container:Nightwatch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

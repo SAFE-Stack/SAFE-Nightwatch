@@ -1,4 +1,4 @@
-module MainScene
+module internal MainScene
 
 open System
 open Fable.Core
@@ -8,7 +8,7 @@ open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 
 type MainSceneProperties = {
-    Navigator : Navigator
+    Navigator:Navigator
 }
 
 type MainScene (props) =
@@ -17,14 +17,13 @@ type MainScene (props) =
     member x.render () =
         let logo =
             image 
-                [ Source (localImage "../images/logo.png")
+                [ Source (localImage "../../images/raven.jpg")
                   ImageProperties.Style [
                     ImageStyle.AlignSelf Alignment.Center
-                    ImageStyle.MarginBottom 15.
                   ]
                 ]
 
         view [ Styles.sceneBackground ] 
-          [ text [ Styles.titleText ] "Image picker"
+          [ text [ Styles.titleText ] "Nightwatch"
             logo
-            Styles.button "Tap me to go to image picker scene" (fun () -> x.props.Navigator.push (createRoute("ImagePicker",1))) ]
+            Styles.button "Begin watch" (fun () -> x.props.Navigator.push (createRoute("LocationListScene",1))) ]

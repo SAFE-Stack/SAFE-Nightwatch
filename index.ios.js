@@ -1,7 +1,7 @@
 import * as coreJs from "core-js/shim";
 import {AppRegistry} from 'react-native';
-import {ImagePickerApp} from './out/ImagePickerApp';
+import {Nightwatch} from './out/Nightwatch';
 
-AppRegistry.registerComponent('ImagePickerApp', () => ImagePickerApp);
+AppRegistry.registerComponent('Nightwatch', () => Nightwatch);
 
 

@@ -21,6 +21,7 @@ let [<Literal>] textColor = "#FFFFFF"
 let [<Literal>] shadowColor = "#000000"
 
 let [<Literal>] backgroundColor = "#615A5B"
+let [<Literal>] inputBackgroundColor = "#251D1C"
 
 let [<Literal>] touched = "#5499C4"
 
@@ -33,14 +34,14 @@ let inline buttonStyle<'a> =
     TouchableHighlightProperties.Style [
         ViewStyle.BackgroundColor brandPrimary
         ViewStyle.BorderRadius borderRadius
-        ViewStyle.MarginBottom 5.
+        ViewStyle.Margin 5.
       ]
 
 let inline defaultText<'a> =
     TextProperties.Style [ 
         TextStyle.Color textColor
         TextStyle.TextAlign TextAlignment.Center
-        TextStyle.MarginBottom 5.
+        TextStyle.Margin 5.
         TextStyle.FontSize fontSizeBase
       ]
 
@@ -48,7 +49,7 @@ let inline titleText<'a> =
     TextProperties.Style [ 
         TextStyle.Color textColor
         TextStyle.TextAlign TextAlignment.Center
-        TextStyle.MarginBottom 15.
+        TextStyle.Margin 15.
         TextStyle.FontSize titleFontSize
       ] 
 
@@ -68,5 +69,17 @@ let inline button label onPress =
     text [ defaultText ] label
     |> touchableHighlight [
         buttonStyle
+        TouchableHighlightProperties.UnderlayColor touched
+        OnPress onPress]
+
+let inline verticalButton label onPress =
+    text [ defaultText ] label
+    |> touchableHighlight [
+        TouchableHighlightProperties.Style [
+            ViewStyle.BackgroundColor brandPrimary
+            ViewStyle.BorderRadius borderRadius
+            ViewStyle.Margin 5.
+            ViewStyle.Padding 5.
+        ]
         TouchableHighlightProperties.UnderlayColor touched
         OnPress onPress]
