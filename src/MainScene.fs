@@ -8,7 +8,7 @@ open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 
 type MainSceneProperties = {
-    onGoToImagePicker: unit -> unit
+    Navigator : Navigator
 }
 
 type MainScene (props) =
@@ -27,4 +27,4 @@ type MainScene (props) =
         view [ Styles.sceneBackground ] 
           [ text [ Styles.titleText ] "Image picker"
             logo
-            Styles.button "Tap me to go to image picker scene" x.props.onGoToImagePicker ]
+            Styles.button "Tap me to go to image picker scene" (fun () -> x.props.Navigator.push (createRoute("ImagePicker",1))) ]

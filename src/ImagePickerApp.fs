@@ -14,29 +14,22 @@ type ImagePickerApp (props) =
     inherit React.Component<obj,obj>(props)
 
     member x.render () =
-        let routeStack = [| createRoute("Main",0); createRoute("ImagePicker",1) |]
         navigator [
-            InitialRoute routeStack.[0]
-            InitialRouteStack routeStack
+            InitialRoute (createRoute("Main",0))
             RenderScene (Func<_,_,_>(fun route navigator ->
                 match route.title with
                 | "ImagePicker" ->
                     createScene<ImagePickerScene.ImagePickerScene,_,_>(
                         {
-                            initState = { uri = "http://facebook.github.io/react/img/logo_og.png" }
-                            onDone = 
-                                (fun imagePickerState ->
-                                    if route.index > 0 then
-                                        navigator.pop()
-                                )                        
+                            initUri = "http://facebook.github.io/react/img/logo_og.png"
+                            Navigator = navigator                    
                         })
                 | _ ->
                     createScene<MainScene.MainScene,_,_>(
                         {
-                            onGoToImagePicker = (fun () -> navigator.push routeStack.[1])
+                            Navigator = navigator
                         })
             ))
-            
         ]
 
         

@@ -44,6 +44,7 @@
     <Compile Include="../node_modules/fable-import-react/Fable.Helpers.React.fs" />
     <Compile Include="../node_modules/fable-import-react-native/Fable.Import.ReactNative.fs" />
     <Compile Include="../node_modules/fable-import-react-native/Fable.Helpers.ReactNative.fs" />
+    <Compile Include="../node_modules/fable-react-native-simple-store/Fable.Helpers.ReactNative.SimpleStore.fs" />
     <Compile Include="../node_modules/fable-import-react-native-image-picker/Fable.Import.ReactNativeImagePicker.fs" />
     <Compile Include="../node_modules/fable-import-react-native-image-picker/Fable.Helpers.ReactNativeImagePicker.fs" />
     <Compile Include="Styles.fs" />

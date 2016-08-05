@@ -15,14 +15,14 @@ type ImagePickerState = {
 }
 
 type ImagePickerSceneProperties = {
-    initState : ImagePickerState
-    onDone: ImagePickerState -> unit
+    initUri : string
+    Navigator : Navigator
 }
 
 type ImagePickerScene (props) as this =
     inherit React.Component<ImagePickerSceneProperties,ImagePickerState>(props)
 
-    do this.state <- this.props.initState
+    do this.state <- { uri = this.props.initUri }
 
     member x.render () =
         let selectImageButton =
@@ -46,4 +46,4 @@ type ImagePickerScene (props) as this =
         view [ Styles.sceneBackground ]
             [ image
               selectImageButton
-              Styles.button "Tap me to go back" (fun () -> x.props.onDone x.state) ]
+              Styles.button "Tap me to go back" x.props.Navigator.pop ]
