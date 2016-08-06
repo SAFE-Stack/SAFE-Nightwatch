@@ -70,7 +70,14 @@ type CheckLocationScene (props) as this =
                     TextStyle.Color Styles.textColor
                     TextStyle.BackgroundColor Styles.inputBackgroundColor
                   ]
-                TextInputProperties.OnChangeText (fun txt -> x.setState { x.state with Status = Model.LocationStatus.Alarm txt })
+                TextInputProperties.OnChangeText 
+                    (fun text ->
+                        let status =
+                            if String.IsNullOrWhiteSpace text then
+                                Model.LocationStatus.Ok
+                            else
+                                Model.LocationStatus.Alarm text
+                        x.setState { x.state with Status = status })
               ] ""
 
               image
