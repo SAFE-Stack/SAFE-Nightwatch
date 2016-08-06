@@ -1,5 +1,4 @@
-module Database 
-
+module Database
 
 open System
 open Fable.Core
@@ -8,7 +7,6 @@ open Fable.Import.ReactNative
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 open Fable.Helpers.ReactNativeSimpleStore
-
 
 let getRequestsAndMatchingResults() =
     async { 

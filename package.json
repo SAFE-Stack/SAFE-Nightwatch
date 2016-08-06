@@ -19,6 +19,7 @@
     "fable-import-react": "^0.5.0",
     "fable-import-react-native": "^0.6.11",
     "fable-react-native-simple-store": "^0.2.11",
-    "fable-import-react-native-image-picker": "^0.1.1"
+    "fable-import-react-native-image-picker": "^0.1.1",
+    "fable-import-fetch": "^0.0.2"
   }
 }

@@ -47,6 +47,8 @@
     <Compile Include="../node_modules/fable-react-native-simple-store/Fable.Helpers.ReactNative.SimpleStore.fs" />
     <Compile Include="../node_modules/fable-import-react-native-image-picker/Fable.Import.ReactNativeImagePicker.fs" />
     <Compile Include="../node_modules/fable-import-react-native-image-picker/Fable.Helpers.ReactNativeImagePicker.fs" />
+    <Compile Include="../node_modules/fable-import-fetch/Fable.Import.Fetch.fs" />
+    <Compile Include="AsyncPromiseExtensions.fs" />
     <Compile Include="Model.fs" />
     <Compile Include="Database.fs" />
     <Compile Include="Styles.fs" />

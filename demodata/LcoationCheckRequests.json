@@ -1,0 +1,12 @@
+[
+  {
+      "LocationId":"X1",
+      "Name":"Bell tower",
+      "Address":"Market place"
+  },
+  {
+      "LocationId":"X2",
+      "Name":"Graveyard",
+      "Address":"Right next to church"
+  }
+]
