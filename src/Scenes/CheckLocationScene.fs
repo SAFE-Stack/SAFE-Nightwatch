@@ -59,7 +59,8 @@ type CheckLocationScene (props) as this =
                                         x.setState { x.state with PictureUri = Some result.uri } )))]
 
         view [ Styles.sceneBackground ] 
-            [ text [ Styles.defaultText ] ("Location: " + x.state.LocationId)
+            [ text [ Styles.defaultText ] ("Location: " + x.props.ReadingRequest.Name)
+              text [ Styles.defaultText ] x.props.ReadingRequest.Address
               textInput [
                 TextInputProperties.KeyboardType KeyboardType.Numeric
                 TextInputProperties.AutoCorrect false
@@ -69,7 +70,7 @@ type CheckLocationScene (props) as this =
                     TextStyle.Color Styles.textColor
                     TextStyle.BackgroundColor Styles.inputBackgroundColor
                   ]
-                TextInputProperties.OnChangeText (fun txt -> x.setState { x.state with Status = Model.LocationStatus.Warning txt })
+                TextInputProperties.OnChangeText (fun txt -> x.setState { x.state with Status = Model.LocationStatus.Alarm txt })
               ] ""
 
               image

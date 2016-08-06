@@ -61,17 +61,22 @@ type LocationListScene (props) as this =
                             [ text [ Styles.defaultText ] request.LocationId
                               text [ Styles.defaultText ] request.Name
                               text [ Styles.defaultText ] request.Address
-                              (if result = None then 
-                                text [] ""
-                              else 
-                                image
-                                    [ Source (localImage "../../images/Approve.png")
-                                      ImageProperties.Style [
-                                        ImageStyle.Width 24.
-                                        ImageStyle.Height 24.
-                                        ImageStyle.AlignSelf Alignment.Center
-                                      ]
-                                    ])
+                              (match result with
+                               | None -> text [] ""
+                               | Some result ->
+                                    let uri = 
+                                        if result.Status = Model.LocationStatus.Ok then
+                                            localImage "../../images/Approve.png"
+                                        else
+                                            localImage "../../images/Alarm.png"
+                                    image
+                                        [ Source uri
+                                          ImageProperties.Style [
+                                                ImageStyle.Width 24.
+                                                ImageStyle.Height 24.
+                                                ImageStyle.AlignSelf Alignment.Center
+                                            ]
+                                        ])
                              ]
                         |> touchableHighlight [OnPress (fun () -> createFullRoute("CheckLocation",2,request,x.RefreshData,id) |> x.props.Navigator.push)]))
                 ]

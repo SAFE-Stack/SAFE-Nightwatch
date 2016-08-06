@@ -13,7 +13,6 @@ type LocationCheckRequest = {
 [<RequireQualifiedAccess>]
 type LocationStatus =
 | Ok
-| Warning of string
 | Alarm of string
 
 type LocationCheckResult = {
