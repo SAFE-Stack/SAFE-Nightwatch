@@ -8,5 +8,10 @@
       "LocationId":"X2",
       "Name":"Graveyard",
       "Address":"Right next to church"
+  },
+  {
+      "LocationId":"X3",
+      "Name":"Castle black",
+      "Address":"The wall"
   }
 ]
