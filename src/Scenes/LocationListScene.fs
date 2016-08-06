@@ -61,7 +61,18 @@ type LocationListScene (props) as this =
                             [ text [ Styles.defaultText ] request.LocationId
                               text [ Styles.defaultText ] request.Name
                               text [ Styles.defaultText ] request.Address
-                              text [ Styles.defaultText ] (if result = None then "" else "Checked")]
+                              (if result = None then 
+                                text [] ""
+                              else 
+                                image
+                                    [ Source (localImage "../../images/Approve.png")
+                                      ImageProperties.Style [
+                                        ImageStyle.Width 24.
+                                        ImageStyle.Height 24.
+                                        ImageStyle.AlignSelf Alignment.Center
+                                      ]
+                                    ])
+                             ]
                         |> touchableHighlight [OnPress (fun () -> createFullRoute("CheckLocation",2,request,x.RefreshData,id) |> x.props.Navigator.push)]))
                 ]
               Styles.button "OK" x.props.Navigator.pop
