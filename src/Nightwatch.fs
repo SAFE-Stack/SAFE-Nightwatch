@@ -9,10 +9,11 @@ open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 open Fable.Helpers.ReactNativeSimpleStore
 
+
 type Nightwatch (props) =
     inherit React.Component<obj,obj>(props)
 
-    member x.componentDidMount() = DemoData.createDemoData() // Make sure we have some data
+    member x.componentDidMount() = Database.createDemoData() // Make sure we have some data
 
     member x.render () =
         navigator [

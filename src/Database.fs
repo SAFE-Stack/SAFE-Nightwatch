@@ -1,4 +1,5 @@
-module DemoData
+module Database 
+
 
 open System
 open Fable.Core
@@ -7,6 +8,17 @@ open Fable.Import.ReactNative
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 open Fable.Helpers.ReactNativeSimpleStore
+
+
+let getRequestsAndMatchingResults() =
+    async { 
+        let! requests = DB.getAll<Model.LocationCheckRequest>()
+        let! results = DB.getAll<Model.LocationCheckResult>()
+
+        return
+            requests
+            |> Array.map (fun request -> request,results |> Array.tryFind (fun result -> result.LocationId = request.LocationId))
+    }
 
 let createDemoData() =
     async { 
@@ -21,3 +33,12 @@ let createDemoData() =
         | error -> ()
     } 
     |> Async.StartImmediate
+    
+let saveLocationCheckResult data =
+    async {
+        try
+            let! newID = DB.add<Model.LocationCheckResult> data
+            ()
+        with
+        | error -> () // Error saving data
+    } |> Async.StartImmediate

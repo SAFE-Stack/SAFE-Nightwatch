@@ -7,10 +7,8 @@ open Fable.Import.ReactNative
 open Fable.Import.ReactNativeImagePicker
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
-open Fable.Helpers.ReactNativeSimpleStore
 open Fable.Helpers.ReactNativeImagePicker
 open Fable.Helpers.ReactNativeImagePicker.Props
-open Fable.Core.JsInterop
 
 type CheckLocationSceneProperties = {
     Navigator: Navigator
@@ -90,13 +88,7 @@ type CheckLocationScene (props) as this =
                   [ Styles.verticalButton "Cancel" (fun () -> x.props.Route.onCancelButton(); x.props.Navigator.pop())
                     Styles.verticalButton "OK" 
                         (fun () ->
-                            async {
-                                try
-                                    let! newID = DB.add<Model.LocationCheckResult> x.state
-                                    ()
-                                with
-                                | error -> () // Error saving data
-                            } |> Async.StartImmediate
+                            Database.saveLocationCheckResult x.state
                             
                             x.props.Route.onOkButton()
                             x.props.Navigator.pop()) ]

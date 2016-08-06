@@ -4,11 +4,8 @@ open System
 open Fable.Core
 open Fable.Import
 open Fable.Import.ReactNative
-open Fable.Import.ReactNativeImagePicker
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
-open Fable.Helpers.ReactNativeSimpleStore
-open Fable.Core.JsInterop
 
 type LocationListSceneProperties = {
     Navigator: Navigator
@@ -30,13 +27,8 @@ type LocationListScene (props) as this =
 
     member x.RefreshData() =
         async { 
-            try
-                let! requests = DB.getAll<Model.LocationCheckRequest>()
-                let! results = DB.getAll<Model.LocationCheckResult>()
-
-                let model =
-                    requests
-                    |> Array.map (fun request -> request,results |> Array.tryFind (fun result -> result.LocationId = request.LocationId))
+            try                
+                let! model = Database.getRequestsAndMatchingResults()
                 
                 x.setState { x.state with RequestDataSource = updateDataSource model x.state.RequestDataSource }
             with

@@ -48,7 +48,7 @@
     <Compile Include="../node_modules/fable-import-react-native-image-picker/Fable.Import.ReactNativeImagePicker.fs" />
     <Compile Include="../node_modules/fable-import-react-native-image-picker/Fable.Helpers.ReactNativeImagePicker.fs" />
     <Compile Include="Model.fs" />
-    <Compile Include="DemoData.fs" />
+    <Compile Include="Database.fs" />
     <Compile Include="Styles.fs" />
     <Compile Include="Scenes/CheckLocationScene.fs" />
     <Compile Include="Scenes/MainScene.fs" />
