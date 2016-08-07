@@ -20,7 +20,7 @@ If you want to try it out then please do the following:
 * Press F5 to start debug
 * Go to android device simulator and you should see something like
 
-![Device Running](https://cloud.githubusercontent.com/assets/57396/17247642/e46d3452-5594-11e6-92de-afd68ea9cde2.png)
+![Device Running](http://www.navision-blog.de/images/nightwatchapp.gif)
 
 * Go to VS Code and hit Ctrl+Shift+B this will activate fable watch 
 * Go to the F# source in VS Code make a change and save the file
@@ -29,4 +29,4 @@ If you want to try it out then please do the following:
 
 This could look like:
 
-![Hot loading](https://cloud.githubusercontent.com/assets/57396/17248364/5f88f0b8-559a-11e6-95cc-774664d266e7.gif)
+![Hot loading](http://www.navision-blog.de/images/hotloading.gif)

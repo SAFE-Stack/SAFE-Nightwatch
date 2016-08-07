@@ -7,8 +7,10 @@ open Fable.Import.ReactNative
 open Fable.Import.ReactNativeImagePicker
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
+open Fable.Helpers.ReactNativeSimpleStore
 open Fable.Helpers.ReactNativeImagePicker
 open Fable.Helpers.ReactNativeImagePicker.Props
+open Fable.Core.JsInterop
 
 type CheckLocationSceneProperties = {
     Navigator: Navigator
@@ -22,45 +24,39 @@ type CheckLocationScene (props) as this =
     do this.state <- Model.LocationCheckResult.FromRequest this.props.ReadingRequest
 
     member x.render () =
-
-        let image =
-            let image =
-                match x.state.PictureUri with
-                | Some uri -> 
-                    image
-                        [ Source [ Uri uri; IsStatic true]
-                          ImageProperties.Style [
-                            ImageStyle.Flex 3
-                            ImageStyle.AlignSelf Alignment.Center
-                          ]
-                    ]
-                | None ->
-                    imageWithChild
-                        [ Source (localImage "../../images/snow.jpg")
-                          ImageProperties.Style [
-                            ImageStyle.Flex 3
-                            ImageStyle.AlignSelf Alignment.Center
-                          ]
-                        ] 
-                        (text [ Styles.defaultText ] "Tap to select picture")
-
-            image
-            |> touchableHighlight [
-                TouchableHighlightProperties.UnderlayColor Styles.touched
-                OnPress 
-                  (fun () ->
+        let selectImageButton =
+            Styles.button "Take picture"
+                (fun () ->
                     (showImagePicker
                         [AllowsEditing true] 
                         (fun result ->    
                             if not result.didCancel then
                                 if String.IsNullOrEmpty result.error then
-                                        x.setState { x.state with PictureUri = Some result.uri } )))]
+                                        x.setState { x.state with PictureUri = Some result.uri } )))
+
+        let image =
+            match x.state.PictureUri with
+            | Some uri -> 
+                image
+                    [ Source [ Uri uri; IsStatic true]
+                      ImageProperties.Style [
+                        ImageStyle.BorderColor "#000000"
+                        ImageStyle.Flex 3
+                      ]
+                    ]                
+            | None -> 
+                image
+                    [ Source (localImage "../../images/snow.jpg")
+                      ImageProperties.Style [
+                        ImageStyle.BorderColor "#000000"
+                        ImageStyle.Flex 3
+                        ImageStyle.AlignSelf Alignment.Center
+                      ]
+                ]
 
         view [ Styles.sceneBackground ] 
-            [ text [ Styles.defaultText ] ("Location: " + x.props.ReadingRequest.Name)
-              text [ Styles.defaultText ] x.props.ReadingRequest.Address
+            [ text [ Styles.defaultText ] x.props.ReadingRequest.Name
               textInput [
-                TextInputProperties.KeyboardType KeyboardType.Numeric
                 TextInputProperties.AutoCorrect false
                 TextInputProperties.Style [
                     TextStyle.MarginTop 2.
@@ -79,17 +75,21 @@ type CheckLocationScene (props) as this =
               ] ""
 
               image
-              view [ 
-                  ViewProperties.Style[
+              selectImageButton
+              view 
+                [ ViewProperties.Style [
                     ViewStyle.JustifyContent Alignment.Center
                     ViewStyle.AlignItems ItemAlignment.Center
                     ViewStyle.Flex 1
                     ViewStyle.FlexDirection FlexDirection.Row ]]
-                  [ Styles.verticalButton "Cancel" (fun () -> x.props.Route.onCancelButton(); x.props.Navigator.pop())
+                  [ Styles.verticalButton "Cancel" 
+                        (fun () -> 
+                             x.props.Route.onCancelButton()
+                             x.props.Navigator.pop())
                     Styles.verticalButton "OK" 
                         (fun () ->
                             Database.saveLocationCheckResult x.state
                             
                             x.props.Route.onOkButton()
-                            x.props.Navigator.pop()) ]
-              ]
+                            x.props.Navigator.pop())]
+            ]

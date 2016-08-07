@@ -50,8 +50,7 @@ type LocationListScene (props) as this =
                                 ViewStyle.AlignItems ItemAlignment.Center
                                 ViewStyle.Flex 1
                                 ViewStyle.FlexDirection FlexDirection.Row ]]
-                            [ text [ Styles.defaultText ] request.LocationId
-                              text [ Styles.defaultText ] request.Name
+                            [ text [ Styles.defaultText ] request.Name
                               text [ Styles.defaultText ] request.Address
                               (match result with
                                | None -> text [] ""

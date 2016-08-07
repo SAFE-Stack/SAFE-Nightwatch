@@ -20,6 +20,7 @@ type MainScene (props) =
                 [ Source (localImage "../../images/raven.jpg")
                   ImageProperties.Style [
                     ImageStyle.AlignSelf Alignment.Center
+                    ImageStyle.FlexDirection FlexDirection.Column
                   ]
                 ]
 

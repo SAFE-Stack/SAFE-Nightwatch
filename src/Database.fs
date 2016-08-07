@@ -7,8 +7,8 @@ open Fable.Import.ReactNative
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 open Fable.Helpers.ReactNativeSimpleStore
-open AsyncPromiseExtensions
 open Fable.Import.Fetch
+open Fable.Helpers.Fetch
 
 let getRequestsAndMatchingResults() =
     async { 
@@ -26,9 +26,9 @@ let createDemoData() =
             let! count = DB.count<Model.LocationCheckRequest>()
             if count = 0 then
                 // Fetch demo data 
-                let! fetched = GlobalFetch.fetch (Url "https://raw.githubusercontent.com/fsprojects/fable-react_native-demo/master/demodata/LcoationCheckRequests.json")
-                let! json = fetched.json()
-                let requests : Model.LocationCheckRequest[] = unbox json
+                let! requests =
+                    fetchAs<Model.LocationCheckRequest[]>
+                      (RequestInfo.Url "https://raw.githubusercontent.com/fsprojects/fable-react_native-demo/master/demodata/LocationCheckRequests.json")
                 do! DB.addMultiple<Model.LocationCheckRequest>(requests)
         with
         | error -> 
