@@ -29,10 +29,11 @@ type CheckLocationScene (props) as this =
                 (fun () ->
                     (showImagePicker
                         [AllowsEditing true] 
-                        (fun result ->    
-                            if not result.didCancel then
-                                if String.IsNullOrEmpty result.error then
-                                        x.setState { x.state with PictureUri = Some result.uri } )))
+                        (fun result ->
+                            if not result.didCancel && 
+                               String.IsNullOrEmpty result.error 
+                            then
+                               x.setState { x.state with PictureUri = Some result.uri } )))
 
         let image =
             match x.state.PictureUri with
