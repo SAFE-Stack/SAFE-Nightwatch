@@ -7,7 +7,7 @@
     "prebuild": "npm install",
     "build": "fable --watch"
   },
-  "dependencies": {   
+  "dependencies": {
     "core-js": "^2.4.1",
     "fable-core": "^0.5.1",
     "react": "~15.2.0",
