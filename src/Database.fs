@@ -9,11 +9,12 @@ open Fable.Helpers.ReactNative.Props
 open Fable.Helpers.ReactNativeSimpleStore
 open Fable.Import.Fetch
 open Fable.Helpers.Fetch
+open Model
 
 let getRequestsAndMatchingResults() =
     async { 
-        let! requests = DB.getAll<Model.LocationCheckRequest>()
-        let! results = DB.getAll<Model.LocationCheckResult>()
+        let! requests = DB.getAll<LocationCheckRequest>()
+        let! results = DB.getAll<LocationCheckResult>()
 
         return
             requests
@@ -23,16 +24,23 @@ let getRequestsAndMatchingResults() =
 let createDemoData() =
     async { 
         try
-            let! count = DB.count<Model.LocationCheckRequest>()
+            let! count = DB.count<LocationCheckRequest>()
+                    
+            do! DB.add 
+                    { LocationId = "X0"
+                      Name = "Hall"
+                      Address = "Inside the main building" }
+
             if count = 0 then
                 // Fetch demo data 
                 let! requests =
-                    fetchAs<Model.LocationCheckRequest[]>
-                      (RequestInfo.Url "https://raw.githubusercontent.com/fsprojects/fable-react_native-demo/master/demodata/LocationCheckRequests.json")
-                do! DB.addMultiple<Model.LocationCheckRequest>(requests)
+                    fetchAs<LocationCheckRequest[]>
+                      ("https://raw.githubusercontent.com/fsprojects/fable-react_native-demo/master/demodata/LocationCheckRequests.json",
+                      [])
+                do! DB.addMultiple requests
         with
         | error -> 
-            do! DB.addMultiple<Model.LocationCheckRequest>(
+            do! DB.addMultiple(
                     [| { LocationId = "X1"; Name = "Bell tower"; Address = "Market place" } 
                        { LocationId = "X2"; Name = "Graveyard"; Address = "Right next to church" } |])
     } 
