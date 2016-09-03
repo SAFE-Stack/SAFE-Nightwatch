@@ -46,7 +46,7 @@ type LocationListScene (props) as this =
                     (Func<_,_,_,_,_>(fun (request,result) b c d ->
                         view [
                             ViewProperties.Style[
-                                ViewStyle.JustifyContent Alignment.Center
+                                ViewStyle.JustifyContent JustifyContent.Center
                                 ViewStyle.AlignItems ItemAlignment.Center
                                 ViewStyle.Flex 1
                                 ViewStyle.FlexDirection FlexDirection.Row ]]
