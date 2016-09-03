@@ -60,7 +60,7 @@ let inline sceneBackground<'a> =
         ViewStyle.ShadowColor shadowColor
         ViewStyle.ShadowOpacity 0.8
         ViewStyle.ShadowRadius 3.
-        ViewStyle.JustifyContent Alignment.Center
+        ViewStyle.JustifyContent JustifyContent.Center
         ViewStyle.Flex 1
         ViewStyle.BackgroundColor backgroundColor
       ]

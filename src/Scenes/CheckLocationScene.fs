@@ -79,7 +79,7 @@ type CheckLocationScene (props) as this =
               selectImageButton
               view 
                 [ ViewProperties.Style [
-                    ViewStyle.JustifyContent Alignment.Center
+                    ViewStyle.JustifyContent JustifyContent.Center
                     ViewStyle.AlignItems ItemAlignment.Center
                     ViewStyle.Flex 1
                     ViewStyle.FlexDirection FlexDirection.Row ]]
