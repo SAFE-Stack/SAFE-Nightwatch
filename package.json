@@ -1,5 +1,5 @@
 {
-  "name": "meter-app",
+  "name": "Nightwatch",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,16 +10,18 @@
   "dependencies": {
     "core-js": "^2.4.1",
     "fable-core": "^0.5.1",
-    "react": "~15.2.0",
-    "react-native": "^0.30.0",
-    "react-native-image-picker": "^0.21.4"
+    "react": "15.3.1",
+    "react-native": "0.32.0",
+    "react-native-image-picker": "^0.21.4",
+    "react-native-windows": "^0.32.0"
   },
   "devDependencies": {
     "fable-compiler": "^0.5.1",
+    "fable-import-fetch": "^0.1.7",
     "fable-import-react": "^0.5.0",
     "fable-import-react-native": "^0.6.12",
-    "fable-react-native-simple-store": "^0.2.11",
     "fable-import-react-native-image-picker": "^0.1.1",
-    "fable-import-fetch": "^0.1.7"
+    "fable-react-native-simple-store": "^0.2.11",
+    "rnpm-plugin-windows": "^0.2.0"
   }
 }
