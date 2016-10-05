@@ -1,44 +1,37 @@
-module Nightwatch
+module internal Nightwatch
 
 open System
-open Fable.Core
 open Fable.Import
-open Fable.Import.ReactNative
-open Fable.Import.ReactNativeImagePicker
-open Fable.Helpers.ReactNative
-open Fable.Helpers.ReactNative.Props
-open Fable.Helpers.ReactNativeSimpleStore
+open Elmish
+open Messages
+open App
 
+type Nightwatch (props) as this =
+    inherit React.Component<obj,AppModel>(props)
 
-type Nightwatch (props) =
-    inherit React.Component<obj,obj>(props)
+    let safeState state = 
+        match !loaded with 
+        | false -> this.state <- state
+        | _ -> this.setState state
 
-    member x.componentDidMount() = Database.createDemoData() // Make sure we have some data
+    let dispatch = program |> Program.run safeState 
+    let backHandler = (fun () -> dispatch AppMsg.NavigateBack; true)
+        
+    member x.componentDidMount() =
+        if not !loaded then
+            Fable.Helpers.ReactNative.setOnHardwareBackPressHandler backHandler
+
+        loaded := true
+        Database.createDemoData() // Make sure we have some data
+
+    member x.componentWillUnmount() =  
+        if !loaded then
+            Fable.Helpers.ReactNative.removeOnHardwareBackPressHandler backHandler
+
+        loaded := false
 
     member x.render () =
-        navigator [
-            InitialRoute (createRoute("Start",0))
-            RenderScene (Func<_,_,_>(fun route navigator ->
-                match route.id with
-                | "CheckLocation" ->
-                    createScene<CheckLocationScene.CheckLocationScene,_,_>(
-                        {
-                            ReadingRequest = unbox route.payload
-                            Route = route
-                            Navigator = navigator
-                        })
-                | "LocationListScene" ->
-                    createScene<LocationListScene.LocationListScene,_,_>(
-                        {
-                            Navigator = navigator
-                        })                        
-                | _ ->
-                    createScene<MainScene.MainScene,_,_>(
-                        {
-                            Navigator = navigator
-                        }) 
-            ))
-            
-        ]
-
-        
+        if !loaded then
+            view this.state dispatch
+        else
+            view (init() |> fst) dispatch 

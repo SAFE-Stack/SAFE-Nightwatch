@@ -11,46 +11,26 @@ open Fable.Import.Fetch
 open Fable.Helpers.Fetch
 open Model
 
-let getRequestsAndMatchingResults() =
-    async { 
-        let! requests = DB.getAll<LocationCheckRequest>()
-        let! results = DB.getAll<LocationCheckResult>()
-
-        return
-            requests
-            |> Array.map (fun request -> request,results |> Array.tryFind (fun result -> result.LocationId = request.LocationId))
-    }
-
 let createDemoData() =
     async { 
         try
-            let! count = DB.count<LocationCheckRequest>()
-                    
-            do! DB.add 
-                    { LocationId = "X0"
-                      Name = "Hall"
-                      Address = "Inside the main building" }
-
-            if count = 0 then
-                // Fetch demo data 
-                let! requests =
-                    fetchAs<LocationCheckRequest[]>
-                      ("https://raw.githubusercontent.com/fsprojects/fable-react_native-demo/master/demodata/LocationCheckRequests.json",
-                      [])
-                do! DB.addMultiple requests
+            do! DB.clear<LocationCheckRequest>()
+            // Fetch demo data 
+            let! requests =
+                fetchAs<LocationCheckRequest[]>
+                    ("https://raw.githubusercontent.com/fsprojects/fable-react_native-demo/master/demodata/LocationCheckRequests.json",
+                    [])
+            do! DB.addMultiple requests
+            return requests.Length
         with
-        | error -> 
-            do! DB.addMultiple(
-                    [| { LocationId = "X1"; Name = "Bell tower"; Address = "Market place" } 
-                       { LocationId = "X2"; Name = "Graveyard"; Address = "Right next to church" } |])
+        | error -> return 0
     } 
-    |> Async.StartImmediate
-    
-let saveLocationCheckResult data =
+
+
+let getIndexedCheckRequests () =
     async {
-        try
-            let! newID = DB.add<Model.LocationCheckResult> data
-            ()
-        with
-        | error -> () // Error saving data
-    } |> Async.StartImmediate
+        let! requests = DB.getAll<Model.LocationCheckRequest>()
+        return 
+            requests
+            |> Array.mapi (fun i r -> i,r)
+    }

@@ -44,17 +44,22 @@
     <Compile Include="../node_modules/fable-import-react/Fable.Helpers.React.fs" />
     <Compile Include="../node_modules/fable-import-react-native/Fable.Import.ReactNative.fs" />
     <Compile Include="../node_modules/fable-import-react-native/Fable.Helpers.ReactNative.fs" />
+    <Compile Include="../node_modules/fable-import-react-native/Fable.Import.XmlDom.fs" />
     <Compile Include="../node_modules/fable-react-native-simple-store/Fable.Helpers.ReactNative.SimpleStore.fs" />
     <Compile Include="../node_modules/fable-import-react-native-image-picker/Fable.Import.ReactNativeImagePicker.fs" />
     <Compile Include="../node_modules/fable-import-react-native-image-picker/Fable.Helpers.ReactNativeImagePicker.fs" />
     <Compile Include="../node_modules/fable-import-fetch/Fable.Import.Fetch.fs" />
     <Compile Include="../node_modules/fable-import-fetch/Fable.Helpers.Fetch.fs" />
+    <Compile Include="../node_modules/fable-elmish/elmish.fs" />
+    <Compile Include="../node_modules/fable-elmish/elmish-promise.fs" />
     <Compile Include="Model.fs" />
     <Compile Include="Database.fs" />
     <Compile Include="Styles.fs" />
-    <Compile Include="Scenes/CheckLocationScene.fs" />
-    <Compile Include="Scenes/MainScene.fs" />
-    <Compile Include="Scenes/LocationListScene.fs" />
+    <Compile Include="Messages.fs" />
+    <Compile Include="Scenes/CheckLocation.fs" />
+    <Compile Include="Scenes/LocationList.fs" />
+    <Compile Include="Scenes/Home.fs" />
+    <Compile Include="Scenes/App.fs" />
     <Compile Include="Nightwatch.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />

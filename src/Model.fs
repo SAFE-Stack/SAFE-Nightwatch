@@ -4,27 +4,16 @@ open System
 
 type LocationId = string
 
-type LocationCheckRequest = {
-    LocationId : LocationId
-    Name: string
-    Address: string
-} 
-
 [<RequireQualifiedAccess>]
 type LocationStatus =
+| NotChecked
 | Ok
 | Alarm of string
 
-type LocationCheckResult = {
+type LocationCheckRequest = {
     LocationId : LocationId
+    Name: string
+    Address: string    
     Status : LocationStatus
-    Date : DateTime
-    PictureUri : string option
+    Date : DateTime option
 }
-    with
-        static member FromRequest(request:LocationCheckRequest) = {
-            LocationId = request.LocationId
-            Status = LocationStatus.Ok
-            Date = DateTime.Now
-            PictureUri = None
-        }
