@@ -62,7 +62,7 @@ let update msg model : Model*Cmd<AppMsg> =
         { model with
             LocationCheckRequest = 
                 { model.LocationCheckRequest with 
-                      Status = newStatus
+                      Status = Some newStatus
                       Date = Some DateTime.Now }
             Status = Changed }, []
     | LocationCheckMsg.Error e ->

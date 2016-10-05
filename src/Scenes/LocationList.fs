@@ -58,10 +58,10 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                         [ text [ Styles.defaultText ] request.Name
                           text [ Styles.defaultText ] request.Address
                           (match request.Status with
-                           | Model.LocationStatus.NotChecked -> text [] ""
-                           |  _ ->
+                           | None -> text [] ""
+                           | Some status ->
                                 let uri = 
-                                    match request.Status with
+                                    match status with
                                     | Model.LocationStatus.Alarm text -> localImage "../../images/Alarm.png"
                                     | _ -> localImage "../../images/Approve.png"
 
