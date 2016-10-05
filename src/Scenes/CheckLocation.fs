@@ -37,10 +37,7 @@ let save (pos,request : Model.LocationCheckRequest) = DB.update(pos,request)
 
 let selectImage () =
     showImagePickerAsync
-        [Title "Zähler"
-         ImagePickerOptions.CancelButtonTitle "Abbrechen"
-         ImagePickerOptions.TakePhotoButtonTitle "Kamera"
-         ImagePickerOptions.ChooseFromLibraryButtonTitle "Bibliothek"
+        [Title "Take picture"
          AllowsEditing true]
 
 // Update
