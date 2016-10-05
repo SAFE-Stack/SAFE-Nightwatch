@@ -26,6 +26,7 @@ let [<Literal>] inputBackgroundColor = "#251D1C"
 let [<Literal>] touched = "#5499C4"
 
 let [<Literal>] fontSizeBase = 15.
+let [<Literal>] smallFontSize = 10.
 let [<Literal>] titleFontSize = 17.
 
 let [<Literal>] borderRadius = 4.
@@ -37,21 +38,26 @@ let inline buttonStyle<'a> =
         ViewStyle.Margin 5.
       ]
 
-let inline defaultText<'a> =
+let inline buttonStyleDisabled<'a> =
+    TouchableHighlightProperties.Style [
+        ViewStyle.BackgroundColor brandInfo
+        ViewStyle.BorderRadius borderRadius
+        ViewStyle.Margin 5.
+      ]
+
+let inline renderText fontSize =
     TextProperties.Style [ 
         TextStyle.Color textColor
         TextStyle.TextAlign TextAlignment.Center
         TextStyle.Margin 5.
-        TextStyle.FontSize fontSizeBase
+        TextStyle.FontSize fontSize
       ]
 
-let inline titleText<'a> =
-    TextProperties.Style [ 
-        TextStyle.Color textColor
-        TextStyle.TextAlign TextAlignment.Center
-        TextStyle.Margin 15.
-        TextStyle.FontSize titleFontSize
-      ] 
+let inline defaultText<'a> = renderText fontSizeBase
+let inline smallText<'a> = renderText smallFontSize
+let inline titleText<'a> = renderText titleFontSize
+
+let inline whitespace<'a> = text [ smallText ] ""
 
 let inline sceneBackground<'a> =
     ViewProperties.Style [ 
@@ -69,6 +75,13 @@ let inline button label onPress =
     text [ defaultText ] label
     |> touchableHighlight [
         buttonStyle
+        TouchableHighlightProperties.UnderlayColor touched
+        OnPress onPress]
+
+let inline disabledButton label onPress =
+    text [ defaultText ] label
+    |> touchableHighlight [
+        buttonStyleDisabled
         TouchableHighlightProperties.UnderlayColor touched
         OnPress onPress]
 
