@@ -97,7 +97,6 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
 
     view [ Styles.sceneBackground ] 
         [ text [ Styles.defaultText ] model.LocationCheckRequest.Name
-          (match model.Status with Error msg -> text [ Styles.defaultText ] msg | _ -> Styles.whitespace)
           textInput [
             TextInputProperties.AutoCorrect false
             TextInputProperties.Style [
