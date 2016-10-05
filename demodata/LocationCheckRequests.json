@@ -2,16 +2,19 @@
   {
       "LocationId":"X1",
       "Name":"Bell tower",
-      "Address":"Market place"
+      "Address":"Market place",
+      "Status":"NotChecked"
   },
   {
       "LocationId":"X2",
       "Name":"Graveyard",
-      "Address":"Right next to church"
+      "Address":"Right next to church",
+      "Status":"NotChecked"
   },
   {
       "LocationId":"X3",
       "Name":"Castle black",
-      "Address":"The wall"
+      "Address":"The wall",
+      "Status":"NotChecked"
   }
 ]

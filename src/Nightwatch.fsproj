@@ -55,9 +55,11 @@
     <Compile Include="Model.fs" />
     <Compile Include="Database.fs" />
     <Compile Include="Styles.fs" />
-    <Compile Include="Scenes/CheckLocationScene.fs" />
-    <Compile Include="Scenes/MainScene.fs" />
-    <Compile Include="Scenes/LocationListScene.fs" />
+    <Compile Include="Messages.fs" />
+    <Compile Include="Scenes/CheckLocation.fs" />
+    <Compile Include="Scenes/LocationList.fs" />
+    <Compile Include="Scenes/Home.fs" />
+    <Compile Include="Scenes/App.fs" />
     <Compile Include="Nightwatch.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
