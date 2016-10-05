@@ -41,4 +41,7 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
       view [ Styles.sceneBackground ] 
         [ text [ Styles.titleText ] "Nightwatch"
           logo
-          Styles.button "Begin watch" (fun () -> dispatch (HomeSceneMsg (HomeSceneMsg.BeginWatch))) ]
+          Styles.button "Begin watch" (fun () -> dispatch (HomeSceneMsg (HomeSceneMsg.BeginWatch)))
+          Styles.whitespace
+          Styles.whitespace
+          text [ Styles.smallText ] model.StatusText  ]
