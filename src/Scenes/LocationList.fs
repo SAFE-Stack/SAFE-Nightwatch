@@ -49,12 +49,12 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
             model.RequestDataSource
             [ ListViewProperties.RenderRow  
                 (Func<_,_,_,_,_>(fun (pos,request) b c d ->
-                    view [
+                    [view [
                         ViewProperties.Style[
-                            ViewStyle.JustifyContent JustifyContent.Center
-                            ViewStyle.AlignItems ItemAlignment.Center
-                            ViewStyle.Flex 1
-                            ViewStyle.FlexDirection FlexDirection.Row ]]
+                            FlexStyle.JustifyContent JustifyContent.Center
+                            FlexStyle.AlignItems ItemAlignment.Center
+                            FlexStyle.Flex 1.
+                            FlexStyle.FlexDirection FlexDirection.Row ]]
                         [ text [ Styles.defaultText ] request.Name
                           text [ Styles.defaultText ] request.Address
                           (match request.Status with
@@ -68,12 +68,12 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                                 image
                                     [ Source uri
                                       ImageProperties.Style [
-                                            ImageStyle.Width 24.
-                                            ImageStyle.Height 24.
-                                            ImageStyle.AlignSelf Alignment.Center
+                                            FlexStyle.Width 24.
+                                            FlexStyle.Height 24.
+                                            FlexStyle.AlignSelf Alignment.Center
                                         ]
                                     ])
-                         ]
+                    ]]
                     |> touchableHighlight [OnPress (fun () -> dispatch (LocationListMsg (LocationListMsg.CheckNextLocation(pos,request))))]))
             ]
 

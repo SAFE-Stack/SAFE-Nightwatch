@@ -79,7 +79,7 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                 [ Source [ Uri uri; IsStatic true]
                   ImageProperties.Style [
                     ImageStyle.BorderColor "#000000"
-                    ImageStyle.Flex 3
+                    FlexStyle.Flex 3.
                   ]
                 ]                
         | None -> 
@@ -87,32 +87,32 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                 [ Source (localImage "../../images/snow.jpg")
                   ImageProperties.Style [
                     ImageStyle.BorderColor "#000000"
-                    ImageStyle.Flex 3
-                    ImageStyle.AlignSelf Alignment.Center
+                    FlexStyle.Flex 3.
+                    FlexStyle.AlignSelf Alignment.Center
                   ]
             ]
 
     view [ Styles.sceneBackground ] 
         [ text [ Styles.defaultText ] model.LocationCheckRequest.Name
           textInput [
-            TextInputProperties.AutoCorrect false
-            TextInputProperties.Style [
-                TextStyle.MarginTop 2.
-                TextStyle.MarginBottom 2.
+            TextInput.TextInputProperties.AutoCorrect false
+            TextInput.TextInputProperties.Style [
+                FlexStyle.MarginTop 2.
+                FlexStyle.MarginBottom 2.
                 TextStyle.Color Styles.textColor
-                TextStyle.BackgroundColor Styles.inputBackgroundColor
+                ViewStyle.BackgroundColor Styles.inputBackgroundColor
               ]
-            TextInputProperties.OnChangeText (Model.LocationStatus.Alarm >> LocationCheckMsg.LocationStatusUpdated >> LocationCheckMsg >> dispatch)
+            TextInput.TextInputProperties.OnChangeText (Model.LocationStatus.Alarm >> LocationCheckMsg.LocationStatusUpdated >> LocationCheckMsg >> dispatch)
           ] ""
 
           image
           selectImageButton
           view 
             [ ViewProperties.Style [
-                ViewStyle.JustifyContent JustifyContent.Center
-                ViewStyle.AlignItems ItemAlignment.Center
-                ViewStyle.Flex 1
-                ViewStyle.FlexDirection FlexDirection.Row ]]
+                FlexStyle.JustifyContent JustifyContent.Center
+                FlexStyle.AlignItems ItemAlignment.Center
+                FlexStyle.Flex 1.
+                FlexStyle.FlexDirection FlexDirection.Row ]]
               [ Styles.verticalButton "Cancel" (fun () -> dispatch NavigateBack)
                 Styles.verticalButton "OK" (fun () -> dispatch (LocationCheckMsg LocationCheckMsg.SaveAndGoBack)) ]
         ]

@@ -27,33 +27,36 @@ let [<Literal>] touched = "#5499C4"
 
 let [<Literal>] fontSizeBase = 15.
 let [<Literal>] smallFontSize = 10.
+let [<Literal>] mediumFontSize = 12.
 let [<Literal>] titleFontSize = 17.
 
 let [<Literal>] borderRadius = 4.
+
 
 let inline buttonStyle<'a> =
     TouchableHighlightProperties.Style [
         ViewStyle.BackgroundColor brandPrimary
         ViewStyle.BorderRadius borderRadius
-        ViewStyle.Margin 5.
+        FlexStyle.Margin 5.
       ]
 
 let inline buttonStyleDisabled<'a> =
     TouchableHighlightProperties.Style [
         ViewStyle.BackgroundColor brandInfo
         ViewStyle.BorderRadius borderRadius
-        ViewStyle.Margin 5.
+        FlexStyle.Margin 5.
       ]
 
 let inline renderText fontSize =
     TextProperties.Style [ 
         TextStyle.Color textColor
         TextStyle.TextAlign TextAlignment.Center
-        TextStyle.Margin 5.
+        FlexStyle.Margin 3.
         TextStyle.FontSize fontSize
       ]
 
 let inline defaultText<'a> = renderText fontSizeBase
+let inline mediumText<'a> = renderText mediumFontSize
 let inline smallText<'a> = renderText smallFontSize
 let inline titleText<'a> = renderText titleFontSize
 
@@ -61,38 +64,50 @@ let inline whitespace<'a> = text [ smallText ] ""
 
 let inline sceneBackground<'a> =
     ViewProperties.Style [ 
-        ViewStyle.AlignSelf Alignment.Stretch
-        ViewStyle.Padding 20.
+        FlexStyle.AlignSelf Alignment.Stretch
+        FlexStyle.Padding 20.
         ViewStyle.ShadowColor shadowColor
         ViewStyle.ShadowOpacity 0.8
         ViewStyle.ShadowRadius 3.
-        ViewStyle.JustifyContent JustifyContent.Center
-        ViewStyle.Flex 1
+        FlexStyle.JustifyContent JustifyContent.Center
+        FlexStyle.Flex 1.
         ViewStyle.BackgroundColor backgroundColor
       ]
 
+let inline viewPagerBackground<'a> =
+    ViewPagerAndroidProperties.Style [
+        FlexStyle.AlignSelf Alignment.Stretch
+        FlexStyle.Padding 20.
+        ViewStyle.ShadowColor shadowColor
+        ViewStyle.ShadowOpacity 0.8
+        ViewStyle.ShadowRadius 3.
+        FlexStyle.JustifyContent JustifyContent.Center
+        FlexStyle.Flex 1.
+        ViewStyle.BackgroundColor backgroundColor
+      ]
+      
 let inline button label onPress =
-    text [ defaultText ] label
+    [text [ defaultText ] label]
     |> touchableHighlight [
         buttonStyle
         TouchableHighlightProperties.UnderlayColor touched
         OnPress onPress]
 
 let inline disabledButton label onPress =
-    text [ defaultText ] label
+    [text [ defaultText ] label]
     |> touchableHighlight [
         buttonStyleDisabled
         TouchableHighlightProperties.UnderlayColor touched
         OnPress onPress]
 
 let inline verticalButton label onPress =
-    text [ defaultText ] label
+    [text [ defaultText ] label]
     |> touchableHighlight [
         TouchableHighlightProperties.Style [
             ViewStyle.BackgroundColor brandPrimary
             ViewStyle.BorderRadius borderRadius
-            ViewStyle.Margin 5.
-            ViewStyle.Padding 5.
+            FlexStyle.Margin 5.
+            FlexStyle.Padding 5.
         ]
         TouchableHighlightProperties.UnderlayColor touched
         OnPress onPress]

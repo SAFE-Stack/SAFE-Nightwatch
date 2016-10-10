@@ -33,8 +33,8 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
           image 
               [ Source (localImage "../../images/raven.jpg")
                 ImageProperties.Style [
-                  ImageStyle.AlignSelf Alignment.Center
-                  ImageStyle.FlexDirection FlexDirection.Column
+                  FlexStyle.AlignSelf Alignment.Center
+                  FlexStyle.FlexDirection FlexDirection.Column
                 ]
               ]
 
