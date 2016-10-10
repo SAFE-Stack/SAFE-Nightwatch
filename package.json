@@ -10,14 +10,14 @@
   "dependencies": {
     "buffer": "^4.9.1",
     "core-js": "^2.4.1",
-    "fable-core": "^0.6.5",
+    "fable-core": "^0.6.8",
     "react": "~15.3.2",
     "react-native": "^0.34.1",
     "react-native-windows": "^0.34.1",
     "react-native-image-picker": "^0.22.8"
   },
   "devDependencies": {
-    "fable-compiler": "^0.6.7",
+    "fable-compiler": "^0.6.15",
     "fable-import-fetch": "^0.2.4",
     "fable-import-react": "^0.5.2",
     "fable-import-react-native": "^0.10.7",
