@@ -4,7 +4,7 @@ This is a very early prototype for React Native development in F# using Fable.
 
 If you want to try it out then please do the following:
 
-### Make sure FSharp 
+### Make sure FSharp is installed
 
 Make sure that the FSharp compiler is properly installed on your operating system:
   * [on Windows](http://fsharp.org/use/windows/)
@@ -37,3 +37,25 @@ Make sure that the FSharp compiler is properly installed on your operating syste
 This could look like:
 
 ![Hot loading](http://www.navision-blog.de/images/hotloading.gif)
+
+
+## Error handling
+
+### Unauthorized device
+
+If you hit F5 in VS Code and it compiles everything, but nothing happens... go to the debugger 
+output (Ctrl+Shif+y) and search for hints.
+One pitfall might be "Skipping device, Device is UNAUTHORIZED". With
+```
+adb devices
+```
+you can see the list of devices, probably one of them is marked as UNAUTHORIZED. First,
+try 
+```
+adb kill-server
+```
+and try it again. If it doesn't help, you can push the public key onto the device again:
+```
+cd ~/.android && adb push adbkey.pub /data/misc/adb/adb_keys
+```
+After rebooting the device, access should be granted again.
