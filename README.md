@@ -4,6 +4,13 @@ This is a very early prototype for React Native development in F# using Fable.
 
 If you want to try it out then please do the following:
 
+### Make sure FSharp 
+
+Make sure that the FSharp compiler is properly installed on your operating system:
+  * [on Windows](http://fsharp.org/use/windows/)
+  * [on Mac OS X](http://fsharp.org/use/mac/)
+  * [on Linux](http://fsharp.org/use/linux/)
+
 ### Make sure React Native works
 
 * Install the Ionide [VS Code extenstion for F#](https://github.com/ionide/ionide-vscode-fsharp)
