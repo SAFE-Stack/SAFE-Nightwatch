@@ -1,4 +1,4 @@
-package com.Nightwatch;
+package com.nightwatch;
 
 import com.facebook.react.ReactActivity;
 

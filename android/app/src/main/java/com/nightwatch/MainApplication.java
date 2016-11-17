@@ -1,4 +1,4 @@
-package com.Nightwatch;
+package com.nightwatch;
 
 import android.app.Application;
 import android.util.Log;

@@ -85,8 +85,9 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
+
     defaultConfig {
-        applicationId "com.Nightwatch"
+        applicationId "com.nightwatch"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
