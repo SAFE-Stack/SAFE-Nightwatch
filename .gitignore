@@ -49,3 +49,5 @@ launchReactNative.js
 debuggerWorker.js
 index.android.bundle
 index.android.map
+.fake
+packages

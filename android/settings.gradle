@@ -1,4 +1,4 @@
-rootProject.name = 'Nightwatch'
+rootProject.name = 'nightwatch'
 
 include ':app'
 include ':react-native-image-picker'

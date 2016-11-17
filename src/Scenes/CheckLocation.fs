@@ -1,4 +1,4 @@
-module internal CheckLocation
+module CheckLocation
 
 open System
 open Fable.Core

@@ -1,7 +1,7 @@
 import * as coreJs from "core-js/shim";
 import {AppRegistry} from 'react-native';
-import {Nightwatch} from './out/Nightwatch';
+import {runnable} from './out/Nightwatch';
 
-AppRegistry.registerComponent('Nightwatch', () => Nightwatch);
+AppRegistry.registerRunnable('nightwatch', runnable);
 
 

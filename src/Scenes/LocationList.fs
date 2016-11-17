@@ -1,4 +1,4 @@
-module internal LocationList
+module LocationList
 
 open System
 open Fable.Core
@@ -48,7 +48,7 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
           listView 
             model.RequestDataSource
             [ ListViewProperties.RenderRow  
-                (Func<_,_,_,_,_>(fun (pos,request) b c d ->
+                (Func<_,_,_,_,_>(fun (pos,request: Model.LocationCheckRequest) b c d ->
                     [view [
                         ViewProperties.Style[
                             FlexStyle.JustifyContent JustifyContent.Center

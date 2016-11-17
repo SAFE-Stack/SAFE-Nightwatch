@@ -1,4 +1,4 @@
-module internal Home
+module Home
 
 open System
 open Fable.Core

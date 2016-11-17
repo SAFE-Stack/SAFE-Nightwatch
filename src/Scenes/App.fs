@@ -1,4 +1,4 @@
-module internal App
+module App
 
 open System
 open Fable.Core
@@ -57,15 +57,9 @@ let init() =
     { SubModel = HomeModel subModel
       NavigationStack = [Page.Home] }, cmd
 
-// App
-let program =
-    Program.mkProgram init update
-    |> Program.withConsoleTrace
-
-let loaded = ref false
-
 let view (model:AppModel) (dispatch: AppMsg -> unit) =
     match model.SubModel with
     | HomeModel model -> Home.view model dispatch
     | CheckLocationModel model -> CheckLocation.view model dispatch
     | LocationListModel model -> LocationList.view model dispatch
+    
