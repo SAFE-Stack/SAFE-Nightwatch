@@ -7,6 +7,8 @@ open Fable.Import.ReactNative
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 open Elmish
+open Elmish.React
+open Elmish.ReactNative
 open Messages
 
 type SubModel =
@@ -59,7 +61,7 @@ let init() =
 
 let view (model:AppModel) (dispatch: AppMsg -> unit) =
     match model.SubModel with
-    | HomeModel model -> Home.view model dispatch
-    | CheckLocationModel model -> CheckLocation.view model dispatch
-    | LocationListModel model -> LocationList.view model dispatch
+    | HomeModel model -> lazyView2 Home.view model dispatch
+    | CheckLocationModel model -> lazyView2 CheckLocation.view model dispatch
+    | LocationListModel model -> lazyView2 LocationList.view model dispatch
     
