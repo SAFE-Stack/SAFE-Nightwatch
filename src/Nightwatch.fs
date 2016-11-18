@@ -20,8 +20,11 @@ let setupBackHandler dispatch =
 let subscribe _ =
     Cmd.ofSub setupBackHandler
 
+
+let view = lazyView2 App.view
+
 let runnable :obj->obj = 
-    Program.mkProgram App.init App.update App.view
+    Program.mkProgram App.init App.update view
     |> Program.withSubscription subscribe
     |> Program.withConsoleTrace
     |> Program.toRunnable Program.run
