@@ -105,10 +105,10 @@ Target "Build" (fun _ ->
     run fableTool "--verbose --symbols PRODUCTION" ""
     run gradleTool "assembleRelease" "android"
     
-    let outFile = "android" </> "app" </> "build" </> "outputs" </> "apk" </> "app-release.apk"
+    let outFile = "android" </> "app" </> "build" </> "outputs" </> "apk" </> "app-release-unsigned.apk"
     Copy deployDir [outFile]
-    let fi = FileInfo (deployDir </> "app-release.apk")
-    fi.MoveTo (deployDir </> sprintf "msu.Reading.%s.apk" release.NugetVersion)
+    let fi = FileInfo (deployDir </> "app-release-unsigned.apk")
+    fi.MoveTo (deployDir </> sprintf "Nightwatch.%s.apk" release.NugetVersion)
 )
 
 Target "Debug" (fun _ ->

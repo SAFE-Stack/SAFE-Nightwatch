@@ -46,7 +46,14 @@ let update msg model : Model*Cmd<AppMsg> =
     | LocationCheckMsg.SaveAndGoBack ->
         match model.Status with
         | Unchanged -> model,Cmd.ofMsg LocationCheckMsg.GoBack |> Cmd.map LocationCheckMsg
-        | _ -> model,Cmd.ofAsync save (model.Position,model.LocationCheckRequest) (fun _ -> LocationCheckMsg.GoBack) LocationCheckMsg.Error |> Cmd.map LocationCheckMsg
+        | _ ->
+            let saveAndGoBack = Cmd.ofAsync save (model.Position,model.LocationCheckRequest) (fun _ -> LocationCheckMsg.GoBack) LocationCheckMsg.Error |> Cmd.map LocationCheckMsg
+            let sendAlarm =
+                match model.LocationCheckRequest.Status with
+                | Some(Model.LocationStatus.Alarm text) -> Cmd.ofMsg (AppMsg.SendAlarm (sprintf "Alarm at %s. Message: %s" model.LocationCheckRequest.Name text))
+                | _ -> Cmd.none
+
+            model,Cmd.batch [saveAndGoBack; sendAlarm]
     | LocationCheckMsg.GoBack ->
         model, Cmd.ofMsg AppMsg.NavigateBack
     | LocationCheckMsg.PictureSelected selectedPicture ->
