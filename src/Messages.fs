@@ -9,7 +9,10 @@ type Page =
 | CheckLocation of int * Model.LocationCheckRequest
 
 type AppMsg =
+| PushNotificationClicked of string * Fable.Import.ReactNativeOneSignal.OneSignalNotificationData * bool
 | NavigateTo of Page
+| SetDeviceID of Fable.Import.ReactNativeOneSignal.OneSignalID
+| SendAlarm of string
 | NavigateBack
 | ExitApp
 | HomeSceneMsg of HomeSceneMsg
@@ -35,12 +38,3 @@ and [<RequireQualifiedAccess>] LocationCheckMsg =
 | SaveAndGoBack
 | GoBack
 | Error of exn
-
-
-module Routes =
-    [<Literal>] 
-    let Main = "main"
-    [<Literal>] 
-    let Current = "current"
-    [<Literal>] 
-    let Retrieved = "retrieved"

@@ -13,11 +13,12 @@
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> 
+
     <uses-sdk
         android:minSdkVersion="18"
-        android:targetSdkVersion="22" />
-
-    <uses-sdk tools:overrideLibrary="com.reactnative.imagepicker"/>
+        android:targetSdkVersion="22"
+        tools:overrideLibrary="com.reactnative.imagepicker"/>
 
     <application
       android:name=".MainApplication"
@@ -28,6 +29,7 @@
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
+        android:launchMode="singleTop"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

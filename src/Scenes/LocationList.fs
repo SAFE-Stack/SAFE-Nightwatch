@@ -38,10 +38,10 @@ let update msg model : Model*Cmd<AppMsg> =
     | LocationListMsg.NewLocationCheckRequests indexedRequests ->
         { model with
             RequestDataSource = updateDataSource indexedRequests model.RequestDataSource
-            Status = Complete (sprintf "Locations: %d" indexedRequests.Length) }, []
+            Status = Complete (sprintf "Locations: %d" indexedRequests.Length) }, Cmd.none
     | LocationListMsg.Error e ->
         { model with
-            Status = Complete (string e.Message) }, []
+            Status = Complete (string e.Message) }, Cmd.none
 
 // View
 let view (model:Model) (dispatch: AppMsg -> unit) =

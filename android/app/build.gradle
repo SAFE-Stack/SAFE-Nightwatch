@@ -90,11 +90,14 @@ android {
         applicationId "com.nightwatch"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 6
+        versionName "1.0.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [manifestApplicationId: "${applicationId}",
+                                onesignal_app_id: "34358918-b545-47b8-ba9b-2d94e7e3b9f1",
+                                onesignal_google_project_number: "653990616227"]
     }
     splits {
         abi {
@@ -130,6 +133,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-image-picker')
+    compile project(':react-native-onesignal')
 }
 
 // Run this once to be able to run the application with BUCK
