@@ -11,14 +11,15 @@
     "buffer": "^5.0.0",
     "core-js": "^2.4.1",
     "fable-core": "^0.7.11",
-    "react": "~15.3.2",
-    "react-native": "^0.36.0",
-    "react-native-windows": "^0.36.0",
-    "react-native-image-picker": "^0.22.8",
+    "fable-elmish": "^0.7.0-alpha.4",
+    "fable-elmish-react": "^0.7.0-alpha.3",
     "fable-powerpack": "^0.0.16",
     "fable-react": "^0.7.8",
-    "fable-elmish": "^0.7.0-alpha.4",
-    "fable-elmish-react": "^0.7.0-alpha.3"
+    "react": "~15.3.2",
+    "react-native": "^0.36.0",
+    "react-native-image-picker": "^0.22.8",
+    "react-native-onesignal": "^1.2.3",
+    "react-native-windows": "^0.36.0"
   },
   "devDependencies": {
     "fable-compiler": "^0.7.14",
