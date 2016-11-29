@@ -11,26 +11,19 @@ open Fable.PowerPack
 open Model
 
 let createDemoData() =
-    async {
+    promise {
         try
             do! DB.clear<LocationCheckRequest>()
             // Fetch demo data
             let! requests =
                 Fetch.fetchAs<LocationCheckRequest[]>
-                    ("https://raw.githubusercontent.com/fsprojects/fable-react_native-demo/master/demodata/LocationCheckRequests.json",
-                    [])
-                |> Async.AwaitPromise
+                    "https://raw.githubusercontent.com/fsprojects/fable-react_native-demo/master/demodata/LocationCheckRequests.json" []
             do! DB.addMultiple requests
             return requests.Length
         with
         | error -> return 0
     }
 
-
 let getIndexedCheckRequests () =
-    async {
-        let! requests = DB.getAll<Model.LocationCheckRequest>()
-        return
-            requests
-            |> Array.mapi (fun i r -> i,r)
-    }
+    DB.getAll<Model.LocationCheckRequest>()
+    |> Promise.map (Array.mapi (fun i r -> i,r))

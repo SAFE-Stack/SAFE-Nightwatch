@@ -24,7 +24,7 @@ type Model =
   { Position : int
     LocationCheckRequest : Model.LocationCheckRequest
     PictureUri : string option
-    Status : Status } 
+    Status : Status }
 
 let init (pos,request) =
     { Status = Unchanged
@@ -33,7 +33,7 @@ let init (pos,request) =
       LocationCheckRequest = request }, Cmd.none
 
 // Helpers update
-let save (pos,request : Model.LocationCheckRequest) = DB.update(pos,request) 
+let save (pos,request : Model.LocationCheckRequest) = DB.update(pos,request)
 
 let selectImage () =
     showImagePickerAsync
@@ -46,7 +46,7 @@ let update msg model : Model*Cmd<AppMsg> =
     | LocationCheckMsg.SaveAndGoBack ->
         match model.Status with
         | Unchanged -> model,Cmd.ofMsg LocationCheckMsg.GoBack |> Cmd.map LocationCheckMsg
-        | _ -> model,Cmd.ofAsync save (model.Position,model.LocationCheckRequest) (fun _ -> LocationCheckMsg.GoBack) LocationCheckMsg.Error |> Cmd.map LocationCheckMsg
+        | _ -> model,Cmd.ofPromise save (model.Position,model.LocationCheckRequest) (fun _ -> LocationCheckMsg.GoBack) LocationCheckMsg.Error |> Cmd.map LocationCheckMsg
     | LocationCheckMsg.GoBack ->
         model, Cmd.ofMsg AppMsg.NavigateBack
     | LocationCheckMsg.PictureSelected selectedPicture ->
@@ -54,11 +54,11 @@ let update msg model : Model*Cmd<AppMsg> =
             PictureUri = selectedPicture
             Status = Changed }, []
     | LocationCheckMsg.SelectPicture ->
-        model,Cmd.ofAsync selectImage () LocationCheckMsg.PictureSelected LocationCheckMsg.Error |> Cmd.map LocationCheckMsg
+        model,Cmd.ofPromise selectImage () LocationCheckMsg.PictureSelected LocationCheckMsg.Error |> Cmd.map LocationCheckMsg
     | LocationCheckMsg.LocationStatusUpdated newStatus ->
         { model with
-            LocationCheckRequest = 
-                { model.LocationCheckRequest with 
+            LocationCheckRequest =
+                { model.LocationCheckRequest with
                       Status = Some newStatus
                       Date = Some DateTime.Now }
             Status = Changed }, []
@@ -74,15 +74,15 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
 
     let image =
         match model.PictureUri with
-        | Some uri -> 
+        | Some uri ->
             image
                 [ Source [ Uri uri; IsStatic true]
                   ImageProperties.Style [
                     ImageStyle.BorderColor "#000000"
                     FlexStyle.Flex 3.
                   ]
-                ]                
-        | None -> 
+                ]
+        | None ->
             image
                 [ Source (localImage "../../images/snow.jpg")
                   ImageProperties.Style [
@@ -92,7 +92,7 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                   ]
             ]
 
-    view [ Styles.sceneBackground ] 
+    view [ Styles.sceneBackground ]
         [ text [ Styles.defaultText ] model.LocationCheckRequest.Name
           textInput [
             TextInput.TextInputProperties.AutoCorrect false
@@ -107,7 +107,7 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
 
           image
           selectImageButton
-          view 
+          view
             [ ViewProperties.Style [
                 FlexStyle.JustifyContent JustifyContent.Center
                 FlexStyle.AlignItems ItemAlignment.Center

@@ -19,7 +19,7 @@ type Status =
 
 type Model =
   { RequestDataSource : ListViewDataSource<int * Model.LocationCheckRequest>
-    Status : Status } 
+    Status : Status }
 
 let init () =
     { Status = NotStarted
@@ -29,11 +29,12 @@ let init () =
 let update msg model : Model*Cmd<AppMsg> =
     match msg with
     | LocationListMsg.CheckNextLocation (pos,request) ->
-        { model with
-            Status = InProgress }, Cmd.ofMsg (NavigateTo (Page.CheckLocation(pos,request)))
+        { model with Status = InProgress },
+        Cmd.ofMsg (NavigateTo (Page.CheckLocation(pos,request)))
     | LocationListMsg.RefreshList ->
-        { model with
-            Status = InProgress }, Cmd.ofAsync Database.getIndexedCheckRequests () LocationListMsg.NewLocationCheckRequests LocationListMsg.Error |> Cmd.map LocationListMsg
+        { model with Status = InProgress },
+        Cmd.ofPromise Database.getIndexedCheckRequests () LocationListMsg.NewLocationCheckRequests LocationListMsg.Error
+        |> Cmd.map LocationListMsg
     | LocationListMsg.NewLocationCheckRequests indexedRequests ->
         { model with
             RequestDataSource = updateDataSource indexedRequests model.RequestDataSource
@@ -45,9 +46,9 @@ let update msg model : Model*Cmd<AppMsg> =
 // View
 let view (model:Model) (dispatch: AppMsg -> unit) =
     let getListView() =
-          listView 
+          listView
             model.RequestDataSource
-            [ ListViewProperties.RenderRow  
+            [ ListViewProperties.RenderRow
                 (Func<_,_,_,_,_>(fun (pos,request: Model.LocationCheckRequest) b c d ->
                     [view [
                         ViewProperties.Style[
@@ -60,7 +61,7 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                           (match request.Status with
                            | None -> text [] ""
                            | Some status ->
-                                let uri = 
+                                let uri =
                                     match status with
                                     | Model.LocationStatus.Alarm text -> localImage "../../images/Alarm.png"
                                     | _ -> localImage "../../images/Approve.png"
@@ -77,10 +78,10 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                     |> touchableHighlight [OnPress (fun () -> dispatch (LocationListMsg (LocationListMsg.CheckNextLocation(pos,request))))]))
             ]
 
-    view [ Styles.sceneBackground ] 
+    view [ Styles.sceneBackground ]
         [ text [ Styles.titleText ] "Locations to check"
-          text [ Styles.defaultText ] 
-            (match model.Status with 
+          text [ Styles.defaultText ]
+            (match model.Status with
              | Complete s -> s
              | _ -> "")
           (if model.RequestDataSource.getRowCount() > 0 then getListView() else Styles.whitespace)
