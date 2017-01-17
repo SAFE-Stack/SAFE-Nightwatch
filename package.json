@@ -12,7 +12,7 @@
     "core-js": "^2.4.1",
     "fable-core": "^0.7.23",
     "fable-elmish": "^0.8.0",
-    "fable-elmish-react": "^0.8.0",
+    "fable-elmish-react": "^0.8.1",
     "fable-powerpack": "^0.0.19",
     "fable-react": "^0.8.0",
     "react": "~15.3.2",
