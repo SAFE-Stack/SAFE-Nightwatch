@@ -1,6 +1,6 @@
 # Fable on React Native demo
 
-This is a very early prototype for React Native development in F# using Fable.
+This is a demo application for React Native development in F# using Fable.
 
 If you want to try it out then please do the following:
 
