@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server",
     "haul": "haul start"
   },
   "dependencies": {
@@ -30,7 +29,6 @@
     "fable-react": "1.0.0-narumi-6",
     "haul-cli": "0.5.0",
     "react-native-cli": "^2.0.1",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.2"
+    "webpack": "^2.2.1"
   }
 }
