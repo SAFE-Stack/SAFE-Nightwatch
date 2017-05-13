@@ -53,3 +53,8 @@ index.android.map
 packages
 deploy/
 *.orig
+
+# Haul
+#
+haul-debug.log
+.happypack
