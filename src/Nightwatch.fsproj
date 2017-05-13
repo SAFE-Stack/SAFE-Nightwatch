@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\node_modules\fable-powerpack\Fable.PowerPack.fsproj" />
     <ProjectReference Include="..\node_modules\fable-react\Fable.React.fsproj" />
+    <ProjectReference Include="..\node_modules\fable-react-native\Fable.React.Native.fsproj" />
     <ProjectReference Include="..\node_modules\fable-elmish\Fable.Elmish.fsproj" />
     <ProjectReference Include="..\node_modules\fable-elmish-react\Fable.Elmish.React.fsproj" />
   </ItemGroup>

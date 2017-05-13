@@ -2289,6 +2289,10 @@ fable-powerpack@1.0.0-narumi-5:
   version "1.0.0-narumi-5"
   resolved "https://registry.yarnpkg.com/fable-powerpack/-/fable-powerpack-1.0.0-narumi-5.tgz#485e39d3f3f7f1bd5c18b2653406d776cace160d"
 
+fable-react-native@next:
+  version "1.0.0-narumi-6"
+  resolved "https://registry.yarnpkg.com/fable-react-native/-/fable-react-native-1.0.0-narumi-6.tgz#2c3df35e9f8fb1f9bb192b3d3c633f198457b25a"
+
 fable-react@1.0.0-narumi-6:
   version "1.0.0-narumi-6"
   resolved "https://registry.yarnpkg.com/fable-react/-/fable-react-1.0.0-narumi-6.tgz#ff5c9021c3ec1c5051f13d27ddf00f317df3c0ec"
