@@ -1,6 +1,7 @@
 module Model
 
 open System
+open Fable.Core
 
 type LocationId = string
 
@@ -9,10 +10,10 @@ type LocationStatus =
 | Ok
 | Alarm of string
 
-type LocationCheckRequest = {
+type [<Pojo>] LocationCheckRequest = {
     LocationId : LocationId
     Name: string
-    Address: string    
+    Address: string
     Status : LocationStatus option
     Date : DateTime option
 }
