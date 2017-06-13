@@ -15,21 +15,26 @@ Make sure that the FSharp compiler is properly installed on your operating syste
 
 * Install the Ionide [VS Code extenstion for F#](https://github.com/ionide/ionide-vscode-fsharp)
 * Install the [VS Code extension for React Native](https://github.com/Microsoft/vscode-react-native)
-* Go to https://facebook.github.io/react-native/ and do all steps of the [getting started tutorial](https://facebook.github.io/react-native/docs/getting-started.html#content) 
+* Go to https://facebook.github.io/react-native/ and do all steps of the [getting started tutorial](https://facebook.github.io/react-native/docs/getting-started.html#content)
 * At this point you should have the default Javascript React Native "Hello World" running
 
 ### Running F# code on React Native
 
 * Pull latest master
-* Run "npm install" from command prompt
+* Run "npm install" or "yarn install" from command prompt
 * Open Android Simulator
-* Open VS Code
-* Press F5 to start debug
+* Open VS Code and press F5 to start debug
+
+> You can also run `react-native run-android` in a terminal
+
 * Go to android device simulator and you should see something like
 
 ![Device Running](http://www.navision-blog.de/images/nightwatchapp.gif)
 
-* Go to VS Code and hit Ctrl+Shift+B this will activate fable watch 
+* Go to VS Code and hit Ctrl+Shift+B this will activate fable watch
+
+> You can also run `dotnet fable npm-run build` instead
+
 * Go to the F# source in VS Code make a change and save the file
 * Fable watch should pick up this change automatically and compile it
 * Go to android device simulator and press r+r - change should be visible
@@ -43,14 +48,14 @@ This could look like:
 
 ### Unauthorized device
 
-If you hit F5 in VS Code and it compiles everything, but nothing happens... go to the debugger 
+If you hit F5 in VS Code and it compiles everything, but nothing happens... go to the debugger
 output (Ctrl+Shif+y) and search for hints.
 One pitfall might be "Skipping device, Device is UNAUTHORIZED". With
 ```
 adb devices
 ```
 you can see the list of devices, probably one of them is marked as UNAUTHORIZED. First,
-try 
+try
 ```
 adb kill-server
 ```

@@ -17,7 +17,7 @@ type Status =
 | InProgress
 | Complete of string
 
-type Model =
+type [<Pojo>] Model =
   { RequestDataSource : ListViewDataSource<int * Model.LocationCheckRequest>
     Status : Status }
 
@@ -63,8 +63,8 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                            | Some status ->
                                 let uri =
                                     match status with
-                                    | Model.LocationStatus.Alarm text -> localImage "../../images/Alarm.png"
-                                    | _ -> localImage "../../images/Approve.png"
+                                    | Model.LocationStatus.Alarm text -> localImage "../images/Alarm.png"
+                                    | _ -> localImage "../images/Approve.png"
 
                                 image
                                     [ Source uri
