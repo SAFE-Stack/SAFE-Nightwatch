@@ -1,6 +1,6 @@
 NUGET
   remote: https://www.nuget.org/api/v2
-    Fable.Core (1.0.11)
+    Fable.Core (1.0.14)
       FSharp.Core (>= 4.1.17) - restriction: >= netstandard16
       NETStandard.Library (>= 1.6.1) - restriction: >= netstandard16
     Fable.Elmish (0.9.0-beta-008)
@@ -22,7 +22,7 @@ NUGET
       Fable.Core (>= 1.0.0-narumi-912) - restriction: >= netstandard16
       FSharp.Core (>= 4.1.17) - restriction: >= netstandard16
       NETStandard.Library (>= 1.6.1) - restriction: >= netstandard16
-    Fable.React.Native (1.0.0-rc-005)
+    Fable.React.Native (1.0.0-rc-006)
       Fable.Core (>= 1.0.8) - restriction: >= netstandard16
       Fable.PowerPack (>= 1.0.0-narumi-902) - restriction: >= netstandard16
       Fable.React (>= 1.0.0-narumi-902) - restriction: >= netstandard16
