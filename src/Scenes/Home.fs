@@ -10,7 +10,7 @@ open Elmish
 open Messages
 
 // Model
-type Model = { StatusText : string  }
+type [<Pojo>] Model = { StatusText : string  }
 
 // Update
 let update (msg:HomeSceneMsg) model : Model*Cmd<AppMsg> =
@@ -34,7 +34,7 @@ let init () = { StatusText = "" }, Cmd.ofMsg HomeSceneMsg.GetDemoData |> Cmd.map
 let view (model:Model) (dispatch: AppMsg -> unit) =
       let logo =
           image
-              [ Source (localImage "../../images/raven.jpg")
+              [ Source (localImage "../images/raven.jpg")
                 ImageProperties.Style [
                   FlexStyle.AlignSelf Alignment.Center
                   FlexStyle.FlexDirection FlexDirection.Column

@@ -10,14 +10,10 @@
         {
             "taskName": "install",
             "args": ["install"]
-        },        
+        },
         {
             "taskName": "update",
             "args": ["update"]
-        },
-        {
-            "taskName": "firstbuild",
-            "args": ["run", "firstbuild"]
         },
         {
             "taskName": "build",

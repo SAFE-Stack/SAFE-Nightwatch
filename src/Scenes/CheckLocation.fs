@@ -20,7 +20,7 @@ type Status =
 | Changed
 | Error of string
 
-type Model =
+type [<Pojo>] Model =
   { Position : int
     LocationCheckRequest : Model.LocationCheckRequest
     PictureUri : string option
@@ -91,7 +91,7 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                 ]
         | None ->
             image
-                [ Source (localImage "../../images/snow.jpg")
+                [ Source (localImage "../images/snow.jpg")
                   ImageProperties.Style [
                     ImageStyle.BorderColor "#000000"
                     FlexStyle.Flex 3.

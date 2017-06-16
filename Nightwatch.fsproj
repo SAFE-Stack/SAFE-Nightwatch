@@ -1,0 +1,22 @@
+<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src/Model.fs" />
+    <Compile Include="src/Database.fs" />
+    <Compile Include="src/Styles.fs" />
+    <Compile Include="src/Messages.fs" />
+    <Compile Include="src/Scenes/CheckLocation.fs" />
+    <Compile Include="src/Scenes/LocationList.fs" />
+    <Compile Include="src/Scenes/Home.fs" />
+    <Compile Include="src/Scenes/App.fs" />
+    <Compile Include="src/Nightwatch.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FSharp.NET.Sdk" Version="1.*" PrivateAssets="All" />
+    <!--Keep dotnet-fable version pinned with Fable.Core in paket.dependencies-->
+    <DotNetCliToolReference Include="dotnet-fable" Version="1.0.14" />
+  </ItemGroup>
+  <Import Project=".paket\Paket.Restore.targets" />
+</Project>

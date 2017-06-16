@@ -7,7 +7,6 @@
             "type": "reactnative",
             "request": "launch",
             "platform": "android",
-            "preLaunchTask": "firstbuild",
             "internalDebuggerPort": 9090,
             "sourceMaps": true,
             "outDir": "${workspaceRoot}/.vscode/.react"
@@ -19,7 +18,6 @@
             "request": "launch",
             "platform": "ios",
             "target": "iPhone 5s",
-            "preLaunchTask": "firstbuild",
             "internalDebuggerPort": 9090,
             "sourceMaps": true,
             "outDir": "${workspaceRoot}/.vscode/.react"
