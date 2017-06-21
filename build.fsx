@@ -27,23 +27,39 @@ let release = List.head releaseNotesData
 let msg =  release.Notes |> List.fold (fun r s -> r + s + "\n") ""
 let releaseMsg = (sprintf "Release %s\n" release.NugetVersion) + msg
 
-let run cmd args dir =
-    if execProcess( fun info ->
+let run' timeout cmd args dir =
+    if execProcess (fun info ->
         info.FileName <- cmd
-        if not( String.IsNullOrWhiteSpace dir) then
+        if not (String.IsNullOrWhiteSpace dir) then
             info.WorkingDirectory <- dir
         info.Arguments <- args
-    ) System.TimeSpan.MaxValue |> not then
+    ) timeout |> not then
         failwithf "Error while running '%s' with args: %s" cmd args
 
-let platformTool tool path =
-    isUnix |> function | true -> tool | _ -> path
+let run = run' System.TimeSpan.MaxValue
 
-let nodePath = @"C:\Program Files\nodejs\node.exe" |> FullName
 
-let npmTool = platformTool "npm" (@"C:\Program Files\nodejs\npm.cmd" |> FullName)
+let platformTool tool winTool =
+    let tool = if isUnix then tool else winTool
+    tool
+    |> ProcessHelper.tryFindFileOnPath
+    |> function Some t -> t | _ -> failwithf "%s not found" tool
 
-let fableTool = platformTool "fable" ("node_modules" </> ".bin" </> "fable.cmd" |> FullName)
+let nodeTool = platformTool "node" "node.exe"
+let yarnTool = platformTool "yarn" "yarn.cmd"
+
+
+let dotnetcliVersion = "1.0.4"
+
+let mutable dotnetExePath = "dotnet"
+
+let runDotnet workingDir args =
+    let result =
+        ExecProcess (fun info ->
+            info.FileName <- dotnetExePath
+            info.WorkingDirectory <- workingDir
+            info.Arguments <- args) TimeSpan.MaxValue
+    if result <> 0 then failwithf "dotnet %s failed" args
 
 let gradleTool = platformTool "android/gradlew" ("android" </> "gradlew.bat" |> FullName)
 let reactNativeTool = platformTool "react-native" ("node_modules" </> ".bin" </> "react-native.cmd" |> FullName)
@@ -62,10 +78,19 @@ Target "Clean" (fun _ ->
     CleanDir deployDir
 )
 
-Target "NPMInstall" (fun _ ->
+Target "InstallDotNetCore" (fun _ ->
+    dotnetExePath <- DotNetCli.InstallDotNetSDK dotnetcliVersion
+)
+
+Target "Restore" (fun _ ->
     setEnvironVar "ANDROID_HOME" androidSDKPath
 
-    run npmTool "install" ""
+    printfn "Node version:"
+    run nodeTool "--version" __SOURCE_DIRECTORY__
+    printfn "Yarn version:"
+    run yarnTool "--version" __SOURCE_DIRECTORY__
+    run yarnTool "install" __SOURCE_DIRECTORY__
+    runDotnet __SOURCE_DIRECTORY__ "restore"
 )
 
 Target "SetVersionAndroid" (fun _ ->
@@ -102,7 +127,7 @@ Target "Build" (fun _ ->
         let newPATH = environVar "PATH" + @";C:\Program Files (x86)\Microsoft F#\v4.0"
         setEnvironVar "PATH" newPATH
 
-    run fableTool "--verbose --symbols PRODUCTION" ""
+    //run fableTool "--verbose --symbols PRODUCTION" ""
     run gradleTool "assembleRelease" "android"
     
     let outFile = "android" </> "app" </> "build" </> "outputs" </> "apk" </> "app-release-unsigned.apk"
@@ -112,10 +137,22 @@ Target "Build" (fun _ ->
 )
 
 Target "Debug" (fun _ ->
-    run fableTool "" ""
-    run reactNativeTool "run-android" ""    
-    Process.Start("chrome.exe","http://localhost:8081/debugger-ui") |> ignore
-    run fableTool "--watch" ""
+    let dotnetwatch = async {
+        let result =
+            ExecProcess (fun info ->
+                info.FileName <- dotnetExePath
+                info.WorkingDirectory <- __SOURCE_DIRECTORY__
+                info.Arguments <- " fable npm-run build") TimeSpan.MaxValue
+        if result <> 0 then failwith "Website shut down." }
+
+    let reactNativeTool = async { run reactNativeTool "run-android" "" }
+    let openBrowser = async {
+        System.Threading.Thread.Sleep(5000)
+        Process.Start("chrome.exe","http://localhost:8081/debugger-ui") |> ignore }
+
+    Async.Parallel [| dotnetwatch; reactNativeTool; openBrowser |]
+    |> Async.RunSynchronously
+    |> ignore    
 )
 
 Target "Deploy" (fun _ ->
@@ -125,7 +162,8 @@ Target "Deploy" (fun _ ->
 Target "Default" DoNothing
 
 "Clean"
-==> "NPMInstall"
+==> "InstallDotNetCore"
+==> "Restore"
 ==> "SetVersion"
 ==> "SetVersionAndroid"
 ==> "Build"
