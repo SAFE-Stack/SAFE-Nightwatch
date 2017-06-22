@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "rollup -c -w"
+    "build": "rollup -c",
+    "start": "rollup -c -w"
   },
   "dependencies": {
     "buffer": "^5.0.0",

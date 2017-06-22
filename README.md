@@ -33,7 +33,7 @@ Make sure that the FSharp compiler is properly installed on your operating syste
 
 * Go to VS Code and hit Ctrl+Shift+B this will activate fable watch
 
-> You can also run `dotnet fable npm-run build` instead
+> You can also run `dotnet fable npm-run start` instead
 
 * Go to the F# source in VS Code make a change and save the file
 * Fable watch should pick up this change automatically and compile it
