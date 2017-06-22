@@ -10,7 +10,7 @@ type LocationStatus =
 | Ok
 | Alarm of string
 
-type [<Pojo>] LocationCheckRequest = {
+type LocationCheckRequest = {
     LocationId : LocationId
     Name: string
     Address: string

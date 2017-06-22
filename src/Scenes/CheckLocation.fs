@@ -20,7 +20,7 @@ type Status =
 | Changed
 | Error of string
 
-type [<Pojo>] Model =
+type Model =
   { Position : int
     LocationCheckRequest : Model.LocationCheckRequest
     PictureUri : string option
