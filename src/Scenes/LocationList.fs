@@ -17,7 +17,7 @@ type Status =
 | InProgress
 | Complete of string
 
-type [<Pojo>] Model =
+type Model =
   { RequestDataSource : ListViewDataSource<int * Model.LocationCheckRequest>
     Status : Status }
 

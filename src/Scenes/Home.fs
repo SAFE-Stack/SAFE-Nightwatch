@@ -10,7 +10,7 @@ open Elmish
 open Messages
 
 // Model
-type [<Pojo>] Model = { StatusText : string  }
+type Model = { StatusText : string  }
 
 // Update
 let update (msg:HomeSceneMsg) model : Model*Cmd<AppMsg> =
