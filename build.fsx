@@ -30,6 +30,9 @@ let releaseMsg = (sprintf "Release %s\n" release.NugetVersion) + msg
 let run' timeout cmd args dir =
     if execProcess (fun info ->
         info.FileName <- cmd
+        info.UseShellExecute <- 
+            cmd.Contains "yarn" &&
+            Console.OutputEncoding <> Text.Encoding.GetEncoding(850)
         if not (String.IsNullOrWhiteSpace dir) then
             info.WorkingDirectory <- dir
         info.Arguments <- args
