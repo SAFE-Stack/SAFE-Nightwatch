@@ -22,5 +22,8 @@ export default {
     "react-native",
     "react-native-onesignal",
     "react-native-image-picker"
-  ]
+  ],
+  onwarn: function(warning) {
+    console.log(warning.message);
+  }
 };
