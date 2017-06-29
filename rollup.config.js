@@ -9,7 +9,7 @@ var isProduction = process.argv.indexOf("-w") === -1;
 console.log("Bundling for " + (isProduction ? "production" : "development") + "...");
 
 export default {
-  entry: resolve('Nightwatch.fsproj'),
+  entry: resolve('src/Nightwatch.fsproj'),
   dest: resolve('out/Nightwatch.js'),
   format: 'es', // 'amd', 'cjs', 'es', 'iife', 'umd'
   //sourceMap: 'inline',
