@@ -10,6 +10,7 @@ nuget Fable.React
 nuget Fable.React.Native
 nuget Fable.Elmish
 nuget Fable.Elmish.React
+nuget FSharp.NET.Sdk
 
 group Build
 source https://nuget.org/api/v2

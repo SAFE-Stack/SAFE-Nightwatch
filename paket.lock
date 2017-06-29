@@ -30,6 +30,7 @@ NUGET
       Fable.React (>= 1.0.0-narumi-902) - restriction: >= netstandard1.6
       FSharp.Core (>= 4.2.1) - restriction: >= netstandard1.6
       NETStandard.Library (>= 1.6.1) - restriction: >= netstandard1.6
+    FSharp.Compiler.Tools (4.1.17) - restriction: || (>= net40) (>= netstandard1.3)
     FSharp.Core (4.2.1) - redirects: force
       System.Collections (>= 4.0.11) - restriction: >= netstandard1.6
       System.Console (>= 4.0) - restriction: >= netstandard1.6
@@ -54,6 +55,8 @@ NUGET
       System.Threading.Thread (>= 4.0) - restriction: >= netstandard1.6
       System.Threading.ThreadPool (>= 4.0.10) - restriction: >= netstandard1.6
       System.Threading.Timer (>= 4.0.1) - restriction: >= netstandard1.6
+    FSharp.NET.Sdk (1.0.5)
+      FSharp.Compiler.Tools (>= 4.1.17) - restriction: || (>= net40) (>= netstandard1.3)
     Microsoft.NETCore.Platforms (1.1) - restriction: >= netstandard1.6
     Microsoft.NETCore.Targets (1.1) - redirects: force, restriction: || (&& (>= dnxcore50) (>= netstandard1.6)) (&& (< netstandard1.1) (>= netstandard1.6) (< monoandroid)) (&& (< netstandard1.2) (>= netstandard1.6) (< monoandroid)) (&& (< netstandard1.3) (>= netstandard1.6) (< monoandroid)) (&& (< netstandard1.5) (>= netstandard1.6) (< monoandroid)) (&& (>= netstandard1.6) (< monotouch) (< xamarinios) (< xamarinmac)) (>= netcore1.1)
     Microsoft.Win32.Primitives (4.3) - restriction: >= netstandard1.6
