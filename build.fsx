@@ -62,7 +62,7 @@ let runDotnet workingDir args =
     if result <> 0 then failwithf "dotnet %s failed" args
 
 let gradleTool = platformTool "android/gradlew" ("android" </> "gradlew.bat" |> FullName)
-let reactNativeTool() = platformTool "react-native" ("node_modules" </> ".bin" </> "react-native.cmd" |> FullName)
+let reactNativeTool() = platformTool "react-native" "react-native.cmd"
 
 let scpTool = @"C:\Program Files (x86)\Git\usr\bin\scp.exe"
 let sshTool = @"C:\Program Files (x86)\Git\usr\bin\ssh.exe"
