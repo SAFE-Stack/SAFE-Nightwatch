@@ -48,6 +48,7 @@ let platformTool tool winTool =
 let nodeTool = platformTool "node" "node.exe"
 let yarnTool = platformTool "yarn" "yarn.cmd"
 
+let srcDir = __SOURCE_DIRECTORY__ </> "src"
 
 let dotnetcliVersion = "1.0.4"
 
@@ -93,7 +94,7 @@ Target "Restore" (fun _ ->
     printfn "Yarn version:"
     run yarnTool "--version" __SOURCE_DIRECTORY__
     run yarnTool "install" __SOURCE_DIRECTORY__
-    runDotnet __SOURCE_DIRECTORY__ "restore"
+    runDotnet srcDir "restore"
 )
 
 Target "SetVersionAndroid" (fun _ ->
@@ -134,7 +135,7 @@ Target "Build" (fun _ ->
     let result =
         ExecProcess (fun info ->
             info.FileName <- dotnetExePath
-            info.WorkingDirectory <- __SOURCE_DIRECTORY__
+            info.WorkingDirectory <- srcDir
             info.Arguments <- " fable npm-run build") TimeSpan.MaxValue
     if result <> 0 then failwith "fable shut down."
     run gradleTool "assembleRelease" "android"
@@ -150,7 +151,7 @@ Target "Debug" (fun _ ->
         let result =
             ExecProcess (fun info ->
                 info.FileName <- dotnetExePath
-                info.WorkingDirectory <- __SOURCE_DIRECTORY__
+                info.WorkingDirectory <- srcDir
                 info.Arguments <- " fable npm-run start") TimeSpan.MaxValue
         if result <> 0 then failwith "fable shut down." }
 
