@@ -74,6 +74,9 @@ let androidSDKPath =
     if Directory.Exists p2 then FullName p2 else
     failwithf "Can't find Android SDK in %s or %s" p1 p2
 
+killProcess "dotnet"
+killProcess "dotnet.exe"
+
 Target "Clean" (fun _ ->
     CleanDir deployDir
 )
@@ -123,11 +126,17 @@ Target "SetVersion" (fun _ ->
 )
 
 Target "Build" (fun _ ->
+    ActivateFinalTarget "KillProcess"
     if buildServer = BuildServer.GitLabCI then
         let newPATH = environVar "PATH" + @";C:\Program Files (x86)\Microsoft F#\v4.0"
         setEnvironVar "PATH" newPATH
 
-    //run fableTool "--verbose --symbols PRODUCTION" ""
+    let result =
+        ExecProcess (fun info ->
+            info.FileName <- dotnetExePath
+            info.WorkingDirectory <- __SOURCE_DIRECTORY__
+            info.Arguments <- " fable npm-run build") TimeSpan.MaxValue
+    if result <> 0 then failwith "fable shut down."
     run gradleTool "assembleRelease" "android"
     
     let outFile = "android" </> "app" </> "build" </> "outputs" </> "apk" </> "app-release-unsigned.apk"
@@ -153,6 +162,11 @@ Target "Debug" (fun _ ->
     Async.Parallel [| dotnetwatch; reactNativeTool; openBrowser |]
     |> Async.RunSynchronously
     |> ignore    
+)
+
+FinalTarget "KillProcess" (fun _ ->
+    killProcess "dotnet"
+    killProcess "dotnet.exe"
 )
 
 Target "Deploy" (fun _ ->
