@@ -51,7 +51,7 @@ let update (msg:AppMsg) model : AppModel*Cmd<AppMsg> =
         | CheckLocationModel subModel -> CheckLocation.update subMsg subModel |> wrap CheckLocationModel model
         | _ -> model,Cmd.none
     | NavigateTo page -> navigateTo page (page::model.NavigationStack) model
-    | PushNotificationClicked(message,data,isActive) -> printfn "%s" message; model,Cmd.none
+    | PushNotificationClicked(message,data,isActive) -> model,Cmd.none
     | SetDeviceID id -> 
         { model with OneSignalID = Some id }, Cmd.none
     | NavigateBack -> 

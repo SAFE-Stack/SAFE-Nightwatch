@@ -142,8 +142,8 @@ Target "Debug" (fun _ ->
             ExecProcess (fun info ->
                 info.FileName <- dotnetExePath
                 info.WorkingDirectory <- __SOURCE_DIRECTORY__
-                info.Arguments <- " fable npm-run build") TimeSpan.MaxValue
-        if result <> 0 then failwith "Website shut down." }
+                info.Arguments <- " fable npm-run start") TimeSpan.MaxValue
+        if result <> 0 then failwith "fable shut down." }
 
     let reactNativeTool = async { run (reactNativeTool()) "run-android" "" }
     let openBrowser = async {
