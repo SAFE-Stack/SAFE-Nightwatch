@@ -62,7 +62,7 @@ let runDotnet workingDir args =
     if result <> 0 then failwithf "dotnet %s failed" args
 
 let gradleTool = platformTool "android/gradlew" ("android" </> "gradlew.bat" |> FullName)
-let reactNativeTool = platformTool "react-native" ("node_modules" </> ".bin" </> "react-native.cmd" |> FullName)
+let reactNativeTool() = platformTool "react-native" ("node_modules" </> ".bin" </> "react-native.cmd" |> FullName)
 
 let scpTool = @"C:\Program Files (x86)\Git\usr\bin\scp.exe"
 let sshTool = @"C:\Program Files (x86)\Git\usr\bin\ssh.exe"
@@ -145,7 +145,7 @@ Target "Debug" (fun _ ->
                 info.Arguments <- " fable npm-run build") TimeSpan.MaxValue
         if result <> 0 then failwith "Website shut down." }
 
-    let reactNativeTool = async { run reactNativeTool "run-android" "" }
+    let reactNativeTool = async { run (reactNativeTool()) "run-android" "" }
     let openBrowser = async {
         System.Threading.Thread.Sleep(5000)
         Process.Start("chrome.exe","http://localhost:8081/debugger-ui") |> ignore }
