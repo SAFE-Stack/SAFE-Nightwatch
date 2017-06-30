@@ -137,7 +137,7 @@ Target "Build" (fun _ ->
             info.FileName <- dotnetExePath
             info.WorkingDirectory <- srcDir
             info.Arguments <- " fable npm-run build") TimeSpan.MaxValue
-    if result <> 0 then failwith "fable shut down."
+    if result <> 0 then failwith "fable shut down. Please check logs above"
     run gradleTool "assembleRelease" "android"
     
     let outFile = "android" </> "app" </> "build" </> "outputs" </> "apk" </> "app-release-unsigned.apk"
