@@ -1,13 +1,18 @@
 source https://nuget.org/api/v2
 
-nuget FAKE
-nuget FSharp.Core
+nuget FSharp.Core redirects: force
 
 # Keep this version synced with dotnet-fable in .fsproj
-nuget Fable.Core 1.0.14
+nuget Fable.Core 1.1.4
 
 nuget Fable.PowerPack
 nuget Fable.React
 nuget Fable.React.Native
 nuget Fable.Elmish
 nuget Fable.Elmish.React
+nuget FSharp.NET.Sdk
+
+group Build
+source https://nuget.org/api/v2
+
+nuget FAKE
