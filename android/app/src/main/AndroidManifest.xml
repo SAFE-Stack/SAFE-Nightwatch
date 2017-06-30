@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.nightwatch"
     android:versionCode="1"
     android:versionName="1.0">
@@ -17,7 +18,7 @@
     <uses-sdk
         android:minSdkVersion="18"
         android:targetSdkVersion="22"
-        tools:overrideLibrary="com.reactnative.imagepicker"/>
+        tools:overrideLibrary="com.reactnative.imagepicker" />
 
     <application
       android:name=".MainApplication"
