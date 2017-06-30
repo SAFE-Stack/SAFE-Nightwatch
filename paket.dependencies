@@ -7,6 +7,7 @@ nuget Fable.PowerPack
 nuget Fable.React
 nuget Fable.React.Native
 nuget Fable.Elmish
+nuget Fable.Elmish.Debugger
 nuget Fable.Elmish.React
 nuget Fable.Elmish.HMR
 nuget Fable.Import.Browser

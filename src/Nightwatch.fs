@@ -2,6 +2,7 @@ module Nightwatch
 
 open Elmish
 open Elmish.React
+open Elmish.Debug
 open Elmish.ReactNative
 open Elmish.HMR
 
@@ -23,6 +24,7 @@ Program.mkProgram App.init App.update App.view
 #if RELEASE
 #else
 |> Program.withConsoleTrace
+|> Program.withDebugger
 |> Program.withHMR
 #endif
 |> Program.withReactNative "nightwatch"
