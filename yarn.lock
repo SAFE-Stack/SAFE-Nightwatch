@@ -3778,9 +3778,9 @@ rollup-plugin-commonjs@^8.0.2:
     resolve "^1.1.7"
     rollup-pluginutils "^2.0.1"
 
-rollup-plugin-fable@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-fable/-/rollup-plugin-fable-1.0.5.tgz#79fc83ee9c7e9082e763ee4443bf91b9ec9cbf63"
+rollup-plugin-fable@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-fable/-/rollup-plugin-fable-1.0.6.tgz#7bcbb81d332d6e91e6cd016f7ba86910da52c9fc"
   dependencies:
     fable-utils "^1.0.0"
     rollup-pluginutils "2.0.1"

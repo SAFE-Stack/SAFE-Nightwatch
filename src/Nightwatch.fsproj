@@ -15,7 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <!--Keep dotnet-fable version pinned with Fable.Core in paket.dependencies-->
-    <DotNetCliToolReference Include="dotnet-fable" Version="1.1.4" />
+    <DotNetCliToolReference Include="dotnet-fable" Version="1.1.5" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
