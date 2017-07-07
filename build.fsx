@@ -69,11 +69,19 @@ let scpTool = @"C:\Program Files (x86)\Git\usr\bin\scp.exe"
 let sshTool = @"C:\Program Files (x86)\Git\usr\bin\ssh.exe"
 
 let androidSDKPath =
-    let p1 = ProgramFilesX86 </> "Android" </> "android-sdk"
-    if Directory.Exists p1 then FullName p1 else
-    let p2 = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) </> "Android" </> "sdk"
-    if Directory.Exists p2 then FullName p2 else
-    failwithf "Can't find Android SDK in %s or %s" p1 p2
+    match environVarOrNone "ANDROID_HOME" with
+    | Some path -> path
+    | None ->
+        if isWindows then
+            let p1 = ProgramFilesX86 </> "Android" </> "android-sdk"
+            if Directory.Exists p1 then FullName p1 else
+            let p2 = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) </> "Android" </> "sdk"
+            if Directory.Exists p2 then FullName p2 else
+            failwithf "Can't find Android SDK in %s or %s" p1 p2
+        else
+            let p3 = Environment.GetFolderPath(Environment.SpecialFolder.Personal) </> "Library/Android/sdk"
+            if Directory.Exists p3 then FullName p3 else
+            failwithf "Can't find Android SDK in %s, please set ANDROID_HOME enviromental variable" p3
 
 killProcess "dotnet"
 killProcess "dotnet.exe"
@@ -109,7 +117,7 @@ Target "SetVersionAndroid" (fun _ ->
                 sprintf "%sversionCode %d" indent (currentVersionCode + 1)
             elif line.TrimStart().StartsWith("versionName ") then
                 let indent = line.Substring(0,line.IndexOf("versionName"))
-                sprintf "%sversionName \"%O\"" indent release.NugetVersion              
+                sprintf "%sversionName \"%O\"" indent release.NugetVersion
             else line)
     File.WriteAllLines(fileName,lines)
 )
@@ -139,7 +147,7 @@ Target "Build" (fun _ ->
             info.Arguments <- " fable npm-run build") TimeSpan.MaxValue
     if result <> 0 then failwith "fable shut down. Please check logs above"
     run gradleTool "assembleRelease" "android"
-    
+
     let outFile = "android" </> "app" </> "build" </> "outputs" </> "apk" </> "app-release-unsigned.apk"
     Copy deployDir [outFile]
     let fi = FileInfo (deployDir </> "app-release-unsigned.apk")
@@ -162,7 +170,7 @@ Target "Debug" (fun _ ->
 
     Async.Parallel [| dotnetwatch; reactNativeTool; openBrowser |]
     |> Async.RunSynchronously
-    |> ignore    
+    |> ignore
 )
 
 FinalTarget "KillProcess" (fun _ ->
