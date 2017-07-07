@@ -9,8 +9,8 @@
   "dependencies": {
     "buffer": "^5.0.0",
     "core-js": "^2.4.1",
-    "react": "^16.0.0-alpha.12",
-    "react-native": "^0.45.1",
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.46.0",
     "react-native-image-picker": "^0.25.1",
     "react-native-onesignal": "^1.2.3"
   },
