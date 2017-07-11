@@ -14,7 +14,7 @@ export default {
   format: 'es', // 'amd', 'cjs', 'es', 'iife', 'umd'
   //sourceMap: 'inline',
   plugins: [fable({
-    extra: { failOnError: true },
+    extra: { failOnError: true, useCache: true },
     define: isProduction ? ["PRODUCTION"] : ["DEBUG"]
   })],
   external: [
