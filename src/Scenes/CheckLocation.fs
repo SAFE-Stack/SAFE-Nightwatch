@@ -70,6 +70,7 @@ let update msg model : Model*Cmd<AppMsg> =
                       Date = Some DateTime.Now }
             Status = Changed }, []
     | LocationCheckMsg.Error e ->
+        Toast.showShort e.Message
         { model with
             Status = Error (string e.Message) }, []
 
