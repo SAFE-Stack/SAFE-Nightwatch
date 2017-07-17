@@ -20,6 +20,7 @@ export default {
   external: [
     "buffer",
     "react",
+    "xmldom",
     "react-native",
     "react-native-onesignal",
     "react-native-image-picker"
