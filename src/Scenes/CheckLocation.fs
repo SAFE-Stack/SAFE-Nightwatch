@@ -33,6 +33,10 @@ let init (pos,request) =
       LocationCheckRequest = request }, Cmd.none
 
 // Helpers update
+
+
+open Fable.Core.JsInterop
+
 let save (pos,request : Model.LocationCheckRequest) = DB.update(pos,request)
 
 let selectImage () =
