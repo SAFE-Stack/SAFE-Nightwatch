@@ -2618,9 +2618,9 @@ react-native-onesignal@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-1.2.3.tgz#f5bece58f143ff8423d15aed98b982852145e07f"
 
-react-native@0.46.0:
-  version "0.46.0"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.46.0.tgz#07dd7045ad905433fe5256d32023bbd794f7d1f5"
+react-native@0.46.4:
+  version "0.46.4"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.46.4.tgz#281bbcc165e5c36b4c8eaa868e6768543e811bcb"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
