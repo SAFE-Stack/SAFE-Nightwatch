@@ -67,3 +67,5 @@ index.android.map
 packages
 deploy/
 *.orig
+/.paket/load/
+/temp/

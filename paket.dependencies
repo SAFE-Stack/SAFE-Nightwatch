@@ -12,7 +12,16 @@ nuget FSharp.NET.Sdk
 
 clitool dotnet-fable
 
+group Test
+
+generate_load_scripts: true
+source https://nuget.org/api/v2
+framework >= net45
+nuget FSharp.Core redirects: force
+nuget Canopy.Mobile
+nuget Expecto
+
 group Build
 source https://nuget.org/api/v2
-
+  
 nuget FAKE

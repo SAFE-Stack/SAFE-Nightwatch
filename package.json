@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -c -w"
+    "build": "rollup -c --environment BUILD:RELEASE",
+    "start": "rollup -c -w --environment BUILD:DEBUG",
+    "compile-for-test": "rollup -c --environment BUILD:TEST",
+    "cold-start": "rollup -c --environment BUILD:DEBUG"
   },
   "dependencies": {
     "buffer": "^5.0.0",
