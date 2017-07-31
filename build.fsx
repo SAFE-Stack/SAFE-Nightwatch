@@ -20,6 +20,7 @@ let releaseNotesData =
     releaseNotes
     |> parseAllReleaseNotes
 
+let outDir = "./out"
 let deployDir = "./deploy"
 
 let release = List.head releaseNotesData
@@ -87,6 +88,7 @@ killProcess "dotnet"
 killProcess "dotnet.exe"
 
 Target "Clean" (fun _ ->
+    CleanDir outDir
     CleanDir deployDir
 )
 
