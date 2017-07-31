@@ -9,7 +9,6 @@ open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 open Fable.Core.JsInterop
 open Elmish
-open Messages
 
 // Model
 type Status =
@@ -17,34 +16,43 @@ type Status =
 | InProgress
 | Complete of string
 
+type Msg =
+| CheckNextLocation of int * Model.LocationCheckRequest
+| GoBack
+| RefreshList
+| NewLocationCheckRequests of (int * Model.LocationCheckRequest)[]
+| Error of exn
+
 type Model =
   { RequestDataSource : ListViewDataSource<int * Model.LocationCheckRequest>
     Status : Status }
 
 let init () =
     { Status = NotStarted
-      RequestDataSource = emptyDataSource() }, Cmd.ofMsg LocationListMsg.RefreshList |> Cmd.map LocationListMsg
+      RequestDataSource = emptyDataSource() }, Cmd.ofMsg RefreshList
 
 // Update
-let update msg model : Model*Cmd<AppMsg> =
+let update msg model : Model*Cmd<Msg> =
     match msg with
-    | LocationListMsg.CheckNextLocation (pos,request) ->
+    | GoBack
+    | CheckNextLocation _ ->
+        model, Cmd.none // Handled one level above
+
+    | RefreshList ->
         { model with Status = InProgress },
-        Cmd.ofMsg (NavigateTo (Page.CheckLocation(pos,request)))
-    | LocationListMsg.RefreshList ->
-        { model with Status = InProgress },
-        Cmd.ofPromise Database.getIndexedCheckRequests () LocationListMsg.NewLocationCheckRequests LocationListMsg.Error
-        |> Cmd.map LocationListMsg
-    | LocationListMsg.NewLocationCheckRequests indexedRequests ->
+        Cmd.ofPromise Database.getIndexedCheckRequests () NewLocationCheckRequests Error
+
+    | NewLocationCheckRequests indexedRequests ->
         { model with
             RequestDataSource = updateDataSource indexedRequests model.RequestDataSource
             Status = Complete (sprintf "Locations: %d" indexedRequests.Length) }, Cmd.none
-    | LocationListMsg.Error e ->
+
+    | Error e ->
         { model with
-            Status = Complete (string e.Message) }, Cmd.none
+            Status = Complete e.Message }, Cmd.none
 
 // View
-let view (model:Model) (dispatch: AppMsg -> unit) =
+let view (model:Model) (dispatch: Msg -> unit) =
     let getListView() =
           listView
             model.RequestDataSource
@@ -75,7 +83,7 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                                         ]
                                     ])
                     ]]
-                    |> touchableHighlight [OnPress (fun () -> dispatch (LocationListMsg (LocationListMsg.CheckNextLocation(pos,request))))]))
+                    |> touchableHighlight [OnPress (fun () -> dispatch (CheckNextLocation(pos,request)))]))
             ]
 
     view [ Styles.sceneBackground ]
@@ -86,5 +94,5 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
              | _ -> "")
           (if model.RequestDataSource.getRowCount() > 0 then getListView() else Styles.whitespace)
 
-          Styles.button "OK" (fun () -> dispatch AppMsg.NavigateBack)
+          Styles.button "OK" (fun () -> dispatch GoBack)
         ]
