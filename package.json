@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -c -w"
+    "build": "fable-splitter -c splitter.config.js",
+    "start": "fable-splitter -c splitter.config.js -w"
   },
   "dependencies": {
     "buffer": "^5.0.0",
@@ -15,9 +15,7 @@
     "react-native-onesignal": "^1.2.3"
   },
   "devDependencies": {
-    "rollup": "^0.42.0",
-    "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-fable": "^1.0.6",
-    "rollup-watch": "^4.0.0"
+    "babel-core": "^6.25.0",
+    "fable-splitter": "^0.1.4"
   }
 }

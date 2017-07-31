@@ -71,8 +71,8 @@ let view (model:Model) (dispatch: Msg -> unit) =
                            | Some status ->
                                 let uri =
                                     match status with
-                                    | Model.LocationStatus.Alarm text -> localImage "../images/Alarm.png"
-                                    | _ -> localImage "../images/Approve.png"
+                                    | Model.LocationStatus.Alarm text -> localImage "../../images/Alarm.png"
+                                    | _ -> localImage "../../images/Approve.png"
 
                                 image
                                     [ Source uri

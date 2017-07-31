@@ -110,7 +110,7 @@ let view (model:Model) (dispatch: Msg -> unit) =
                 ]
         | None ->
             image
-                [ Source (localImage "../images/snow.jpg")
+                [ Source (localImage "../../images/snow.jpg")
                   ImageProperties.Style [
                     ImageStyle.BorderColor "#000000"
                     FlexStyle.Flex 3.
