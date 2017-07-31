@@ -12,13 +12,21 @@ open Fable.Helpers.ReactNativeImagePicker
 open Fable.Helpers.ReactNativeImagePicker.Props
 open Fable.Import.JS
 open Elmish
-open Messages
 
 // Model
 type Status =
 | Unchanged
 | Changed
 | Error of string
+
+type Msg =
+| PictureSelected of string option
+| LocationStatusUpdated of Model.LocationStatus
+| SelectPicture
+| SaveAndGoBack
+| SendAlarm of string
+| GoBack
+| Error of exn
 
 type Model =
   { Position : int
@@ -41,48 +49,54 @@ let save (pos,request : Model.LocationCheckRequest) = DB.update(pos,request)
 
 let selectImage () =
     showImagePickerAsync
-        [Title "Take picture"
-         AllowsEditing true]
+        [ Title "Take picture"
+          AllowsEditing true]
 
 // Update
-let update msg model : Model*Cmd<AppMsg> =
+let update msg model : Model*Cmd<Msg> =
     match msg with
-    | LocationCheckMsg.SaveAndGoBack ->
+    | SaveAndGoBack ->
         match model.Status with
-        | Unchanged -> model,Cmd.ofMsg LocationCheckMsg.GoBack |> Cmd.map LocationCheckMsg
+        | Unchanged -> model, Cmd.ofMsg GoBack
         | _ ->
-            let saveAndGoBack = Cmd.ofPromise save (model.Position,model.LocationCheckRequest) (fun _ -> LocationCheckMsg.GoBack) LocationCheckMsg.Error |> Cmd.map LocationCheckMsg
+            let saveAndGoBack = Cmd.ofPromise save (model.Position,model.LocationCheckRequest) (fun _ -> GoBack) Error
             let sendAlarm =
                 match model.LocationCheckRequest.Status with
-                | Some(Model.LocationStatus.Alarm text) -> Cmd.ofMsg (AppMsg.SendAlarm (sprintf "Alarm at %s. Message: %s" model.LocationCheckRequest.Name text))
+                | Some(Model.LocationStatus.Alarm text) -> Cmd.ofMsg (SendAlarm (sprintf "Alarm at %s. Message: %s" model.LocationCheckRequest.Name text))
                 | _ -> Cmd.none
 
             model,Cmd.batch [saveAndGoBack; sendAlarm]
-    | LocationCheckMsg.GoBack ->
-        model, Cmd.ofMsg AppMsg.NavigateBack
-    | LocationCheckMsg.PictureSelected selectedPicture ->
+
+    | SendAlarm _
+    | GoBack ->
+        model, Cmd.none // Handled one level above
+
+    | PictureSelected selectedPicture ->
         { model with
             PictureUri = selectedPicture
-            Status = Changed }, []
-    | LocationCheckMsg.SelectPicture ->
-        model,Cmd.ofPromise selectImage () LocationCheckMsg.PictureSelected LocationCheckMsg.Error |> Cmd.map LocationCheckMsg
-    | LocationCheckMsg.LocationStatusUpdated newStatus ->
+            Status = Changed }, Cmd.none
+
+    | SelectPicture ->
+        model,Cmd.ofPromise selectImage () PictureSelected Error
+
+    | LocationStatusUpdated newStatus ->
         { model with
             LocationCheckRequest =
                 { model.LocationCheckRequest with
                       Status = Some newStatus
                       Date = Some DateTime.Now }
-            Status = Changed }, []
-    | LocationCheckMsg.Error e ->
+            Status = Changed }, Cmd.none
+
+    | Error e ->
         Toast.showShort e.Message
         { model with
-            Status = Error (string e.Message) }, []
+            Status = Status.Error e.Message }, Cmd.none
 
 // View
-let view (model:Model) (dispatch: AppMsg -> unit) =
+let view (model:Model) (dispatch: Msg -> unit) =
     let selectImageButton =
         Styles.button "Take picture"
-            (fun () -> dispatch (LocationCheckMsg LocationCheckMsg.SelectPicture))
+            (fun () -> dispatch SelectPicture)
 
     let image =
         match model.PictureUri with
@@ -114,7 +128,7 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                 TextStyle.Color Styles.textColor
                 ViewStyle.BackgroundColor Styles.inputBackgroundColor
               ]
-            TextInput.TextInputProperties.OnChangeText (Model.LocationStatus.Alarm >> LocationCheckMsg.LocationStatusUpdated >> LocationCheckMsg >> dispatch)
+            TextInput.TextInputProperties.OnChangeText (Model.LocationStatus.Alarm >> LocationStatusUpdated >> dispatch)
           ] ""
 
           image
@@ -125,6 +139,6 @@ let view (model:Model) (dispatch: AppMsg -> unit) =
                 FlexStyle.AlignItems ItemAlignment.Center
                 FlexStyle.Flex 1.
                 FlexStyle.FlexDirection FlexDirection.Row ]]
-              [ Styles.verticalButton "Cancel" (fun () -> dispatch NavigateBack)
-                Styles.verticalButton "OK" (fun () -> dispatch (LocationCheckMsg LocationCheckMsg.SaveAndGoBack)) ]
+              [ Styles.verticalButton "Cancel" (fun () -> dispatch GoBack)
+                Styles.verticalButton "OK" (fun () -> dispatch SaveAndGoBack) ]
         ]

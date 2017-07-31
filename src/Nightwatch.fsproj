@@ -6,7 +6,6 @@
     <Compile Include="Model.fs" />
     <Compile Include="Database.fs" />
     <Compile Include="Styles.fs" />
-    <Compile Include="Messages.fs" />
     <Compile Include="Scenes/CheckLocation.fs" />
     <Compile Include="Scenes/LocationList.fs" />
     <Compile Include="Scenes/Home.fs" />
