@@ -16,6 +16,6 @@
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
-    "fable-splitter": "^0.1.4"
+    "fable-splitter": "^0.1.6"
   }
 }

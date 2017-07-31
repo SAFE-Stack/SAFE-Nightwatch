@@ -8,14 +8,13 @@ var isProduction = process.argv.indexOf("-w") === -1;
 console.log("Compiling for " + (isProduction ? "production" : "development") + "...");
 
 module.exports = {
-    entry: "src/Nightwatch.fsproj",
-    outDir: "out",
+    entry: resolve("src/Nightwatch.fsproj"),
+    outDir: resolve("out"),
     babel: {
     //   presets: [["es2015", { modules: false }]],
-      sourceMaps: true,
+    //   sourceMaps: true,
     },
     fable: {
-      define: isProduction ? ["PRODUCTION"] : ["DEBUG"],
-      fableCore: resolve("../Fable/build/fable-core")
+      define: isProduction ? ["PRODUCTION"] : ["DEBUG"]
     }
   }

@@ -40,7 +40,7 @@ let init () = { StatusText = "" }, Cmd.ofMsg GetDemoData
 let view (model:Model) (dispatch: Msg -> unit) =
       let logo =
           image
-              [ Source (localImage "../../images/raven.jpg")
+              [ Source (localImage "${entryDir}/../images/raven.jpg")
                 ImageProperties.Style [
                   FlexStyle.AlignSelf Alignment.Center
                   FlexStyle.FlexDirection FlexDirection.Column

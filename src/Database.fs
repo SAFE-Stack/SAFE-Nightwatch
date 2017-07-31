@@ -19,7 +19,7 @@ let createDemoData() =
             do! DB.clear<LocationCheckRequest>()
             // Fetch demo data
             let requests: LocationCheckRequest[] =
-                localResource "../demodata/LocationCheckRequests.json"
+                localResource "${entryDir}/../demodata/LocationCheckRequests.json"
             // let! requests =
             //     Fetch.fetchAs<LocationCheckRequest[]>
             //         "https://raw.githubusercontent.com/fsprojects/fable-react_native-demo/master/demodata/LocationCheckRequests.json" []
