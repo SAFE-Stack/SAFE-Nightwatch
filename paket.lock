@@ -1245,3 +1245,29 @@ GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
     FAKE (4.63)
+
+GROUP Test
+GENERATE-LOAD-SCRIPTS: ON
+RESTRICTION: >= net45
+NUGET
+  remote: https://www.nuget.org/api/v2
+    Appium.WebDriver (3.0.0.2)
+      Castle.Core (>= 3.3.3)
+      Newtonsoft.Json (>= 9.0.1)
+      Selenium.Support (>= 3.0.1)
+      Selenium.WebDriver (>= 3.0.1)
+    Argu (3.7)
+    canopy.mobile (1.7.4)
+      Appium.WebDriver
+      FSharp.Core
+    Castle.Core (4.1.1)
+    Expecto (5.0)
+      Argu (>= 3.7)
+      FSharp.Core (>= 4.1.12)
+      Mono.Cecil (>= 0.10.0-beta5)
+    FSharp.Core (4.2.2) - redirects: force
+    Mono.Cecil (0.10.0-beta6)
+    Newtonsoft.Json (10.0.3)
+    Selenium.Support (3.4)
+      Selenium.WebDriver (>= 3.4)
+    Selenium.WebDriver (3.4)

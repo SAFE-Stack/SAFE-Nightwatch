@@ -28,6 +28,10 @@ let release = List.head releaseNotesData
 let packageVersion = SemVerHelper.parse release.NugetVersion
 
 
+// Pattern specifying assemblies to be tested using expecto
+let testExecutables = "tests/**/bin/Debug/**/*Tests*.exe"
+
+
 // Default target configuration
 let configuration = "Release"
 
@@ -56,6 +60,8 @@ let nodeTool = platformTool "node" "node.exe"
 let yarnTool = platformTool "yarn" "yarn.cmd"
 
 let srcDir = __SOURCE_DIRECTORY__ </> "src"
+
+let testDir = __SOURCE_DIRECTORY__ </> "tests" </> "IntegrationTests"
 
 let dotnetcliVersion = "1.0.4"
 
@@ -146,6 +152,24 @@ Target "Restore" (fun _ ->
     run yarnTool "--version" __SOURCE_DIRECTORY__
     run yarnTool "install" __SOURCE_DIRECTORY__
     runDotnet srcDir "restore"
+    runDotnet testDir "restore"
+)
+
+Target "BuildTests" (fun _ ->
+    let result =
+        ExecProcess (fun info ->
+            info.FileName <- dotnetExePath
+            info.WorkingDirectory <- testDir
+            info.Arguments <- "build") TimeSpan.MaxValue
+    if result <> 0 then failwith "dotnet build issue."
+)
+
+Target "RunTests" (fun _ ->
+    ActivateFinalTarget "CloseAndroid"
+
+    !! testExecutables
+    |> Expecto (fun p -> { p with Parallel = false } )
+    |> ignore
 )
 
 let gradleFile = "./android/app/build.gradle"
@@ -213,6 +237,23 @@ Target "PrepareRelease" (fun _ ->
     Git.Branches.pushTag "" "origin" tagName
 )
 
+
+Target "CompileForTest" (fun _ ->
+    ActivateFinalTarget "KillProcess"
+
+    let result =
+        ExecProcess (fun info ->
+            info.FileName <- dotnetExePath
+            info.WorkingDirectory <- srcDir
+            info.Arguments <- " fable npm-run compile-for-test") TimeSpan.MaxValue
+
+    if result <> 0 then failwith "fable shut down. Please check logs above"
+)
+
+Target "AssembleForTest" (fun _ ->
+    run gradleTool "assembleRelease --console plain" "android"
+)
+
 Target "BuildRelease" (fun _ ->
     ActivateFinalTarget "KillProcess"
 
@@ -273,6 +314,10 @@ Target "Default" DoNothing
 ==> "SetReleaseNotes"
 ==> "SetVersionAndroid"
 ==> "SetVersion"
+==> "CompileForTest"
+==> "AssembleForTest"
+==> "BuildTests"
+==> "RunTests"
 ==> "Default"
 ==> "BuildRelease"
 ==> "Deploy"
