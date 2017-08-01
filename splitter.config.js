@@ -1,11 +1,20 @@
-var path = require('path');
+var path = require('path')
 
 function resolve(filePath) {
-  return path.resolve(__dirname, filePath);
+  return path.resolve(__dirname, filePath)
 }
 
-var isProduction = process.argv.indexOf("-w") === -1;
-console.log("Compiling for " + (isProduction ? "production" : "development") + "...");
+var define = [];
+var idx = process.argv.indexOf("--define");
+
+console.log(process.argv);
+
+if (idx > -1) {
+  console.log("define found");
+  define = [process.argv[idx + 1]];
+}
+
+console.log("Bundling for " + define + "...");
 
 module.exports = {
     entry: resolve("src/Nightwatch.fsproj"),
@@ -15,6 +24,6 @@ module.exports = {
     //   sourceMaps: true,
     },
     fable: {
-      define: isProduction ? ["PRODUCTION"] : ["DEBUG"]
+      define: define
     }
   }
