@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "fable-splitter -c splitter.config.js",
-    "start": "fable-splitter -c splitter.config.js -w"
+    "build": "fable-splitter -c splitter.config.js --environment BUILD:RELEASE",
+    "start": "fable-splitter -c splitter.config.js -w --environment BUILD:DEBUG",
+    "compile-for-test": "fable-splitter -c splitter.config.js -w --environment BUILD:TEST",
+    "cold-start": "fable-splitter -c splitter.config.js --environment BUILD:DEBUG"
   },
   "dependencies": {
     "buffer": "^5.0.0",
