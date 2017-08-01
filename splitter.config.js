@@ -7,7 +7,7 @@ function resolve(filePath) {
 var define = [];
 var idx = process.argv.indexOf("--define");
 
-console.log(process.argv);
+// console.log(process.argv);
 
 if (idx > -1) {
   console.log("define found");
