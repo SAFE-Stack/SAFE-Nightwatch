@@ -1316,9 +1316,9 @@ extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
 
-fable-splitter@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/fable-splitter/-/fable-splitter-0.1.7.tgz#75993c81e1dd61df67d09f3d6e972d117f517190"
+fable-splitter@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/fable-splitter/-/fable-splitter-0.1.9.tgz#3e0633aab0b7231f31c7f31bf5ab0ba4a1baadf7"
   dependencies:
     chokidar "^1.7.0"
     fable-utils "^1.0.1"
