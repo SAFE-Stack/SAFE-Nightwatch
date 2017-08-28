@@ -56,3 +56,19 @@ and try it again. If it doesn't help, you can push the public key onto the devic
 cd ~/.android && adb push adbkey.pub /data/misc/adb/adb_keys
 ```
 After rebooting the device, access should be granted again.
+
+### Licenses not accepted 
+
+If the above does not work, and still nothing happens after it compiles everything, the licenses may need to be accepted on your computer. To accept the licenses run the following commands for your platform
+
+On a Mac run the following 
+```
+$ANDROID_HOME/tools/bin/sdkmanager --update
+```
+On Windows run the following 
+```
+“%ANDROID_HOME%\tools\bin\sdkmanager” --update
+```
+
+Re-run the build script and everything should work.
+
