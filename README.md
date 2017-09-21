@@ -3,7 +3,7 @@
 This is a demo application for React Native development in F# using Fable and the SAFE stack. 
 SAFE is a technology stack that brings together several technologies into a single, coherent stack for typesafe, flexible end-to-end web-enabled applications that are written entirely in F#.
 
-![SAFE-Stack](src/Client/images/safe_logo.png "SAFE-Stack")
+![SAFE-Stack](images/safe_logo.png "SAFE-Stack")
 
 If you want to try it out then please do the following:
 
