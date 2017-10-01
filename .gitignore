@@ -69,3 +69,5 @@ deploy/
 *.orig
 /.paket/load/
 /temp/
+*.bak
+/paket-files

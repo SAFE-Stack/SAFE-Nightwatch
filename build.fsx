@@ -7,6 +7,7 @@
 open System
 open System.Diagnostics
 open System.IO
+open System.Text.RegularExpressions
 open Fake
 open Fake.Git
 open Fake.ProcessHelper
@@ -63,7 +64,7 @@ let srcDir = __SOURCE_DIRECTORY__ </> "src"
 
 let testDir = __SOURCE_DIRECTORY__ </> "tests" </> "IntegrationTests"
 
-let dotnetcliVersion = "1.0.4"
+let dotnetcliVersion = "2.0.0"
 
 let mutable dotnetExePath = "dotnet"
 
@@ -287,12 +288,9 @@ Target "Debug" (fun _ ->
                 info.Arguments <- " fable npm-run start") TimeSpan.MaxValue
         if result <> 0 then failwith "fable shut down." }
 
-    let reactNativeTool = async { run reactNativeTool "run-android" "" }
-    let openBrowser = async {
-        System.Threading.Thread.Sleep(5000)
-        Process.Start("chrome.exe","http://localhost:8081/debugger-ui") |> ignore }
+    let reactNativeTool = async {  run reactNativeTool "run-android" "" }
 
-    Async.Parallel [| dotnetwatch; reactNativeTool; openBrowser |]
+    Async.Parallel [| dotnetwatch; reactNativeTool |]
     |> Async.RunSynchronously
     |> ignore
 )

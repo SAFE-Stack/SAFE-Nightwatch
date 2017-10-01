@@ -5,5 +5,7 @@ Fable.React
 Fable.React.Native
 Fable.Elmish
 Fable.Elmish.React
-FSharp.NET.Sdk
+Fable.Elmish.HMR
+Fable.Import.Browser
+
 dotnet-fable
