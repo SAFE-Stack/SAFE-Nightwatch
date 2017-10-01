@@ -7,17 +7,21 @@ SAFE is a technology stack that brings together several technologies into a sing
 
 If you want to try it out then please do the following:
 
-### Make sure FSharp is installed
+## Requirements
 
-Make sure that the FSharp compiler is properly installed on your operating system:
-  * [on Windows](http://fsharp.org/use/windows/)
-  * [on Mac OS X](http://fsharp.org/use/mac/)
-  * [on Linux](http://fsharp.org/use/linux/)
+- [Mono](http://www.mono-project.com/) on MacOS/Linux
+- [.NET Framework 4.6.2](https://support.microsoft.com/en-us/help/3151800/the--net-framework-4-6-2-offline-installer-for-windows) on Windows
+- [node.js](https://nodejs.org/) - JavaScript runtime
+- [yarn](https://yarnpkg.com/) - Package manager for npm modules
+
+> On OS X/macOS, make sure you have OpenSSL installed and symlinked correctly, as described here: [https://www.microsoft.com/net/core#macos](https://www.microsoft.com/net/core#macos).
+
+[dotnet SDK 2.0.0](https://www.microsoft.com/net/core) is required but it will be downloaded automatically by the build script if not installed (see below). 
+Other tools like [Paket](https://fsprojects.github.io/Paket/) or [FAKE](https://fake.build/) will also be installed by the build script.
 
 ### Make sure React Native works
 
 * Install the Ionide [VS Code extension for F#](https://github.com/ionide/ionide-vscode-fsharp)
-* Install the [VS Code extension for React Native](https://github.com/Microsoft/vscode-react-native)
 * Go to https://facebook.github.io/react-native/ and do all steps of the [getting started tutorial](https://facebook.github.io/react-native/docs/getting-started.html#content)
 * At this point you should have the default Javascript React Native "Hello World" running
 
@@ -32,7 +36,7 @@ Make sure that the FSharp compiler is properly installed on your operating syste
 
 * Go to the F# source in VS Code make a change and save the file
 * Fable watch should pick up this change automatically and compile it
-* Go to android device simulator and press r+r - change should be visible
+* Go to android device simulator - change should be visible
 
 This could look like:
 
