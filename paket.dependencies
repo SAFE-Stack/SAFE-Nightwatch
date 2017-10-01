@@ -8,7 +8,8 @@ nuget Fable.React
 nuget Fable.React.Native
 nuget Fable.Elmish
 nuget Fable.Elmish.React
-nuget FSharp.NET.Sdk
+nuget Fable.Elmish.HMR
+nuget Fable.Import.Browser
 
 clitool dotnet-fable
 

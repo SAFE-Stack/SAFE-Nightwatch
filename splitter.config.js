@@ -14,13 +14,13 @@ if (idx > -1) {
 console.log("Bundling for " + define + "...");
 
 module.exports = {
-    entry: resolve("src/Nightwatch.fsproj"),
-    outDir: resolve("out"),
-    babel: {
-    //   presets: [["es2015", { modules: false }]],
-    //   sourceMaps: true,
-    },
-    fable: {
-      define: define
-    }
+  entry: resolve('src/Nightwatch.fsproj'),
+  outDir: resolve("out"),
+  babel: {
+     //   presets: [["es2015", { modules: false }]],
+     //   sourceMaps: true,
+  },
+  fable: {
+    define: define
   }
+};

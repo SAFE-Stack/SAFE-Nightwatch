@@ -34,10 +34,13 @@ let subscribe (model:App.Model) =
         Cmd.ofSub setupBackHandler
         Cmd.ofSub setuOneSignal]
 
+
 Program.mkProgram App.init App.update App.view
 |> Program.withSubscription subscribe
-#if DEBUG
+#if RELEASE
+#else
 |> Program.withConsoleTrace
+|> Program.withHMR
 #endif
 |> Program.withReactNative "nightwatch"
 |> Program.run
