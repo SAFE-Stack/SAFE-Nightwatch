@@ -13,8 +13,7 @@
     "core-js": "^2.5.1",
     "react": "16.0.0-alpha.12",
     "react-native": "0.48.4",
-    "react-native-image-picker": "0.26.7",
-    "react-native-onesignal": "^1.2.3"
+    "react-native-image-picker": "0.26.7"
   },
   "devDependencies": {
     "appium": "^1.7.0",

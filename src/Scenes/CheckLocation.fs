@@ -24,7 +24,6 @@ type Msg =
 | LocationStatusUpdated of Model.LocationStatus
 | SelectPicture
 | SaveAndGoBack
-| SendAlarm of string
 | GoBack
 | Error of exn
 
@@ -59,15 +58,8 @@ let update msg model : Model*Cmd<Msg> =
         match model.Status with
         | Unchanged -> model, Cmd.ofMsg GoBack
         | _ ->
-            let saveAndGoBack = Cmd.ofPromise save (model.Position,model.LocationCheckRequest) (fun _ -> GoBack) Error
-            let sendAlarm =
-                match model.LocationCheckRequest.Status with
-                | Some(Model.LocationStatus.Alarm text) -> Cmd.ofMsg (SendAlarm (sprintf "Alarm at %s. Message: %s" model.LocationCheckRequest.Name text))
-                | _ -> Cmd.none
+            model, Cmd.ofPromise save (model.Position,model.LocationCheckRequest) (fun _ -> GoBack) Error
 
-            model,Cmd.batch [saveAndGoBack; sendAlarm]
-
-    | SendAlarm _
     | GoBack ->
         model, Cmd.none // Handled one level above
 

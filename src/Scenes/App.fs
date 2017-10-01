@@ -6,9 +6,6 @@ open Fable.Import
 open Fable.Import.ReactNative
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
-open Fable.Import.ReactNativeOneSignal
-open Fable.Helpers.ReactNativeOneSignal
-open Fable.Helpers.ReactNativeOneSignal.Props
 open Elmish
 open Elmish.React
 open Elmish.ReactNative
@@ -21,10 +18,7 @@ type Page =
 | CheckLocation of int * Model.LocationCheckRequest
 
 type Msg =
-| PushNotificationClicked of string * Fable.Import.ReactNativeOneSignal.OneSignalNotificationData * bool
 | NavigateTo of Page
-| SetDeviceID of Fable.Import.ReactNativeOneSignal.OneSignalID
-| SendAlarm of string
 | NavigateBack
 | ExitApp
 | HomeSceneMsg of Home.Msg
@@ -37,7 +31,6 @@ type SubModel =
 | CheckLocationModel of CheckLocation.Model
 
 type Model = {
-    OneSignalID : ReactNativeOneSignal.OneSignalID option
     SubModel : SubModel
     NavigationStack: Page list
 }
@@ -80,8 +73,6 @@ let update (msg:Msg) model : Model*Cmd<Msg> =
         match model.SubModel with
         | CheckLocationModel subModel -> 
             match subMsg with
-            | CheckLocation.Msg.SendAlarm alarm -> 
-                model, Cmd.ofMsg (SendAlarm alarm)
             | CheckLocation.Msg.GoBack -> 
                 model, Cmd.ofMsg NavigateBack
             | _ ->
@@ -91,28 +82,10 @@ let update (msg:Msg) model : Model*Cmd<Msg> =
     | NavigateTo page -> 
         navigateTo page (page::model.NavigationStack) model
 
-    | PushNotificationClicked(message,data,isActive) -> 
-        model,Cmd.none
-
-    | SetDeviceID id -> 
-        { model with OneSignalID = Some id }, Cmd.none
-
     | NavigateBack -> 
         match model.NavigationStack with
         | _::page::rest -> navigateTo page (page::rest) model
         | _ -> model,Cmd.ofMsg ExitApp
-
-    | SendAlarm message ->
-        match model.OneSignalID with
-        | None -> ()
-        | Some device ->
-            let contents = 
-                createObj [
-                    "en" ==> message
-                ] |> unbox
-            let data = [||]
-            OneSignal.postP2PNotification(contents,data,device.userId)
-        model, Cmd.none
 
     | ExitApp -> 
         Fable.Helpers.ReactNative.exitApp() 
@@ -121,7 +94,6 @@ let update (msg:Msg) model : Model*Cmd<Msg> =
 let init() =
     let subModel,cmd = Home.init() 
     { SubModel = HomeModel subModel
-      OneSignalID = None
       NavigationStack = [Page.Home] }, Cmd.map HomeSceneMsg cmd
 
 let view (model:Model) (dispatch: Msg -> unit) =
@@ -129,4 +101,3 @@ let view (model:Model) (dispatch: Msg -> unit) =
     | HomeModel model -> lazyView2 Home.view model (HomeSceneMsg >> dispatch)
     | CheckLocationModel model -> lazyView2 CheckLocation.view model (CheckLocationMsg >> dispatch)
     | LocationListModel model -> lazyView2 LocationList.view model (LocationListMsg >> dispatch)
-
