@@ -1,6 +1,9 @@
 #!/bin/bash
 
-export ANDROID_HOME=/opt/android-sdk-linux/
+if [ -z "$ANDROID_HOME" ]; then
+  echo "ANDROID_HOME is not currently set, using a default setting of /opt/android-sdk-linux/"
+  export ANDROID_HOME=/opt/android-sdk-linux/
+fi
 
 if test "$OS" = "Windows_NT"; then
   MONO=""
