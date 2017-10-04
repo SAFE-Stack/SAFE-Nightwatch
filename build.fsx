@@ -287,12 +287,10 @@ Target "Debug" (fun _ ->
                 info.WorkingDirectory <- srcDir
                 info.Arguments <- " fable npm-run start") TimeSpan.MaxValue
         if result <> 0 then failwith "fable shut down." }
+    Async.Start dotnetwatch
 
-    let reactNativeTool = async {  run reactNativeTool "run-android" "" }
-
-    Async.Parallel [| dotnetwatch; reactNativeTool |]
-    |> Async.RunSynchronously
-    |> ignore
+    let reactNativeTool = async { run reactNativeTool "run-android" "" }
+    Async.Start reactNativeTool
 )
 
 FinalTarget "KillProcess" (fun _ ->
