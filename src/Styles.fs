@@ -78,16 +78,3 @@ let inline button label onPress =
         ButtonProperties.Title label
         ButtonProperties.OnPress onPress
     ] [ ]
-
-
-let inline verticalButton label onPress =
-    [text [ defaultText ] label]
-    |> touchableHighlight [
-        TouchableHighlightProperties.Style [
-            ViewStyle.BackgroundColor brandPrimary
-            ViewStyle.BorderRadius borderRadius
-            FlexStyle.Margin 5.
-            FlexStyle.Padding 5.
-        ]
-        TouchableHighlightProperties.UnderlayColor touched
-        OnPress onPress]

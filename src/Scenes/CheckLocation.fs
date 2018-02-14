@@ -131,6 +131,6 @@ let view (model:Model) (dispatch: Msg -> unit) =
                 FlexStyle.AlignItems ItemAlignment.Center
                 FlexStyle.Flex 1.
                 FlexStyle.FlexDirection FlexDirection.Row ]]
-              [ Styles.verticalButton "Cancel" (fun () -> dispatch GoBack)
-                Styles.verticalButton "OK" (fun () -> dispatch SaveAndGoBack) ]
+              [ Styles.button "Cancel" (fun () -> dispatch GoBack)
+                Styles.button "OK" (fun () -> dispatch SaveAndGoBack) ]
         ]
