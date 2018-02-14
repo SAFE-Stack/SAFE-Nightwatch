@@ -6,7 +6,8 @@
     "build": "fable-splitter -c splitter.config.js --define RELEASE",
     "start": "fable-splitter -c splitter.config.js -w --define DEBUG",
     "compile-for-test": "fable-splitter -c splitter.config.js --define TEST",
-    "cold-start": "fable-splitter -c splitter.config.js --define DEBUG"
+    "cold-start": "fable-splitter -c splitter.config.js --define DEBUG",
+    "remotedev": "remotedev --hostname=localhost --port=8000"
   },
   "dependencies": {
     "buffer": "5.0.8",
@@ -18,6 +19,7 @@
   "devDependencies": {
     "appium": "1.7.2",
     "babel-core": "6.26.0",
-    "fable-splitter": "0.1.21"
+    "fable-splitter": "0.1.21",
+    "remotedev-server": "^0.2.4"
   }
 }
