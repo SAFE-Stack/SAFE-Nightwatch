@@ -1,7 +1,6 @@
 module Model
 
 open System
-open Fable.Core
 
 type LocationId = string
 

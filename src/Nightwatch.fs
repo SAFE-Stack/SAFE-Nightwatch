@@ -1,11 +1,9 @@
 module Nightwatch
 
-open System
 open Elmish
 open Elmish.React
 open Elmish.ReactNative
 open Elmish.HMR
-open Fable.Core.JsInterop
 
 let setupBackHandler dispatch =    
     let backHandler () =

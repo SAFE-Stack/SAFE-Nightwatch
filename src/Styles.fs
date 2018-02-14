@@ -1,9 +1,5 @@
 module internal Styles
 
-open System
-open Fable.Core
-open Fable.Import
-open Fable.Import.ReactNative
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 
@@ -32,20 +28,6 @@ let [<Literal>] titleFontSize = 17.
 
 let [<Literal>] borderRadius = 4.
 
-
-let inline buttonStyle<'a> =
-    TouchableHighlightProperties.Style [
-        ViewStyle.BackgroundColor brandPrimary
-        ViewStyle.BorderRadius borderRadius
-        FlexStyle.Margin 5.
-      ]
-
-let inline buttonStyleDisabled<'a> =
-    TouchableHighlightProperties.Style [
-        ViewStyle.BackgroundColor brandInfo
-        ViewStyle.BorderRadius borderRadius
-        FlexStyle.Margin 5.
-      ]
 
 let inline renderText fontSize =
     TextProperties.Style [ 
@@ -87,27 +69,7 @@ let inline viewPagerBackground<'a> =
       ]
       
 let inline button label onPress =
-    [text [ defaultText ] label]
-    |> touchableHighlight [
-        buttonStyle
-        TouchableHighlightProperties.UnderlayColor touched
-        OnPress onPress]
-
-let inline disabledButton label onPress =
-    [text [ defaultText ] label]
-    |> touchableHighlight [
-        buttonStyleDisabled
-        TouchableHighlightProperties.UnderlayColor touched
-        OnPress onPress]
-
-let inline verticalButton label onPress =
-    [text [ defaultText ] label]
-    |> touchableHighlight [
-        TouchableHighlightProperties.Style [
-            ViewStyle.BackgroundColor brandPrimary
-            ViewStyle.BorderRadius borderRadius
-            FlexStyle.Margin 5.
-            FlexStyle.Padding 5.
-        ]
-        TouchableHighlightProperties.UnderlayColor touched
-        OnPress onPress]
+    button [
+        ButtonProperties.Title label
+        ButtonProperties.OnPress onPress
+    ] [ ]

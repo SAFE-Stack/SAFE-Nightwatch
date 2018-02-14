@@ -1,16 +1,11 @@
 module CheckLocation
 
 open System
-open Fable.Core
-open Fable.Import
-open Fable.Import.ReactNative
-open Fable.Import.ReactNativeImagePicker
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 open Fable.Helpers.ReactNativeSimpleStore
 open Fable.Helpers.ReactNativeImagePicker
 open Fable.Helpers.ReactNativeImagePicker.Props
-open Fable.Import.JS
 open Elmish
 
 // Model
@@ -40,9 +35,6 @@ let init (pos,request) =
       LocationCheckRequest = request }, Cmd.none
 
 // Helpers update
-
-
-open Fable.Core.JsInterop
 
 let save (pos,request : Model.LocationCheckRequest) = DB.update(pos,request)
 
@@ -131,6 +123,6 @@ let view (model:Model) (dispatch: Msg -> unit) =
                 FlexStyle.AlignItems ItemAlignment.Center
                 FlexStyle.Flex 1.
                 FlexStyle.FlexDirection FlexDirection.Row ]]
-              [ Styles.verticalButton "Cancel" (fun () -> dispatch GoBack)
-                Styles.verticalButton "OK" (fun () -> dispatch SaveAndGoBack) ]
+              [ Styles.button "Cancel" (fun () -> dispatch GoBack)
+                Styles.button "OK" (fun () -> dispatch SaveAndGoBack) ]
         ]
