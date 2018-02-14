@@ -1,16 +1,11 @@
 module CheckLocation
 
 open System
-open Fable.Core
-open Fable.Import
-open Fable.Import.ReactNative
-open Fable.Import.ReactNativeImagePicker
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 open Fable.Helpers.ReactNativeSimpleStore
 open Fable.Helpers.ReactNativeImagePicker
 open Fable.Helpers.ReactNativeImagePicker.Props
-open Fable.Import.JS
 open Elmish
 
 // Model
@@ -40,9 +35,6 @@ let init (pos,request) =
       LocationCheckRequest = request }, Cmd.none
 
 // Helpers update
-
-
-open Fable.Core.JsInterop
 
 let save (pos,request : Model.LocationCheckRequest) = DB.update(pos,request)
 

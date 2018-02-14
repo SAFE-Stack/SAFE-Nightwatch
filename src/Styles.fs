@@ -1,12 +1,7 @@
 module internal Styles
 
-open System
-open Fable.Core
-open Fable.Import
-open Fable.Import.ReactNative
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
-open Fable.Import.ReactNative
 
 let [<Literal>] brandPrimary = "#428bca"
 let [<Literal>] brandInfo = "#5bc0de"
