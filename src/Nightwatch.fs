@@ -24,7 +24,7 @@ Program.mkProgram App.init App.update App.view
 #if RELEASE
 #else
 |> Program.withConsoleTrace
-|> Program.withDebugger
+|> Program.withDebuggerAt (Debugger.ConnectionOptions.Remote("localhost",8000)) 
 |> Program.withHMR
 #endif
 |> Program.withReactNative "nightwatch"
