@@ -39,23 +39,23 @@ let configuration = "Release"
 let msg =  release.Notes |> List.fold (fun r s -> r + s + "\n") ""
 let releaseMsg = (sprintf "Release %s\n" release.NugetVersion) + msg
 
-let run' timeout (cmd:Lazy<string>) args dir =
+let run' timeout (cmd:string) args dir =
     if execProcess (fun info ->
-        info.FileName <- cmd.Force()
+        info.FileName <- cmd
         if not (String.IsNullOrWhiteSpace dir) then
             info.WorkingDirectory <- dir
         info.Arguments <- args
     ) timeout |> not then
-        failwithf "Error while running '%s' with args: %s" (cmd.Force()) args
+        failwithf "Error while running '%s' with args: %s" cmd args
 
 let run = run' System.TimeSpan.MaxValue
 
 
-let platformTool tool winTool = lazy(
+let platformTool tool winTool =
     let tool = if isUnix then tool else winTool
     tool
     |> ProcessHelper.tryFindFileOnPath
-    |> function Some t -> t | _ -> failwithf "%s not found" tool)
+    |> function Some t -> t | _ -> failwithf "%s not found" tool
 
 let nodeTool = platformTool "node" "node.exe"
 let yarnTool = platformTool "yarn" "yarn.cmd"
@@ -96,8 +96,8 @@ let androidSDKPath =
 
 let adbTool = platformTool (androidSDKPath </> "platform-tools/adb") (androidSDKPath </> "platform-tools/adb.exe")
 
-let scpTool = platformTool  "scp" @"C:\Program Files (x86)\Git\usr\bin\scp.exe"
-let sshTool = platformTool "ssh" @"C:\Program Files (x86)\Git\usr\bin\ssh.exe"
+let scpTool = platformTool  "scp" @"C:\Program Files\Git\usr\bin\scp.exe"
+let sshTool = platformTool "ssh" @"C:\Program Files\Git\usr\bin\ssh.exe"
 
 
 setEnvironVar "ANDROID_HOME" androidSDKPath
