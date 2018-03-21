@@ -96,7 +96,7 @@ let androidSDKPath =
 
 let adbTool = platformTool [androidSDKPath </> "platform-tools/adb"] [androidSDKPath </> "platform-tools/adb.exe"]
 
-let scpTool = platformTool  ["scp"] [ @"C:\Program Files\Git\usr\bin\scp.exe"; @"C:\Program Files (x86)\Git\usr\bin\scp.exe"]
+let scpTool = platformTool ["scp"] [@"C:\Program Files\Git\usr\bin\scp.exe"; @"C:\Program Files (x86)\Git\usr\bin\scp.exe"]
 let sshTool = platformTool ["ssh"] [@"C:\Program Files\Git\usr\bin\ssh.exe"; @"C:\Program Files (x86)\Git\usr\bin\ssh.exe"]
 
 
