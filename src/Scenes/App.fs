@@ -90,6 +90,6 @@ let init() =
 
 let view (model:Model) (dispatch: Msg -> unit) =
     match model.SubModel with
-    | HomeModel model -> lazyView2 Home.view model (HomeSceneMsg >> dispatch)
-    | CheckLocationModel model -> lazyView2 CheckLocation.view model (CheckLocationMsg >> dispatch)
-    | LocationListModel model -> lazyView2 LocationList.view model (LocationListMsg >> dispatch)
+    | HomeModel model -> Home.view model (HomeSceneMsg >> dispatch)
+    | CheckLocationModel model -> CheckLocation.view model (CheckLocationMsg >> dispatch)
+    | LocationListModel model -> LocationList.view model (LocationListMsg >> dispatch)
