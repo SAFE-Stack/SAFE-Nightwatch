@@ -24,6 +24,7 @@ let releaseNotesData =
 
 let outDir = "./out"
 let deployDir = "./deploy"
+let nodeModulesBinDir = "./node_modules/.bin"
 
 let release = List.head releaseNotesData
 let packageVersion = SemVerHelper.parse release.NugetVersion
@@ -50,15 +51,14 @@ let run' timeout (cmd:Lazy<string>) args dir =
 
 let run = run' System.TimeSpan.MaxValue
 
-
 let platformTool tool winTool = lazy(
     let tool = if isUnix then tool else winTool
     tool
-    |> ProcessHelper.tryFindFileOnPath
-    |> function Some t -> t | _ -> failwithf "%s not found" tool)
+    |> List.tryPick ProcessHelper.tryFindFileOnPath
+    |> function Some t -> t | _ -> failwithf "%A not found" tool)
 
-let nodeTool = platformTool "node" "node.exe"
-let yarnTool = platformTool "yarn" "yarn.cmd"
+let nodeTool = platformTool ["node"] ["node.exe"]
+let yarnTool = platformTool ["yarn"] ["yarn.cmd"]
 
 let srcDir = __SOURCE_DIRECTORY__ </> "src"
 
@@ -76,8 +76,8 @@ let runDotnet workingDir args =
             info.Arguments <- args) TimeSpan.MaxValue
     if result <> 0 then failwithf "dotnet %s failed" args
 
-let gradleTool = platformTool "android/gradlew" ("android" </> "gradlew.bat" |> FullName)
-let reactNativeTool = platformTool "react-native" "react-native.cmd"
+let gradleTool = platformTool ["android/gradlew"] ["android" </> "gradlew.bat" |> FullName]
+let reactNativeTool = platformTool [nodeModulesBinDir </> "react-native"] [nodeModulesBinDir </> "react-native.cmd"]
 
 let androidSDKPath =
     match environVarOrNone "ANDROID_HOME" with
@@ -94,10 +94,10 @@ let androidSDKPath =
             if Directory.Exists p3 then FullName p3 else
             failwithf "Can't find Android SDK in %s, please set ANDROID_HOME enviromental variable" p3
 
-let adbTool = platformTool (androidSDKPath </> "platform-tools/adb") (androidSDKPath </> "platform-tools/adb.exe")
+let adbTool = platformTool [androidSDKPath </> "platform-tools/adb"] [androidSDKPath </> "platform-tools/adb.exe"]
 
-let scpTool = platformTool  "scp" @"C:\Program Files (x86)\Git\usr\bin\scp.exe"
-let sshTool = platformTool "ssh" @"C:\Program Files (x86)\Git\usr\bin\ssh.exe"
+let scpTool = platformTool ["scp"] [@"C:\Program Files\Git\usr\bin\scp.exe"; @"C:\Program Files (x86)\Git\usr\bin\scp.exe"]
+let sshTool = platformTool ["ssh"] [@"C:\Program Files\Git\usr\bin\ssh.exe"; @"C:\Program Files (x86)\Git\usr\bin\ssh.exe"]
 
 
 setEnvironVar "ANDROID_HOME" androidSDKPath
@@ -123,6 +123,8 @@ Target "Clean" (fun _ ->
     CleanDir deployDir
     ProcessHelper.killProcess "node"
     !! "./**/AppiumLog.txt" |> Seq.iter File.Delete
+    CleanDir "./android/build"
+    CleanDir "./android/app/build"
 )
 
 FinalTarget "CloseAndroid" (fun _ ->
