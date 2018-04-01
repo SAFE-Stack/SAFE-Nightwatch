@@ -113,7 +113,9 @@ let view (model:Model) (dispatch: Msg -> unit) =
                 ViewStyle.BackgroundColor Styles.inputBackgroundColor
               ]
             TextInput.TextInputProperties.OnChangeText (Model.LocationStatus.Alarm >> LocationStatusUpdated >> dispatch)
-          ] ""
+          ] (match model.LocationCheckRequest.Status with
+             | Some (Model.LocationStatus.Alarm s) -> s
+             | _ -> "")
 
           image
           selectImageButton
