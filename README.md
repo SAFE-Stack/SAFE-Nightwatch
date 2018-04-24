@@ -77,5 +77,15 @@ On Windows run the following
 “%ANDROID_HOME%\tools\bin\sdkmanager” --update
 ```
 
+### The app is not updating on saving code changes
+
+If the app does not update whenever you save an F# code change even after Fable compilation succeeds, you may need to enable hot reloading from the in-app developer menu. It is accessed by opening the app and shacking the device or causing the emulator to simulate a shake or by using the command
+```
+adb shell input keyevent 82
+```
+It will look like this:
+
+Click on "Enable Hot Reloading". Now when you save a code change and Fable compiles it, you should see the result in the app on your device or emulator automatically.
+
 Re-run the build script and everything should work.
 
