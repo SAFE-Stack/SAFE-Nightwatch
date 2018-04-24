@@ -85,9 +85,5 @@ If the app does not update whenever you save an F# code change even after Fable 
 ```
 adb shell input keyevent 82
 ```
-It will look like this:
-
 
 Click on "Enable Hot Reloading". Now when you save a code change and Fable compiles it, you should see the result in the app on your device or emulator automatically.
-
-
