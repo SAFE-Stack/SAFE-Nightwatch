@@ -29,7 +29,7 @@ let [<Literal>] titleFontSize = 17.
 let [<Literal>] borderRadius = 4.
 
 
-let inline renderText fontSize =
+let renderText fontSize =
     TextProperties.Style [ 
         TextStyle.Color textColor
         TextStyle.TextAlign TextAlignment.Center
@@ -37,14 +37,14 @@ let inline renderText fontSize =
         TextStyle.FontSize fontSize
       ]
 
-let inline defaultText<'a> = renderText fontSizeBase
-let inline mediumText<'a> = renderText mediumFontSize
-let inline smallText<'a> = renderText smallFontSize
-let inline titleText<'a> = renderText titleFontSize
+let defaultText<'a> = renderText fontSizeBase
+let mediumText<'a> = renderText mediumFontSize
+let smallText<'a> = renderText smallFontSize
+let titleText<'a> = renderText titleFontSize
 
-let inline whitespace<'a> = text [ smallText ] ""
+let whitespace<'a> = text [ smallText ] ""
 
-let inline sceneBackground<'a> =
+let sceneBackground<'a> =
     ViewProperties.Style [ 
         FlexStyle.AlignSelf Alignment.Stretch
         FlexStyle.Padding 20.
@@ -56,7 +56,7 @@ let inline sceneBackground<'a> =
         ViewStyle.BackgroundColor backgroundColor
       ]
 
-let inline viewPagerBackground<'a> =
+let viewPagerBackground<'a> =
     ViewPagerAndroidProperties.Style [
         FlexStyle.AlignSelf Alignment.Stretch
         FlexStyle.Padding 20.
@@ -68,7 +68,7 @@ let inline viewPagerBackground<'a> =
         ViewStyle.BackgroundColor backgroundColor
       ]
       
-let inline button label onPress =
+let button label onPress =
     button [
         ButtonProperties.Title label
         ButtonProperties.OnPress onPress
