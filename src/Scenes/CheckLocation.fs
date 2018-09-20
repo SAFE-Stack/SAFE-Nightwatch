@@ -72,7 +72,7 @@ let update msg model : Model*Cmd<Msg> =
             Status = Changed }, Cmd.none
 
     | Error e ->
-        Toast.showShort e.Message
+        Alert.alert ("Error", e.Message, [])
         { model with
             Status = Status.Error e.Message }, Cmd.none
 
