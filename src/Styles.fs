@@ -33,7 +33,7 @@ let renderText fontSize =
     TextProperties.Style [ 
         TextStyle.Color textColor
         TextStyle.TextAlign TextAlignment.Center
-        FlexStyle.Margin 3.
+        FlexStyle.Margin (unbox 3.)
         TextStyle.FontSize fontSize
       ]
 
@@ -47,7 +47,7 @@ let whitespace<'a> = text [ smallText ] ""
 let sceneBackground<'a> =
     ViewProperties.Style [ 
         FlexStyle.AlignSelf Alignment.Stretch
-        FlexStyle.Padding 20.
+        FlexStyle.Padding (unbox 20.)
         ViewStyle.ShadowColor shadowColor
         ViewStyle.ShadowOpacity 0.8
         ViewStyle.ShadowRadius 3.
@@ -59,7 +59,7 @@ let sceneBackground<'a> =
 let viewPagerBackground<'a> =
     ViewPagerAndroidProperties.Style [
         FlexStyle.AlignSelf Alignment.Stretch
-        FlexStyle.Padding 20.
+        FlexStyle.Padding (unbox 20.)
         ViewStyle.ShadowColor shadowColor
         ViewStyle.ShadowOpacity 0.8
         ViewStyle.ShadowRadius 3.

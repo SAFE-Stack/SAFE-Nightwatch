@@ -23,7 +23,6 @@ Program.mkProgram App.init App.update App.view
 #if RELEASE
 #else
 |> Program.withConsoleTrace
-|> Program.withHMR
 #endif
 |> Program.withReactNative "nightwatch"
 |> Program.run
