@@ -86,7 +86,7 @@ let view (model:Model) (dispatch: Msg -> unit) =
         match model.PictureUri with
         | Some uri ->
             image
-                [ Source (localImage  uri)
+                [ Source (remoteImage [ImageURISourceProperties.Uri uri])
                   ImageProperties.Style [
                     ImageStyle.BorderColor "#000000"
                     FlexStyle.Flex 3.
