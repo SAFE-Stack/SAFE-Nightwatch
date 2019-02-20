@@ -7,5 +7,3 @@ Fable.Elmish
 Fable.Elmish.React
 Fable.Elmish.HMR
 Fable.Import.Browser
-
-dotnet-fable
