@@ -480,7 +480,7 @@ NUGET
 GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE (4.64.4)
+    FAKE (4.64.16)
 
 GROUP Test
 GENERATE-LOAD-SCRIPTS: ON
