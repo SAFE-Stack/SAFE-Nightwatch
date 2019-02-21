@@ -3,7 +3,7 @@ module Nightwatch
 open Elmish
 open Elmish.React
 open Elmish.ReactNative
-open Elmish.HMR
+// TODO: open Elmish.HMR
 
 let setupBackHandler dispatch =    
     let backHandler () =
