@@ -270,8 +270,7 @@ Target "BuildRelease" (fun _ ->
 )
 
 Target "Debug" (fun _ ->
-    run yarnTool "run fable-splitter -c splitter.config.js --define DEBUG" srcDir
-    
+    run yarnTool "run fable-splitter -c splitter.config.js --define DEBUG" srcDir    
     let dotnetwatch = async { run yarnTool "run fable-splitter -c splitter.config.js -w --define DEBUG" srcDir }
 
     let reactNativeTool = async {  run reactNativeTool "run-android" "" }
