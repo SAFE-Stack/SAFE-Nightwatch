@@ -5,7 +5,7 @@ open Elmish.React
 open Elmish.ReactNative
 // TODO: open Elmish.HMR
 
-let setupBackHandler dispatch =    
+let setupBackHandler dispatch =
     let backHandler () =
         dispatch App.Msg.NavigateBack
         true
