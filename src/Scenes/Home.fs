@@ -30,7 +30,12 @@ let update (msg:Msg) model : Model*Cmd<Msg> =
         { model with StatusText = string e.Message }, Cmd.none
 
 
-let init () = { StatusText = "" }, Cmd.ofMsg GetDemoData
+let init () = 
+    printfn "Starting"
+    let ys = [| 1;2;3 |] |> Array.groupBy (fun x -> x = 2)
+
+    printfn "done: %A" ys
+    { StatusText = "" }, Cmd.ofMsg GetDemoData
 
 // View
 let view (model:Model) (dispatch: Msg -> unit) =
