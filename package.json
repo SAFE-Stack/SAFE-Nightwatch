@@ -18,6 +18,7 @@
   "devDependencies": {
     "appium": "1.7.2",
     "babel-core": "6.26.0",
-    "fable-splitter": "0.1.21"
+    "fable-compiler": "2.1.12",
+    "fable-splitter": "2.1.5"
   }
 }

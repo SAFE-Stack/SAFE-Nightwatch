@@ -5,13 +5,11 @@ nuget Fable.Core
 
 nuget Fable.PowerPack
 nuget Fable.React
-nuget Fable.React.Native
+nuget Fable.React.Native prerelease
 nuget Fable.Elmish
 nuget Fable.Elmish.React
 nuget Fable.Elmish.HMR
 nuget Fable.Import.Browser
-
-clitool dotnet-fable
 
 group Test
 
@@ -25,4 +23,4 @@ group Test
 group Build
     source https://nuget.org/api/v2
     
-    nuget FAKE
+    nuget FAKE < 5

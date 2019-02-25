@@ -3,9 +3,9 @@ module Nightwatch
 open Elmish
 open Elmish.React
 open Elmish.ReactNative
-open Elmish.HMR
+// TODO: open Elmish.HMR
 
-let setupBackHandler dispatch =    
+let setupBackHandler dispatch =
     let backHandler () =
         dispatch App.Msg.NavigateBack
         true
@@ -23,7 +23,6 @@ Program.mkProgram App.init App.update App.view
 #if RELEASE
 #else
 |> Program.withConsoleTrace
-|> Program.withHMR
 #endif
 |> Program.withReactNative "nightwatch"
 |> Program.run
