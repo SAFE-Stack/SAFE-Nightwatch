@@ -2864,10 +2864,10 @@ fable-babel-plugins@^2.1.0:
   resolved "https://registry.yarnpkg.com/fable-babel-plugins/-/fable-babel-plugins-2.1.0.tgz#b3202a25f51a6acdf6bc34dc10dd13cf732d291d"
   integrity sha512-5ZUVrlflbvgA3saIyGJhB1ANqoyZ8UJo12iYSROivql1x9PfKjv16pteNoDFCe6UC1Tn+HaQX46BxyllzLsBTw==
 
-fable-compiler@2.1.12:
-  version "2.1.12"
-  resolved "https://registry.yarnpkg.com/fable-compiler/-/fable-compiler-2.1.12.tgz#471e825bf94a3de62a4a1656a1ea928076424f52"
-  integrity sha512-oFnFHSC0gJyQvVmefOruyvxx7ucqt79ElovNxTMxhNGg06iONETTW1+QPh0VY4TRxL4hJxdo9GLLK37wzk57ow==
+fable-compiler@next:
+  version "2.2.0-beta-012"
+  resolved "https://registry.yarnpkg.com/fable-compiler/-/fable-compiler-2.2.0-beta-012.tgz#e883d37b3326efb1b808ff45528affc15d6f68df"
+  integrity sha512-jvmQVLLKyGGPjE1vd01k73GnNGdQwMLQPcdySowAv26aio4ex2az1Jnv3IZZV0bW+sXQKf0S+6y6xEAzoHFp9Q==
 
 fable-splitter@2.1.5:
   version "2.1.5"
