@@ -4,7 +4,7 @@ let AppVersion = "1.0.0"
 
 let IsPrerelease = false
 
-let AndroidVersionCode = 46
+let AndroidVersionCode = 53
 
 let Notes = """
 #### 1.0.0 - 17.10.2016

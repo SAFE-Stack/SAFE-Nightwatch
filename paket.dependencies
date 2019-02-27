@@ -8,7 +8,7 @@ nuget Fable.React
 nuget Fable.React.Native prerelease
 nuget Fable.Elmish
 nuget Fable.Elmish.React
-nuget Fable.Elmish.HMR
+nuget Fable.Elmish.HMR 3.2.0
 nuget Fable.Import.Browser
 
 group Test
@@ -22,5 +22,5 @@ group Test
 
 group Build
     source https://nuget.org/api/v2
-    
+
     nuget FAKE < 5

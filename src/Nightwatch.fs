@@ -3,7 +3,7 @@ module Nightwatch
 open Elmish
 open Elmish.React
 open Elmish.ReactNative
-// TODO: open Elmish.HMR
+open Elmish.HMR
 
 let setupBackHandler dispatch =
     let backHandler () =
@@ -16,7 +16,6 @@ let setupBackHandler dispatch =
 let subscribe (model:App.Model) =
     Cmd.batch [
         Cmd.ofSub setupBackHandler ]
-
 
 Program.mkProgram App.init App.update App.view
 |> Program.withSubscription subscribe
