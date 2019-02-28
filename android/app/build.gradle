@@ -96,7 +96,7 @@ android {
         applicationId "com.nightwatch"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 54
+        versionCode 55
         versionName "1.0.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
