@@ -64,7 +64,7 @@ let srcDir = __SOURCE_DIRECTORY__ </> "src"
 
 let testDir = __SOURCE_DIRECTORY__ </> "tests" </> "IntegrationTests"
 
-let dotnetcliVersion = "2.0.0"
+let dotnetcliVersion = DotNetCli.GetDotNetSDKVersionFromGlobalJson()
 
 let mutable dotnetExePath = "dotnet"
 
@@ -144,6 +144,12 @@ FinalTarget "CloseAndroid" (fun _ ->
 
 Target "InstallDotNetCore" (fun _ ->
     dotnetExePath <- DotNetCli.InstallDotNetSDK dotnetcliVersion
+    let fi = FileInfo dotnetExePath
+    let SEPARATOR = if isWindows then ";" else ":"
+    Environment.SetEnvironmentVariable(
+        "PATH",
+        fi.Directory.FullName + SEPARATOR + System.Environment.GetEnvironmentVariable "PATH",
+        EnvironmentVariableTarget.Process)
 )
 
 Target "Restore" (fun _ ->
@@ -244,13 +250,7 @@ Target "PrepareRelease" (fun _ ->
 Target "CompileForTest" (fun _ ->
     ActivateFinalTarget "KillProcess"
 
-    let result =
-        ExecProcess (fun info ->
-            info.FileName <- dotnetExePath
-            info.WorkingDirectory <- srcDir
-            info.Arguments <- " fable npm-run compile-for-test") TimeSpan.MaxValue
-
-    if result <> 0 then failwith "fable shut down. Please check logs above"
+    run yarnTool "run fable-splitter -c splitter.config.js --define TEST" srcDir
 )
 
 Target "AssembleForTest" (fun _ ->
@@ -260,12 +260,7 @@ Target "AssembleForTest" (fun _ ->
 Target "BuildRelease" (fun _ ->
     ActivateFinalTarget "KillProcess"
 
-    let result =
-        ExecProcess (fun info ->
-            info.FileName <- dotnetExePath
-            info.WorkingDirectory <- srcDir
-            info.Arguments <- " fable npm-run build") TimeSpan.MaxValue
-    if result <> 0 then failwith "fable shut down. Please check logs above"
+    run yarnTool "run fable-splitter -c splitter.config.js --define RELEASE" srcDir
     run gradleTool "assembleRelease --console plain" "android"
 
     let outFile = "android" </> "app" </> "build" </> "outputs" </> "apk" </> "app-release.apk"
@@ -275,20 +270,8 @@ Target "BuildRelease" (fun _ ->
 )
 
 Target "Debug" (fun _ ->
-    let result =
-        ExecProcess (fun info ->
-            info.FileName <- dotnetExePath
-            info.WorkingDirectory <- srcDir
-            info.Arguments <- " fable npm-run cold-start") TimeSpan.MaxValue
-    if result <> 0 then failwith "fable shut down."
-    
-    let dotnetwatch = async {
-        let result =
-            ExecProcess (fun info ->
-                info.FileName <- dotnetExePath
-                info.WorkingDirectory <- srcDir
-                info.Arguments <- " fable npm-run start") TimeSpan.MaxValue
-        if result <> 0 then failwith "fable shut down." }
+    run yarnTool "run fable-splitter -c splitter.config.js --define DEBUG" srcDir    
+    let dotnetwatch = async { run yarnTool "run fable-splitter -c splitter.config.js -w --define DEBUG" srcDir }
 
     let reactNativeTool = async {  run reactNativeTool "run-android" "" }
 

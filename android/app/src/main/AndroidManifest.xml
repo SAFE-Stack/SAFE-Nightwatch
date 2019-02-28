@@ -15,10 +15,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> 
 
-    <uses-sdk
-        android:minSdkVersion="18"
-        android:targetSdkVersion="22"
-        tools:overrideLibrary="com.reactnative.imagepicker" />
+    <uses-sdk tools:overrideLibrary="com.reactnative.imagepicker" />
 
     <application
       android:name=".MainApplication"

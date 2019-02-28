@@ -68,8 +68,8 @@ let view (model:Model) (dispatch: Msg -> unit) =
                     image
                         [ Source uri
                           ImageProperties.Style [
-                                FlexStyle.Width 24.
-                                FlexStyle.Height 24.
+                                FlexStyle.Width (unbox 24.)
+                                FlexStyle.Height (unbox 24.)
                                 FlexStyle.AlignSelf Alignment.Center
                             ]
                         ])
@@ -86,8 +86,8 @@ let view (model:Model) (dispatch: Msg -> unit) =
           
           flatList model.Requests [
               InitialNumToRender 20
-              KeyExtractor (Func<_,_,_>(fun (i,_) _ -> i.ToString()))
-              RenderItem (Func<_,_>(fun v -> renderItem v.item))
+              KeyExtractor (fun (i,_) _ -> i.ToString())
+              RenderItem (fun v -> renderItem v.item)
           ]
           Styles.button "OK" (fun () -> dispatch GoBack)
         ]

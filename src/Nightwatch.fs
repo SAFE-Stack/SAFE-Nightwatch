@@ -5,7 +5,7 @@ open Elmish.React
 open Elmish.ReactNative
 open Elmish.HMR
 
-let setupBackHandler dispatch =    
+let setupBackHandler dispatch =
     let backHandler () =
         dispatch App.Msg.NavigateBack
         true
@@ -17,13 +17,11 @@ let subscribe (model:App.Model) =
     Cmd.batch [
         Cmd.ofSub setupBackHandler ]
 
-
 Program.mkProgram App.init App.update App.view
 |> Program.withSubscription subscribe
 #if RELEASE
 #else
 |> Program.withConsoleTrace
-|> Program.withHMR
 #endif
 |> Program.withReactNative "nightwatch"
 |> Program.run

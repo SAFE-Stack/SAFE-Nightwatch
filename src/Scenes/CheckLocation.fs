@@ -86,7 +86,7 @@ let view (model:Model) (dispatch: Msg -> unit) =
         match model.PictureUri with
         | Some uri ->
             image
-                [ Source [ Uri uri; IsStatic true]
+                [ Source (remoteImage [ImageURISourceProperties.Uri uri])
                   ImageProperties.Style [
                     ImageStyle.BorderColor "#000000"
                     FlexStyle.Flex 3.
@@ -104,11 +104,11 @@ let view (model:Model) (dispatch: Msg -> unit) =
 
     view [ Styles.sceneBackground ]
         [ text [ Styles.defaultText ] model.LocationCheckRequest.Name
-          textInput [
+          textInputWithChild  [
             TextInput.TextInputProperties.AutoCorrect false
             TextInput.TextInputProperties.Style [
-                FlexStyle.MarginTop 2.
-                FlexStyle.MarginBottom 2.
+                FlexStyle.MarginTop (unbox 2.)
+                FlexStyle.MarginBottom (unbox 2.)
                 TextStyle.Color Styles.textColor
                 ViewStyle.BackgroundColor Styles.inputBackgroundColor
               ]
