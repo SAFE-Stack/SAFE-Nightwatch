@@ -16,8 +16,9 @@
     "react-native-image-picker": "0.28.0"
   },
   "devDependencies": {
+    "metro-react-native-babel-preset": "0.52.0",
     "appium": "^1.11.1",
-    "babel-core": "6.26.3",
+    "babel-core": "7.0.0-bridge.0",
     "fable-compiler": "next",
     "fable-splitter": "2.1.5"
   }
