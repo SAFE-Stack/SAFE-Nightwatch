@@ -1,7 +1,7 @@
 module Home
 
-open Fable.Helpers.ReactNative
-open Fable.Helpers.ReactNative.Props
+open Fable.ReactNative
+open Fable.ReactNative.Props
 open Elmish
 
 // Model
@@ -18,7 +18,7 @@ let update (msg:Msg) model : Model*Cmd<Msg> =
     match msg with
     | GetDemoData ->
         { model with StatusText = "Syncing..." },
-        Cmd.ofPromise Database.createDemoData () NewDemoData Error
+        Cmd.OfPromise.either Database.createDemoData () NewDemoData Error
 
     | NewDemoData count ->
         { model with StatusText = sprintf "Locations: %d" count }, Cmd.none

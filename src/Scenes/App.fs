@@ -1,7 +1,7 @@
 module App
 
 open Elmish
-open Elmish.React
+open Fable.ReactNative
 
 [<RequireQualifiedAccess>]
 type Page =
@@ -80,7 +80,7 @@ let update (msg:Msg) model : Model*Cmd<Msg> =
         | _ -> model,Cmd.ofMsg ExitApp
 
     | ExitApp -> 
-        Fable.Helpers.ReactNative.exitApp() 
+        exitApp() 
         model,Cmd.none
 
 let init() =

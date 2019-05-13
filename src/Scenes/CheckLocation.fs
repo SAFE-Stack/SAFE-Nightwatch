@@ -1,12 +1,14 @@
 module CheckLocation
 
 open System
-open Fable.Helpers.ReactNative
-open Fable.Helpers.ReactNative.Props
-open Fable.Helpers.ReactNativeSimpleStore
-open Fable.Helpers.ReactNativeImagePicker
-open Fable.Helpers.ReactNativeImagePicker.Props
+open Fable.ReactNative
+open Fable.ReactNative.Props
+open Fable.ReactNativeSimpleStore.DB
+open Fable.ReactNativeImagePicker
+open Fable.ReactNativeImagePicker.Props
 open Elmish
+open Fable.ReactNative.Types
+open Fable.ReactNative.Props.TextInput
 
 // Model
 type Status =
@@ -36,7 +38,7 @@ let init (pos,request) =
 
 // Helpers update
 
-let save (pos,request : Model.LocationCheckRequest) = DB.update(pos,request)
+let save (pos,request : Model.LocationCheckRequest) = update(pos,request)
 
 let selectImage () =
     showImagePickerAsync
@@ -50,7 +52,7 @@ let update msg model : Model*Cmd<Msg> =
         match model.Status with
         | Unchanged -> model, Cmd.ofMsg GoBack
         | _ ->
-            model, Cmd.ofPromise save (model.Position,model.LocationCheckRequest) (fun _ -> GoBack) Error
+            model, Cmd.OfPromise.either save (model.Position,model.LocationCheckRequest) (fun _ -> GoBack) Error
 
     | GoBack ->
         model, Cmd.none // Handled one level above
@@ -61,7 +63,7 @@ let update msg model : Model*Cmd<Msg> =
             Status = Changed }, Cmd.none
 
     | SelectPicture ->
-        model,Cmd.ofPromise selectImage () PictureSelected Error
+        model, Cmd.OfPromise.either selectImage () PictureSelected Error
 
     | LocationStatusUpdated newStatus ->
         { model with
@@ -86,7 +88,7 @@ let view (model:Model) (dispatch: Msg -> unit) =
         match model.PictureUri with
         | Some uri ->
             image
-                [ Source [ Uri uri; IsStatic true]
+                [ Source (remoteImage [ImageURISourceProperties.Uri uri])
                   ImageProperties.Style [
                     ImageStyle.BorderColor "#000000"
                     FlexStyle.Flex 3.
@@ -105,17 +107,19 @@ let view (model:Model) (dispatch: Msg -> unit) =
     view [ Styles.sceneBackground ]
         [ text [ Styles.defaultText ] model.LocationCheckRequest.Name
           textInput [
-            TextInput.TextInputProperties.AutoCorrect false
-            TextInput.TextInputProperties.Style [
-                FlexStyle.MarginTop 2.
-                FlexStyle.MarginBottom 2.
+            TextInputProperties.AutoCorrect false
+            TextInputProperties.Style [
+                FlexStyle.MarginTop (unbox 2.)
+                FlexStyle.MarginBottom (unbox 2.)
                 TextStyle.Color Styles.textColor
                 ViewStyle.BackgroundColor Styles.inputBackgroundColor
               ]
-            TextInput.TextInputProperties.OnChangeText (Model.LocationStatus.Alarm >> LocationStatusUpdated >> dispatch)
-          ] (match model.LocationCheckRequest.Status with
-             | Some (Model.LocationStatus.Alarm s) -> s
-             | _ -> "")
+            TextInputProperties.OnChangeText (Model.LocationStatus.Alarm >> LocationStatusUpdated >> dispatch)
+            TextInputProperties.Value
+              (match model.LocationCheckRequest.Status with
+               | Some (Model.LocationStatus.Alarm s) -> s
+               | _ -> "")
+          ] 
 
           image
           selectImageButton

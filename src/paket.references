@@ -1,11 +1,10 @@
 FSharp.Core
 Fable.Core
-Fable.PowerPack
 Fable.React
 Fable.React.Native
 Fable.Elmish
 Fable.Elmish.React
 Fable.Elmish.HMR
-Fable.Import.Browser
-
-dotnet-fable
+Fable.Elmish.Browser
+Fable.Fetch
+Fable.Browser.Dom

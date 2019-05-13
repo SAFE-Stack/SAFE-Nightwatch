@@ -9,15 +9,19 @@
     "cold-start": "fable-splitter -c splitter.config.js --define DEBUG"
   },
   "dependencies": {
-    "buffer": "5.0.8",
-    "core-js": "2.5.3",
-    "react": "16.2.0",
-    "react-native": "0.54.2",
-    "react-native-image-picker": "0.26.7"
+    "@react-native-community/async-storage": "1.4.0",
+    "buffer": "5.2.1",
+    "react": "16.8.3",
+    "react-native": "0.59.8",
+    "react-native-image-picker":  "0.28.1"
   },
   "devDependencies": {
-    "appium": "1.7.2",
-    "babel-core": "6.26.0",
-    "fable-splitter": "0.1.21"
+    "@babel/core": "7.4.4",
+    "@babel/runtime": "7.4.4",
+    "appium": "1.12.1",
+    "fable-compiler": "2.3.8",
+    "fable-splitter": "2.1.8",
+    "metro-react-native-babel-preset": "0.54.0",
+    "react-test-renderer": "16.8.3"
   }
 }

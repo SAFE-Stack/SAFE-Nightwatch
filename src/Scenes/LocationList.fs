@@ -1,8 +1,8 @@
 module LocationList
 
 open System
-open Fable.Helpers.ReactNative
-open Fable.Helpers.ReactNative.Props
+open Fable.ReactNative
+open Fable.ReactNative.Props
 open Elmish
 
 // Model
@@ -35,7 +35,7 @@ let update msg model : Model*Cmd<Msg> =
 
     | RefreshList ->
         { model with Status = InProgress },
-        Cmd.ofPromise Database.getIndexedCheckRequests () NewLocationCheckRequests Error
+        Cmd.OfPromise.either Database.getIndexedCheckRequests () NewLocationCheckRequests Error
 
     | NewLocationCheckRequests indexedRequests ->
         { model with
@@ -68,8 +68,8 @@ let view (model:Model) (dispatch: Msg -> unit) =
                     image
                         [ Source uri
                           ImageProperties.Style [
-                                FlexStyle.Width 24.
-                                FlexStyle.Height 24.
+                                FlexStyle.Width (unbox 24.)
+                                FlexStyle.Height (unbox 24.)
                                 FlexStyle.AlignSelf Alignment.Center
                             ]
                         ])
@@ -83,11 +83,10 @@ let view (model:Model) (dispatch: Msg -> unit) =
              | Complete s -> s
              | _ -> "")
           
-          
           flatList model.Requests [
               InitialNumToRender 20
-              KeyExtractor (Func<_,_,_>(fun (i,_) _ -> i.ToString()))
-              RenderItem (Func<_,_>(fun v -> renderItem v.item))
+              KeyExtractor (fun (i,_) _ -> i.ToString())
+              RenderItem (fun v -> renderItem v.item)
           ]
           Styles.button "OK" (fun () -> dispatch GoBack)
         ]

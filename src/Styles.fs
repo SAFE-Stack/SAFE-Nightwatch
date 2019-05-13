@@ -1,7 +1,7 @@
 module internal Styles
 
-open Fable.Helpers.ReactNative
-open Fable.Helpers.ReactNative.Props
+open Fable.ReactNative
+open Fable.ReactNative.Props
 
 let [<Literal>] brandPrimary = "#428bca"
 let [<Literal>] brandInfo = "#5bc0de"
@@ -33,7 +33,7 @@ let renderText fontSize =
     TextProperties.Style [ 
         TextStyle.Color textColor
         TextStyle.TextAlign TextAlignment.Center
-        FlexStyle.Margin 3.
+        FlexStyle.Margin (unbox 3.)
         TextStyle.FontSize fontSize
       ]
 
@@ -47,19 +47,7 @@ let whitespace<'a> = text [ smallText ] ""
 let sceneBackground<'a> =
     ViewProperties.Style [ 
         FlexStyle.AlignSelf Alignment.Stretch
-        FlexStyle.Padding 20.
-        ViewStyle.ShadowColor shadowColor
-        ViewStyle.ShadowOpacity 0.8
-        ViewStyle.ShadowRadius 3.
-        FlexStyle.JustifyContent JustifyContent.Center
-        FlexStyle.Flex 1.
-        ViewStyle.BackgroundColor backgroundColor
-      ]
-
-let viewPagerBackground<'a> =
-    ViewPagerAndroidProperties.Style [
-        FlexStyle.AlignSelf Alignment.Stretch
-        FlexStyle.Padding 20.
+        FlexStyle.Padding (unbox 20.)
         ViewStyle.ShadowColor shadowColor
         ViewStyle.ShadowOpacity 0.8
         ViewStyle.ShadowRadius 3.

@@ -5,14 +5,10 @@
 #r @"packages/build/FAKE/tools/FakeLib.dll"
 
 open System
-open System.Diagnostics
 open System.IO
-open System.Text.RegularExpressions
 open Fake
 open Fake.Git
-open Fake.ProcessHelper
 open Fake.ReleaseNotesHelper
-open Fake.ZipHelper
 open Fake.Testing.Expecto
 
 // Read additional information from the release notes document
@@ -24,21 +20,12 @@ let releaseNotesData =
 
 let outDir = "./out"
 let deployDir = "./deploy"
-let nodeModulesBinDir = "./node_modules/.bin"
-
 let release = List.head releaseNotesData
 let packageVersion = SemVerHelper.parse release.NugetVersion
 
 
-// Pattern specifying assemblies to be tested using expecto
 let testExecutables = "tests/**/bin/Debug/**/*Tests*.exe"
 
-
-// Default target configuration
-let configuration = "Release"
-
-let msg =  release.Notes |> List.fold (fun r s -> r + s + "\n") ""
-let releaseMsg = (sprintf "Release %s\n" release.NugetVersion) + msg
 
 let run' timeout (cmd:Lazy<string>) args dir =
     if execProcess (fun info ->
@@ -51,20 +38,21 @@ let run' timeout (cmd:Lazy<string>) args dir =
 
 let run = run' System.TimeSpan.MaxValue
 
+
 let platformTool tool winTool = lazy(
     let tool = if isUnix then tool else winTool
     tool
-    |> List.tryPick ProcessHelper.tryFindFileOnPath
-    |> function Some t -> t | _ -> failwithf "%A not found" tool)
+    |> ProcessHelper.tryFindFileOnPath
+    |> function Some t -> t | _ -> failwithf "%s not found" tool)
 
-let nodeTool = platformTool ["node"] ["node.exe"]
-let yarnTool = platformTool ["yarn"] ["yarn.cmd"]
+let nodeTool = platformTool "node" "node.exe"
+let yarnTool = platformTool "yarn" "yarn.cmd"
 
 let srcDir = __SOURCE_DIRECTORY__ </> "src"
 
 let testDir = __SOURCE_DIRECTORY__ </> "tests" </> "IntegrationTests"
 
-let dotnetcliVersion = "2.0.0"
+let dotnetcliVersion = DotNetCli.GetDotNetSDKVersionFromGlobalJson()
 
 let mutable dotnetExePath = "dotnet"
 
@@ -76,8 +64,8 @@ let runDotnet workingDir args =
             info.Arguments <- args) TimeSpan.MaxValue
     if result <> 0 then failwithf "dotnet %s failed" args
 
-let gradleTool = platformTool ["android/gradlew"] ["android" </> "gradlew.bat" |> FullName]
-let reactNativeTool = platformTool [nodeModulesBinDir </> "react-native"] [nodeModulesBinDir </> "react-native.cmd"]
+let gradleTool = platformTool "android/gradlew" ("android" </> "gradlew.bat" |> FullName)
+let reactNativeTool = platformTool "react-native" "react-native.cmd"
 
 let androidSDKPath =
     match environVarOrNone "ANDROID_HOME" with
@@ -94,10 +82,7 @@ let androidSDKPath =
             if Directory.Exists p3 then FullName p3 else
             failwithf "Can't find Android SDK in %s, please set ANDROID_HOME enviromental variable" p3
 
-let adbTool = platformTool [androidSDKPath </> "platform-tools/adb"] [androidSDKPath </> "platform-tools/adb.exe"]
-
-let scpTool = platformTool ["scp"] [@"C:\Program Files\Git\usr\bin\scp.exe"; @"C:\Program Files (x86)\Git\usr\bin\scp.exe"]
-let sshTool = platformTool ["ssh"] [@"C:\Program Files\Git\usr\bin\ssh.exe"; @"C:\Program Files (x86)\Git\usr\bin\ssh.exe"]
+let adbTool = platformTool (androidSDKPath </> "platform-tools/adb") (androidSDKPath </> "platform-tools/adb.exe")
 
 
 setEnvironVar "ANDROID_HOME" androidSDKPath
@@ -116,7 +101,7 @@ let killADB() =
     killProcess "adb.exe"
 
 
-killDotnetCli()
+if isLocalBuild then () else killDotnetCli()
 
 Target "Clean" (fun _ ->
     CleanDir outDir
@@ -144,6 +129,13 @@ FinalTarget "CloseAndroid" (fun _ ->
 
 Target "InstallDotNetCore" (fun _ ->
     dotnetExePath <- DotNetCli.InstallDotNetSDK dotnetcliVersion
+
+    let fi = FileInfo dotnetExePath
+    let SEPARATOR = if isWindows then ";" else ":"
+    Environment.SetEnvironmentVariable(
+        "PATH",
+        fi.Directory.FullName + SEPARATOR + System.Environment.GetEnvironmentVariable "PATH",
+        EnvironmentVariableTarget.Process)
 )
 
 Target "Restore" (fun _ ->
@@ -198,9 +190,7 @@ Target "SetVersionAndroid" (fun _ ->
                 sprintf "%sversionName \"%O\"" indent release.NugetVersion
             else line)
     File.WriteAllLines(gradleFile,lines)
-)
 
-Target "SetVersion" (fun _ ->
     let fileName = "./package.json"
     let lines =
         File.ReadAllLines fileName
@@ -244,13 +234,7 @@ Target "PrepareRelease" (fun _ ->
 Target "CompileForTest" (fun _ ->
     ActivateFinalTarget "KillProcess"
 
-    let result =
-        ExecProcess (fun info ->
-            info.FileName <- dotnetExePath
-            info.WorkingDirectory <- srcDir
-            info.Arguments <- " fable npm-run compile-for-test") TimeSpan.MaxValue
-
-    if result <> 0 then failwith "fable shut down. Please check logs above"
+    run yarnTool "run fable-splitter -c splitter.config.js --define TEST" srcDir
 )
 
 Target "AssembleForTest" (fun _ ->
@@ -260,39 +244,25 @@ Target "AssembleForTest" (fun _ ->
 Target "BuildRelease" (fun _ ->
     ActivateFinalTarget "KillProcess"
 
-    let result =
-        ExecProcess (fun info ->
-            info.FileName <- dotnetExePath
-            info.WorkingDirectory <- srcDir
-            info.Arguments <- " fable npm-run build") TimeSpan.MaxValue
-    if result <> 0 then failwith "fable shut down. Please check logs above"
+    run yarnTool "run fable-splitter -c splitter.config.js --define RELEASE" srcDir
+    
     run gradleTool "assembleRelease --console plain" "android"
 
-    let outFile = "android" </> "app" </> "build" </> "outputs" </> "apk" </> "app-release.apk"
+    let outFile = "android" </> "app" </> "build" </> "outputs" </> "apk"  </> "release" </> "app-release.apk"
+
     Copy deployDir [outFile]
     let fi = FileInfo (deployDir </> "app-release.apk")
     fi.MoveTo (deployDir </> sprintf "Nightwatch.%s.apk" release.NugetVersion)
 )
 
 Target "Debug" (fun _ ->
-    let result =
-        ExecProcess (fun info ->
-            info.FileName <- dotnetExePath
-            info.WorkingDirectory <- srcDir
-            info.Arguments <- " fable npm-run cold-start") TimeSpan.MaxValue
-    if result <> 0 then failwith "fable shut down."
+    run yarnTool "run fable-splitter -c splitter.config.js --define DEBUG" srcDir
     
-    let dotnetwatch = async {
-        let result =
-            ExecProcess (fun info ->
-                info.FileName <- dotnetExePath
-                info.WorkingDirectory <- srcDir
-                info.Arguments <- " fable npm-run start") TimeSpan.MaxValue
-        if result <> 0 then failwith "fable shut down." }
+    let fablewatch = async { run yarnTool "run fable-splitter -c splitter.config.js -w --define DEBUG" srcDir }
 
     let reactNativeTool = async {  run reactNativeTool "run-android" "" }
 
-    Async.Parallel [| dotnetwatch; reactNativeTool |]
+    Async.Parallel [| fablewatch; reactNativeTool |]
     |> Async.RunSynchronously
     |> ignore
 )
@@ -309,11 +279,10 @@ Target "Deploy" (fun _ ->
 Target "Default" DoNothing
 
 "Clean"
-==> "InstallDotNetCore"
-==> "Restore"
 ==> "SetReleaseNotes"
 ==> "SetVersionAndroid"
-==> "SetVersion"
+==> "InstallDotNetCore"
+==> "Restore"
 ==> "CompileForTest"
 ==> "AssembleForTest"
 ==> "BuildTests"
@@ -322,7 +291,7 @@ Target "Default" DoNothing
 ==> "BuildRelease"
 ==> "Deploy"
 
-"SetVersion"
+"Restore"
 ==> "Debug"
 
 "SetVersionAndroid"
