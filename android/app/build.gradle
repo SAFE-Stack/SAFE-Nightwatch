@@ -105,7 +105,7 @@ android {
         applicationId "com.nightwatch"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1303
+        versionCode 1304
         versionName "1.0.0"
         missingDimensionStrategy 'react-native-camera', 'general'
     }

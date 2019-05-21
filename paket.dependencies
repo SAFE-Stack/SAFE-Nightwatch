@@ -2,9 +2,8 @@ source https://nuget.org/api/v2
 
 nuget FSharp.Core redirects: force
 nuget Fable.Core
-
 nuget Fable.React
-nuget Fable.React.Native prerelease
+nuget Fable.React.Native
 nuget Fable.Fetch
 nuget Fable.Browser.Dom
 nuget Fable.Elmish
@@ -18,6 +17,7 @@ group Test
     generate_load_scripts: true
     source https://nuget.org/api/v2
     framework >= net45
+
     nuget FSharp.Core redirects: force
     nuget Canopy.Mobile
     nuget Expecto
