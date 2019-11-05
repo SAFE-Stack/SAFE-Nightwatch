@@ -20,7 +20,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-project.xcworkspace
 
 # Android/IntelliJ
 #
@@ -39,30 +38,26 @@ yarn-error.log
 # BUCK
 buck-out/
 \.buckd/
-android/app/libs
-android/keystores/debug.keystore
-.vs
-out
-obj
-bin
-typings
 *.keystore
+!debug.keystore
 
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
 # screenshots whenever they are needed.
 # For more information about the recommended setup visit:
-# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
+# https://docs.fastlane.tools/best-practices/source-control/
 
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
 
-launchReactNative.js
-debuggerWorker.js
-index.android.bundle
-index.android.map
+# Bundle artifact
+*.jsbundle
+
+# CocoaPods
+/ios/Pods/
+
 .fake
 packages
 deploy/
@@ -72,3 +67,7 @@ deploy/
 *.bak
 /paket-files
 /.ionide
+
+out
+obj
+bin

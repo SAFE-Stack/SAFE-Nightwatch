@@ -6,7 +6,7 @@ open Elmish.ReactNative
 open Elmish.HMR
 open Fable.ReactNative
 
-let setupBackHandler dispatch =    
+let setupBackHandler dispatch =
     let backHandler () =
         dispatch App.Msg.NavigateBack
         true
@@ -24,5 +24,5 @@ Program.mkProgram App.init App.update App.view
 #else
 |> Program.withConsoleTrace
 #endif
-|> Program.withReactNative "nightwatch"
+|> Program.withReactNative "Nightwatch"
 |> Program.run

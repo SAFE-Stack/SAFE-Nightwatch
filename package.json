@@ -1,27 +1,35 @@
 {
-  "name": "nightwatch",
+  "name": "Nightwatch",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "fable-splitter -c splitter.config.js --define RELEASE",
     "start": "fable-splitter -c splitter.config.js -w --define DEBUG",
     "compile-for-test": "fable-splitter -c splitter.config.js --define TEST",
-    "cold-start": "fable-splitter -c splitter.config.js --define DEBUG"
+    "cold-start": "fable-splitter -c splitter.config.js --define DEBUG",
+    "test": "jest",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@react-native-community/async-storage": "1.4.0",
-    "buffer": "5.2.1",
-    "react": "16.8.3",
-    "react-native": "0.59.8",
-    "react-native-image-picker":  "0.28.1"
+    "@react-native-community/async-storage": "1.6.2",
+    "react": "16.9.0",
+    "buffer": "5.4.3",
+    "react-native": "0.61.4",
+    "react-native-image-picker": "1.1.0"
   },
   "devDependencies": {
-    "@babel/core": "7.4.4",
-    "@babel/runtime": "7.4.4",
-    "appium": "1.12.1",
-    "fable-compiler": "2.3.8",
-    "fable-splitter": "2.1.8",
-    "metro-react-native-babel-preset": "0.54.0",
-    "react-test-renderer": "16.8.3"
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.5.1",
+    "jest": "^24.9.0",
+    "fable-compiler": "2.4.9",
+    "fable-splitter": "2.1.11",
+    "metro-react-native-babel-preset": "^0.56.0",
+    "react-test-renderer": "16.9.0"
+  },
+  "jest": {
+    "preset": "react-native"
   }
 }
