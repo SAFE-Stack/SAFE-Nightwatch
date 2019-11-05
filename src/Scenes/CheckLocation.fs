@@ -7,7 +7,6 @@ open Fable.ReactNativeSimpleStore.DB
 open Fable.ReactNativeImagePicker
 open Fable.ReactNativeImagePicker.Props
 open Elmish
-open Fable.ReactNative.Types
 open Fable.ReactNative.Props.TextInput
 
 // Model
@@ -98,24 +97,24 @@ let view (model:Model) (dispatch: Msg -> unit) =
             image
                 [ Source (localImage "${entryDir}/../images/snow.jpg")
                   ImageProperties.Style [
-                    ImageStyle.BorderColor "#000000"
-                    FlexStyle.Flex 3.
-                    FlexStyle.AlignSelf Alignment.Center
+                    BorderColor "#000000"
+                    Flex 3.
+                    AlignSelf Alignment.Center
                   ]
             ]
 
     view [ Styles.sceneBackground ]
         [ text [ Styles.defaultText ] model.LocationCheckRequest.Name
           textInput [
-            TextInputProperties.AutoCorrect false
+            AutoCorrect false
             TextInputProperties.Style [
-                FlexStyle.MarginTop (unbox 2.)
-                FlexStyle.MarginBottom (unbox 2.)
+                MarginTop (unbox 2.)
+                MarginBottom (unbox 2.)
                 TextStyle.Color Styles.textColor
                 ViewStyle.BackgroundColor Styles.inputBackgroundColor
               ]
-            TextInputProperties.OnChangeText (Model.LocationStatus.Alarm >> LocationStatusUpdated >> dispatch)
-            TextInputProperties.Value
+            OnChangeText (Model.LocationStatus.Alarm >> LocationStatusUpdated >> dispatch)
+            Value
               (match model.LocationCheckRequest.Status with
                | Some (Model.LocationStatus.Alarm s) -> s
                | _ -> "")
@@ -125,10 +124,10 @@ let view (model:Model) (dispatch: Msg -> unit) =
           selectImageButton
           view
             [ ViewProperties.Style [
-                FlexStyle.JustifyContent JustifyContent.Center
-                FlexStyle.AlignItems ItemAlignment.Center
-                FlexStyle.Flex 1.
-                FlexStyle.FlexDirection FlexDirection.Row ]]
+                JustifyContent JustifyContent.Center
+                AlignItems ItemAlignment.Center
+                Flex 1.
+                FlexDirection FlexDirection.Row ]]
               [ Styles.button "Cancel" (fun () -> dispatch GoBack)
                 Styles.button "OK" (fun () -> dispatch SaveAndGoBack) ]
         ]

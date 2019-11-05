@@ -51,10 +51,10 @@ let view (model:Model) (dispatch: Msg -> unit) =
     let renderItem (pos,request: Model.LocationCheckRequest) =
         [view [
             ViewProperties.Style[
-                FlexStyle.JustifyContent JustifyContent.Center
-                FlexStyle.AlignItems ItemAlignment.Center
-                FlexStyle.Flex 1.
-                FlexStyle.FlexDirection FlexDirection.Row ]]
+                JustifyContent JustifyContent.Center
+                AlignItems ItemAlignment.Center
+                Flex 1.
+                FlexDirection FlexDirection.Row ]]
             [ text [ Styles.defaultText ] request.Name
               text [ Styles.defaultText ] request.Address
               (match request.Status with
