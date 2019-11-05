@@ -241,6 +241,24 @@ Target "AssembleForTest" (fun _ ->
     run gradleTool "assembleRelease --console plain" "android"
 )
 
+
+type NativeApps =
+| Android
+| IOs
+
+let nativeApp =
+    if hasBuildParam "ios" then IOs
+    elif hasBuildParam "android" then Android
+    elif isMacOS then
+        IOs
+    else
+        Android
+
+let reactiveCmd =
+    match nativeApp with
+    | Android -> "react-native run-android"
+    | IOs -> "react-native run-ios"
+
 Target "BuildRelease" (fun _ ->
     ActivateFinalTarget "KillProcess"
 
@@ -255,18 +273,8 @@ Target "BuildRelease" (fun _ ->
     fi.MoveTo (deployDir </> sprintf "Nightwatch.%s.apk" release.NugetVersion)
 )
 
-type NativeApps = 
-| Android
-| Ios
-
-let nativeApp = Ios
-
 Target "Debug" (fun _ ->
     run yarnTool "run fable-splitter -c splitter.config.js --define DEBUG" srcDir
-    let reactiveCmd =
-        match nativeApp with
-        | Android -> "react-native run-android"
-        | Ios -> "react-native run-ios"
 
     let fablewatch = async { run yarnTool "run fable-splitter -c splitter.config.js -w --define DEBUG" srcDir }
 
