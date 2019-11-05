@@ -255,12 +255,22 @@ Target "BuildRelease" (fun _ ->
     fi.MoveTo (deployDir </> sprintf "Nightwatch.%s.apk" release.NugetVersion)
 )
 
+type NativeApps = 
+| Android
+| Ios
+
+let nativeApp = Ios
+
 Target "Debug" (fun _ ->
     run yarnTool "run fable-splitter -c splitter.config.js --define DEBUG" srcDir
+    let reactiveCmd =
+        match nativeApp with
+        | Android -> "react-native run-android"
+        | Ios -> "react-native run-ios"
 
     let fablewatch = async { run yarnTool "run fable-splitter -c splitter.config.js -w --define DEBUG" srcDir }
 
-    let reactNativeTool = async { run yarnTool "react-native run-android" "" }
+    let reactNativeTool = async { run yarnTool reactiveCmd "" }
 
     Async.Parallel [| fablewatch; reactNativeTool |]
     |> Async.RunSynchronously
