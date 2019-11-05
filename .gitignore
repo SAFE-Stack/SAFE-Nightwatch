@@ -71,3 +71,4 @@ deploy/
 /temp/
 *.bak
 /paket-files
+/.ionide
