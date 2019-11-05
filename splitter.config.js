@@ -17,7 +17,8 @@ module.exports = {
   entry: resolve('src/Nightwatch.fsproj'),
   outDir: resolve("out"),
   babel: {
-     //   presets: [["es2015", { modules: false }]],
+    filename: "Nightwatch.js",
+    presets: ["module:metro-react-native-babel-preset"]
      //   sourceMaps: true,
   },
   fable: {

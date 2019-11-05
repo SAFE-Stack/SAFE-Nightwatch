@@ -220,11 +220,11 @@ Target "PrepareRelease" (fun _ ->
     Git.Branches.checkout "" false "master"
     Git.CommandHelper.directRunGitCommand "" "fetch origin" |> ignore
     Git.CommandHelper.directRunGitCommand "" "fetch origin --tags" |> ignore
-    
+
     StageAll ""
     Git.Commit.Commit "" (sprintf "Release %O" release.NugetVersion)
     Git.Branches.pushBranch "" "origin" "master"
-    
+
     let tagName = string release.NugetVersion
     Git.Branches.tag "" tagName
     Git.Branches.pushTag "" "origin" tagName
@@ -245,7 +245,7 @@ Target "BuildRelease" (fun _ ->
     ActivateFinalTarget "KillProcess"
 
     run yarnTool "run fable-splitter -c splitter.config.js --define RELEASE" srcDir
-    
+
     run gradleTool "assembleRelease --console plain" "android"
 
     let outFile = "android" </> "app" </> "build" </> "outputs" </> "apk"  </> "release" </> "app-release.apk"
@@ -257,10 +257,10 @@ Target "BuildRelease" (fun _ ->
 
 Target "Debug" (fun _ ->
     run yarnTool "run fable-splitter -c splitter.config.js --define DEBUG" srcDir
-    
+
     let fablewatch = async { run yarnTool "run fable-splitter -c splitter.config.js -w --define DEBUG" srcDir }
 
-    let reactNativeTool = async {  run reactNativeTool "run-android" "" }
+    let reactNativeTool = async { run yarnTool "react-native run-android" "" }
 
     Async.Parallel [| fablewatch; reactNativeTool |]
     |> Async.RunSynchronously
