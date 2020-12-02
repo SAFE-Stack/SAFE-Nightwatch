@@ -7,5 +7,4 @@ group Stack
     Fable.Elmish.React
     Fable.Elmish.HMR
     Fable.Elmish.Browser
-    Fable.Fetch
     Fable.Browser.Dom

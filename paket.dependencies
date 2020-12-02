@@ -12,7 +12,6 @@ group Stack
     nuget Fable.Elmish.Browser 
     nuget Fable.Elmish.Debugger
     nuget Fable.Elmish.HMR
-    nuget Fable.Fetch
 
 group Test
 
