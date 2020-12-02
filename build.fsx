@@ -2,14 +2,42 @@
 // FAKE build script
 // --------------------------------------------------------------------------------------
 
-#r @"packages/build/FAKE/tools/FakeLib.dll"
+#r "paket:
+nuget FSharp.Core
+nuget Fake.Core.ReleaseNotes
+nuget Fake.Core.Process
+nuget Fake.IO.FileSystem
+nuget Fake.BuildServer.TeamFoundation
+nuget Fake.Core.Target
+nuget Fake.DotNet.Cli
+nuget Fake.Core.Environment
+nuget Fake.Installer.Wix
+nuget Newtonsoft.Json
+nuget System.ServiceProcess.ServiceController
+nuget Fake.Core.Trace
+nuget Fake.IO.Zip
+nuget Fake.Tools.Git
+nuget Microsoft.Web.Administration
+nuget Fake.DotNet.Testing.Expecto
+nuget Fantomas
+//"
 
-open System
+#load "./.fake/build.fsx/intellisense.fsx"
+
+#if !FAKE
+#r "netstandard"
+#r "Facades/netstandard" // https://github.com/ionide/ionide-vscode-fsharp/issues/839#issuecomment-396296095
+#endif
+
 open System.IO
-open Fake
-open Fake.Git
-open Fake.ReleaseNotesHelper
-open Fake.Testing.Expecto
+open Fake.Core
+open Fake.DotNet
+open Fake.Core.TargetOperators
+open Fake.IO
+open Fake.IO.FileSystemOperators
+open Fake.IO.Globbing.Operators
+open Fantomas
+open Fantomas.FakeHelpers
 
 // Read additional information from the release notes document
 let releaseNotes = File.ReadAllLines "RELEASE_NOTES.md"

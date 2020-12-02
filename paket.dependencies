@@ -20,8 +20,3 @@ group Test
     nuget FSharp.Core 
     nuget Canopy.Mobile
     nuget Expecto
-
-group Build
-    source https://nuget.org/api/v2
-    
-    nuget FAKE < 5
