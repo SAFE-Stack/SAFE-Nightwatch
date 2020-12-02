@@ -1,10 +1,10 @@
-source https://nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
+framework:net5.0
 
-nuget FSharp.Core redirects: force
+nuget FSharp.Core 
 nuget Fable.Core
 nuget Fable.React
 nuget Fable.React.Native
-nuget Fable.Fetch
 nuget Fable.Browser.Dom
 nuget Fable.Elmish
 nuget Fable.Elmish.React
@@ -15,10 +15,9 @@ nuget Fable.Elmish.HMR
 group Test
 
     generate_load_scripts: true
-    source https://nuget.org/api/v2
-    framework >= net45
-
-    nuget FSharp.Core redirects: force
+    source https://api.nuget.org/v3/index.json
+    framework:net5.0
+    nuget FSharp.Core 
     nuget Canopy.Mobile
     nuget Expecto
 

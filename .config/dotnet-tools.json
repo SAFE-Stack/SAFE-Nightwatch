@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "fake-cli": {
+      "version": "5.20.3",
+      "commands": [
+        "fake"
+      ]
+    },
+    "paket": {
+      "version": "6.0.0-alpha050",
+      "commands": [
+        "paket"
+      ]
+    },
+    "fable": {
+      "version": "3.0.0-nagareyama-beta-005",
+      "commands": [
+        "fable"
+      ]
+    }
+  }
+}
