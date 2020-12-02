@@ -1,20 +1,21 @@
-source https://api.nuget.org/v3/index.json
-framework:net5.0
+group Stack
+    source https://api.nuget.org/v3/index.json
+    framework:net5.0
 
-nuget FSharp.Core 
-nuget Fable.Core
-nuget Fable.React
-nuget Fable.React.Native
-nuget Fable.Browser.Dom
-nuget Fable.Elmish
-nuget Fable.Elmish.React
-nuget Fable.Elmish.Browser 
-nuget Fable.Elmish.Debugger
-nuget Fable.Elmish.HMR
+    nuget FSharp.Core 
+    nuget Fable.Core
+    nuget Fable.React
+    nuget Fable.React.Native
+    nuget Fable.Browser.Dom
+    nuget Fable.Elmish
+    nuget Fable.Elmish.React
+    nuget Fable.Elmish.Browser 
+    nuget Fable.Elmish.Debugger
+    nuget Fable.Elmish.HMR
+    nuget Fable.Fetch
 
 group Test
 
-    generate_load_scripts: true
     source https://api.nuget.org/v3/index.json
     framework:net5.0
     nuget FSharp.Core 

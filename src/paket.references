@@ -1,10 +1,11 @@
-FSharp.Core
-Fable.Core
-Fable.React
-Fable.React.Native
-Fable.Elmish
-Fable.Elmish.React
-Fable.Elmish.HMR
-Fable.Elmish.Browser
-Fable.Fetch
-Fable.Browser.Dom
+group Stack
+    FSharp.Core
+    Fable.Core
+    Fable.React
+    Fable.React.Native
+    Fable.Elmish
+    Fable.Elmish.React
+    Fable.Elmish.HMR
+    Fable.Elmish.Browser
+    Fable.Fetch
+    Fable.Browser.Dom

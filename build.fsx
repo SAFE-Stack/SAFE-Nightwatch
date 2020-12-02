@@ -19,7 +19,6 @@ nuget Fake.IO.Zip
 nuget Fake.Tools.Git
 nuget Microsoft.Web.Administration
 nuget Fake.DotNet.Testing.Expecto
-nuget Fantomas
 //"
 
 #load "./.fake/build.fsx/intellisense.fsx"
@@ -36,8 +35,6 @@ open Fake.Core.TargetOperators
 open Fake.IO
 open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
-open Fantomas
-open Fantomas.FakeHelpers
 
 // Read additional information from the release notes document
 let releaseNotes = File.ReadAllLines "RELEASE_NOTES.md"
