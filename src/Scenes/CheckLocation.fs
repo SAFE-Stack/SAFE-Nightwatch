@@ -3,12 +3,13 @@ module CheckLocation
 open System
 open Fable.ReactNative
 open Fable.ReactNative.Props
-open Fable.ReactNativeSimpleStore.DB
+open Fable.ReactNativeSqlite
 open Fable.ReactNativeImagePicker
 open Fable.ReactNativeImagePicker.Props
 open Elmish
 open Fable.ReactNative.Props.TextInput
-
+open Fable.ReactNativeSimpleStore.KeyValueStore
+open Fable.ReactNative.SimpleStore.DB
 // Model
 type Status =
 | Unchanged
@@ -34,8 +35,7 @@ let init (pos,request) =
       Position = pos
       PictureUri = None
       LocationCheckRequest = request }, Cmd.none
-
-// Helpers update
+      
 
 let save (pos,request : Model.LocationCheckRequest) = update(pos,request)
 

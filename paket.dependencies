@@ -1,3 +1,6 @@
+source https://api.nuget.org/v3/index.json
+nuget FSharp.Core
+
 group Stack
     source https://api.nuget.org/v3/index.json
     framework:net5.0
@@ -5,7 +8,7 @@ group Stack
     nuget FSharp.Core == 5.0.0
     nuget Fable.Core
     nuget Fable.React
-    nuget Fable.React.Native
+    nuget Fable.React.Native prerelease
     nuget Fable.Browser.Dom
     nuget Fable.Elmish
     nuget Fable.Elmish.React
@@ -17,6 +20,7 @@ group Test
 
     source https://api.nuget.org/v3/index.json
     framework:net5.0
-    nuget FSharp.Core 
-    nuget Canopy.Mobile
+    nuget FSharp.Core == 5.0.0
+    nuget Canopy.Mobile 
     nuget Expecto
+    nuget Appium.WebDriver prerelease

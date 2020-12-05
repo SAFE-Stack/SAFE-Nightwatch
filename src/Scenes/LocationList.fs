@@ -9,7 +9,7 @@ open Elmish
 type Status =
 | NotStarted
 | InProgress
-| Complete of string
+| Complete of string  
 
 type Msg =
 | CheckNextLocation of int * Model.LocationCheckRequest
@@ -39,7 +39,7 @@ let update msg model : Model*Cmd<Msg> =
 
     | NewLocationCheckRequests indexedRequests ->
         { model with
-            Requests = indexedRequests
+            Requests = indexedRequests  
             Status = Complete (sprintf "Locations: %d" indexedRequests.Length) }, Cmd.none
 
     | Error e ->

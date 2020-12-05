@@ -1,4 +1,6 @@
-
+NUGET
+  remote: https://api.nuget.org/v3/index.json
+    FSharp.Core (5.0)
 
 GROUP Stack
 RESTRICTION: == net50
@@ -20,8 +22,8 @@ NUGET
       Fable.Browser.Event (>= 1.0)
       Fable.Core (>= 3.0)
       FSharp.Core (>= 4.5.2)
-    Fable.Core (3.1.6)
-      FSharp.Core (>= 4.7.1)
+    Fable.Core (3.2)
+      FSharp.Core (>= 5.0)
     Fable.Elmish (3.1)
       Fable.Core (>= 3.0)
       FSharp.Core (>= 4.6.2)
@@ -52,12 +54,10 @@ NUGET
       Fable.Browser.Dom (>= 2.0.1)
       Fable.Core (>= 3.1.5)
       FSharp.Core (>= 4.7.2)
-    Fable.React.Native (2.6.1)
-      Fable.Core (>= 3.0)
-      Fable.Promise (>= 2.0)
-      Fable.React (>= 5.2.3)
-      FSharp.Core (>= 4.6.2)
-      Thoth.Json (>= 3.1)
+    Fable.React.Native (3.0.0-alpha001)
+      Fable.Core (>= 3.1.6)
+      Fable.Promise (>= 2.1)
+      Fable.React (>= 7.2)
     FSharp.Core (5.0)
     Thoth.Json (5.0)
       Fable.Core (>= 3.1.4)

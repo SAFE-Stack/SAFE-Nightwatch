@@ -8,3 +8,4 @@ group Stack
     Fable.Elmish.HMR
     Fable.Elmish.Browser
     Fable.Browser.Dom
+    Thoth.Json

@@ -35,162 +35,171 @@ open Fake.Core.TargetOperators
 open Fake.IO
 open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
-
+open Fake.DotNet.Testing
 // Read additional information from the release notes document
 let releaseNotes = File.ReadAllLines "RELEASE_NOTES.md"
 
-let releaseNotesData =
-    releaseNotes
-    |> parseAllReleaseNotes
+let release = ReleaseNotes.load "RELEASE_NOTES.md"
 
 let outDir = "./out"
 let deployDir = "./deploy"
-let release = List.head releaseNotesData
-let packageVersion = SemVerHelper.parse release.NugetVersion
+let serverTestsPath = Path.getFullName "./tests/Server"
+let sharedTestsPath = Path.getFullName "./tests/Shared"
 
+// --------------------------------------------------------------------------------------
+// PlatformTools
+// --------------------------------------------------------------------------------------
 
-let testExecutables = "tests/**/bin/Debug/**/*Tests*.exe"
+let platformTool tool winTool =
+    let tool =
+        if Environment.isUnix then tool else winTool
 
+    match ProcessUtils.tryFindFileOnPath tool with
+    | Some t -> t
+    | _ ->
+        let errorMsg =
+            tool
+            + " was not found in path. "
+            + "Please install it and make sure it's available from your path. "
+            + "See https://safe-stack.github.io/docs/quickstart/#install-pre-requisites for more info"
 
-let run' timeout (cmd:Lazy<string>) args dir =
-    if execProcess (fun info ->
-        info.FileName <- cmd.Force()
-        if not (String.IsNullOrWhiteSpace dir) then
-            info.WorkingDirectory <- dir
-        info.Arguments <- args
-    ) timeout |> not then
-        failwithf "Error while running '%s' with args: %s" (cmd.Force()) args
-
-let run = run' System.TimeSpan.MaxValue
-
-
-let platformTool tool winTool = lazy(
-    let tool = if isUnix then tool else winTool
-    tool
-    |> ProcessHelper.tryFindFileOnPath
-    |> function Some t -> t | _ -> failwithf "%s not found" tool)
+        failwith errorMsg
 
 let nodeTool = platformTool "node" "node.exe"
-let yarnTool = platformTool "yarn" "yarn.cmd"
+// let yarnTool = platformTool "yarn" "yarn.cmd"
+let npmTool = platformTool "npm" "npm.cmd"
 
+let dotnet cmd workingDir =
+    let result =
+        DotNet.exec (DotNet.Options.withWorkingDirectory workingDir) cmd ""
+
+    if result.ExitCode <> 0
+    then failwithf "'dotnet %s' failed in %s" cmd workingDir
+
+let npm args workingDir =
+
+    let npmPath =
+        match ProcessUtils.tryFindFileOnPath "npm" with
+        | Some path -> path
+        | None ->
+            "npm was not found in path. Please install it and make sure it's available from your path. "
+            + "See https://safe-stack.github.io/docs/quickstart/#install-pre-requisites for more info"
+            |> failwith
+
+    let arguments =
+        args |> String.split ' ' |> Arguments.OfArgs
+
+    RawCommand(npmPath, arguments)
+    |> CreateProcess.fromCommand
+    |> CreateProcess.withWorkingDirectory workingDir
+    |> CreateProcess.ensureExitCode
+    |> Proc.run
+    |> ignore
+
+let runTool cmd args workingDir =
+    let arguments =
+        args |> String.split ' ' |> Arguments.OfArgs
+
+    RawCommand(cmd, arguments)
+    |> CreateProcess.fromCommand
+    |> CreateProcess.withWorkingDirectory workingDir
+    |> CreateProcess.ensureExitCode
+    |> Proc.run
+    |> ignore
 let srcDir = __SOURCE_DIRECTORY__ </> "src"
 
 let testDir = __SOURCE_DIRECTORY__ </> "tests" </> "IntegrationTests"
 
-let dotnetcliVersion = DotNetCli.GetDotNetSDKVersionFromGlobalJson()
 
-let mutable dotnetExePath = "dotnet"
-
-let runDotnet workingDir args =
-    let result =
-        ExecProcess (fun info ->
-            info.FileName <- dotnetExePath
-            info.WorkingDirectory <- workingDir
-            info.Arguments <- args) TimeSpan.MaxValue
-    if result <> 0 then failwithf "dotnet %s failed" args
-
-let gradleTool = platformTool "android/gradlew" ("android" </> "gradlew.bat" |> FullName)
+let gradleTool = platformTool "android/gradlew" ("android" </> "gradlew.bat" |> Path.getFullName)
 let reactNativeTool = platformTool "react-native" "react-native.cmd"
 
 let androidSDKPath =
-    match environVarOrNone "ANDROID_HOME" with
+    match Environment.environVarOrNone "ANDROID_HOME" with
     | Some path -> path
-    | None ->
-        if isWindows then
-            let p1 = ProgramFilesX86 </> "Android" </> "android-sdk"
-            if Directory.Exists p1 then FullName p1 else
-            let p2 = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) </> "Android" </> "sdk"
-            if Directory.Exists p2 then FullName p2 else
-            failwithf "Can't find Android SDK in %s or %s" p1 p2
-        else
-            let p3 = Environment.GetFolderPath(Environment.SpecialFolder.Personal) </> "Library/Android/sdk"
-            if Directory.Exists p3 then FullName p3 else
-            failwithf "Can't find Android SDK in %s, please set ANDROID_HOME enviromental variable" p3
+    | None -> ""
+        // if Environment.isWindows then
+        //     let p1 = Environment.ProgramFilesX86 </> "Android" </> "android-sdk"
+        //     if Directory.Exists p1 then Path.getFullName p1 else
+        //     let p2 = Environment.GetFolderPath(Environment.SpecialFolder.) </> "Android" </> "sdk"
+        //     if Directory.Exists p2 then FullName p2 else
+        //     failwithf "Can't find Android SDK in %s or %s" p1 p2
+        // else
+        //     let p3 = Environment.GetFolderPath(Environment.SpecialFolder.Personal) </> "Library/Android/sdk"
+        //     if Directory.Exists p3 then FullName p3 else
+        //     failwithf "Can't find Android SDK in %s, please set ANDROID_HOME enviromental variable" p3
 
-let adbTool = platformTool (androidSDKPath </> "platform-tools/adb") (androidSDKPath </> "platform-tools/adb.exe")
+// let adbTool = platformTool (androidSDKPath </> "platform-tools/adb") (androidSDKPath </> "platform-tools/adb.exe")
 
 
-setEnvironVar "ANDROID_HOME" androidSDKPath
-setEnvironVar "ANDROID_SDK_ROOT" androidSDKPath
+Environment.setEnvironVar "ANDROID_HOME" androidSDKPath
+Environment.setEnvironVar "ANDROID_SDK_ROOT" androidSDKPath
 
-if buildServer = BuildServer.GitLabCI then
-    let newPATH = environVar "PATH" + @";C:\Program Files (x86)\Microsoft F#\v4.0"
-    setEnvironVar "PATH" newPATH
+if BuildServer.buildServer = GitLabCI then
+    let newPATH = Environment.environVar "PATH" + @";C:\Program Files (x86)\Microsoft F#\v4.0"
+    Environment.setEnvironVar "PATH" newPATH
 
 let killDotnetCli() =
-    killProcess "dotnet"
-    killProcess "dotnet.exe"
+    Process.killAllByName "dotnet"
+    Process.killAllByName "dotnet.exe"
 
 let killADB() =
-    killProcess "adb"
-    killProcess "adb.exe"
+    Process.killAllByName "adb"
+    Process.killAllByName "adb.exe"
 
 
-if isLocalBuild then () else killDotnetCli()
+if BuildServer.isLocalBuild then () else killDotnetCli()
 
-Target "Clean" (fun _ ->
-    CleanDir outDir
-    CleanDir deployDir
-    ProcessHelper.killProcess "node"
+Target.create "Clean" (fun _ ->
+    Shell.cleanDir outDir
+    Shell.cleanDir deployDir
+    Process.killAllByName "node"
     !! "./**/AppiumLog.txt" |> Seq.iter File.Delete
-    CleanDir "./android/build"
-    CleanDir "./android/app/build"
+    Shell.cleanDir "./android/build"
+    Shell.cleanDir "./android/app/build"
 )
 
-FinalTarget "CloseAndroid" (fun _ ->
-    if isLocalBuild then () else
+Target.createFinal "CloseAndroid" (fun _ ->
+    if BuildServer.isLocalBuild then () else
     killADB()
     killDotnetCli()
-    killProcess "qemu-system-i386"
-    killProcess "qemu-system-aarch64"
-    killProcess "qemu-system-armel"
-    killProcess "qemu-system-mips64el"
-    killProcess "qemu-system-mipsel"
-    killProcess "qemu-system-x86_64"
-    killProcess "emulator-crash-service"
-    killProcess "emulator64-crash-service"
-    killProcess "node"
+    Process.killAllByName "qemu-system-i386"
+    Process.killAllByName "qemu-system-aarch64"
+    Process.killAllByName "qemu-system-armel"
+    Process.killAllByName "qemu-system-mips64el"
+    Process.killAllByName "qemu-system-mipsel"
+    Process.killAllByName "qemu-system-x86_64"
+    Process.killAllByName "emulator-crash-service"
+    Process.killAllByName "emulator64-crash-service"
+    Process.killAllByName "node"
 )
 
-Target "InstallDotNetCore" (fun _ ->
-    dotnetExePath <- DotNetCli.InstallDotNetSDK dotnetcliVersion
-
-    let fi = FileInfo dotnetExePath
-    let SEPARATOR = if isWindows then ";" else ":"
-    Environment.SetEnvironmentVariable(
-        "PATH",
-        fi.Directory.FullName + SEPARATOR + System.Environment.GetEnvironmentVariable "PATH",
-        EnvironmentVariableTarget.Process)
-)
-
-Target "Restore" (fun _ ->
-    setEnvironVar "ANDROID_HOME" androidSDKPath
+Target.create "Restore" (fun _ ->
+    Environment.setEnvironVar "ANDROID_HOME" androidSDKPath
 
     printfn "Node version:"
-    run nodeTool "--version" __SOURCE_DIRECTORY__
-    printfn "Yarn version:"
-    run yarnTool "--version" __SOURCE_DIRECTORY__
-    run yarnTool "install --frozen-lockfile" __SOURCE_DIRECTORY__
-    runDotnet srcDir "restore"
-    runDotnet testDir "restore"
+    runTool nodeTool "--version" __SOURCE_DIRECTORY__
+    printfn "Npm version:"
+    runTool npmTool "--version" __SOURCE_DIRECTORY__
+    runTool npmTool "install" __SOURCE_DIRECTORY__
+    dotnet "restore" srcDir
+    dotnet "restore" testDir
 )
 
-Target "BuildTests" (fun _ ->
-    let result =
-        ExecProcess (fun info ->
-            info.FileName <- dotnetExePath
-            info.WorkingDirectory <- testDir
-            info.Arguments <- "build") TimeSpan.MaxValue
-    if result <> 0 then failwith "dotnet build issue."
+Target.create "BuildTests" (fun _ ->
+    dotnet "build" testDir
 )
 
-Target "RunTests" (fun _ ->
-    ActivateFinalTarget "CloseAndroid"
-
-    !! testExecutables
-    |> Expecto (fun p -> { p with Parallel = false } )
+Target.create "ExecuteTests" (fun _ ->
+    Environment.setEnvironVar "status" "Development"
+    dotnet "build" sharedTestsPath
+    [ async { dotnet "run" serverTestsPath }
+      async { npm "run test:build" "." } ]
+    |> Async.Parallel
+    |> Async.RunSynchronously
     |> ignore
 )
+
 
 let gradleFile = "./android/app/build.gradle"
 
@@ -202,7 +211,7 @@ let getCurrentAndroidVersionCode() =
         else None)
     |> fun v -> defaultArg v 1
 
-Target "SetVersionAndroid" (fun _ ->
+Target.create "SetVersionAndroid" (fun _ ->
     let lines =
         File.ReadAllLines gradleFile
         |> Seq.map (fun line ->
@@ -227,7 +236,7 @@ Target "SetVersionAndroid" (fun _ ->
     File.WriteAllLines(fileName,lines)
 )
 
-Target "SetReleaseNotes" (fun _ ->
+Target.create "SetReleaseNotes" (fun _ ->
     let lines = [
             "module internal ReleaseNotes"
             ""
@@ -241,29 +250,31 @@ Target "SetReleaseNotes" (fun _ ->
     File.WriteAllLines("src/ReleaseNotes.fs",lines)
 )
 
-Target "PrepareRelease" (fun _ ->
-    Git.Branches.checkout "" false "master"
-    Git.CommandHelper.directRunGitCommand "" "fetch origin" |> ignore
-    Git.CommandHelper.directRunGitCommand "" "fetch origin --tags" |> ignore
+Target.create "PrepareRelease" (fun _ ->
+    Fake.Tools.Git.Branches.checkout "" false "master"
+    Fake.Tools.Git.CommandHelper.directRunGitCommand "" "fetch origin"
+    |> ignore
+    Fake.Tools.Git.CommandHelper.directRunGitCommand "" "fetch origin --tags"
+    |> ignore
 
-    StageAll ""
-    Git.Commit.Commit "" (sprintf "Release %O" release.NugetVersion)
-    Git.Branches.pushBranch "" "origin" "master"
+    Fake.Tools.Git.Staging.stageAll ""
+    Fake.Tools.Git.Commit.exec "" (sprintf "Bumping version to %O" release.NugetVersion)
+    Fake.Tools.Git.Branches.pushBranch "" "origin" "master"
 
     let tagName = string release.NugetVersion
-    Git.Branches.tag "" tagName
-    Git.Branches.pushTag "" "origin" tagName
+    Fake.Tools.Git.Branches.tag "" tagName
+    Fake.Tools.Git.Branches.pushTag "" "origin" tagName
 )
 
 
-Target "CompileForTest" (fun _ ->
-    ActivateFinalTarget "KillProcess"
-
-    run yarnTool "run fable-splitter -c splitter.config.js --define TEST" srcDir
+Target.create "CompileForTest" (fun _ ->
+    Target.activateFinal "KillProcess"
+    DotNet.exec id "fable" "watch src/ --outDir src/output --define TEST"
+            |> ignore
 )
 
-Target "AssembleForTest" (fun _ ->
-    run gradleTool "assembleRelease --console plain" "android"
+Target.create "AssembleForTest" (fun _ ->
+    runTool gradleTool "assembleRelease --console plain" "android"
 )
 
 
@@ -272,9 +283,9 @@ type NativeApps =
 | IOs
 
 let nativeApp =
-    if hasBuildParam "ios" then IOs
-    elif hasBuildParam "android" then Android
-    elif isMacOS then
+    if Environment.hasEnvironVar "ios" then IOs
+    elif Environment.hasEnvironVar "android" then Android
+    elif Environment.isMacOS then
         IOs
     else
         Android
@@ -284,51 +295,50 @@ let reactiveCmd =
     | Android -> "react-native run-android"
     | IOs -> "react-native run-ios"
 
-Target "BuildRelease" (fun _ ->
-    ActivateFinalTarget "KillProcess"
+Target.create "BuildRelease" (fun _ ->
+    Target.activateFinal "KillProcess"
 
-    run yarnTool "run fable-splitter -c splitter.config.js --define RELEASE" srcDir
+    dotnet "fable run fable-splitter -c splitter.config.js --define RELEASE" srcDir
 
-    run gradleTool "assembleRelease --console plain" "android"
+    runTool gradleTool "assembleRelease --console plain" "android"
 
     let outFile = "android" </> "app" </> "build" </> "outputs" </> "apk"  </> "release" </> "app-release.apk"
 
-    Copy deployDir [outFile]
+    Shell.copy deployDir [outFile]
     let fi = FileInfo (deployDir </> "app-release.apk")
     fi.MoveTo (deployDir </> sprintf "Nightwatch.%s.apk" release.NugetVersion)
 )
 
-Target "Debug" (fun _ ->
-    run yarnTool "run fable-splitter -c splitter.config.js --define DEBUG" srcDir
+Target.create "Debug" (fun _ ->
+    dotnet "run fable-splitter -c splitter.config.js --define DEBUG" srcDir
 
-    let fablewatch = async { run yarnTool "run fable-splitter -c splitter.config.js -w --define DEBUG" srcDir }
+    let fablewatch = async { dotnet "run fable-splitter -c splitter.config.js -w --define DEBUG" srcDir }
 
-    let reactNativeTool = async { run yarnTool reactiveCmd "" }
+    let reactNativeTool = async { runTool npmTool reactiveCmd "" }
 
     Async.Parallel [| fablewatch; reactNativeTool |]
     |> Async.RunSynchronously
     |> ignore
 )
 
-FinalTarget "KillProcess" (fun _ ->
+Target.createFinal "KillProcess" (fun _ ->
     killDotnetCli()
     killADB()
 )
 
-Target "Deploy" (fun _ ->
+Target.create "Deploy" (fun _ ->
     () // TODO:
 )
 
-Target "Default" DoNothing
+Target.create "Default" ignore
 
 "Clean"
 ==> "SetReleaseNotes"
 ==> "SetVersionAndroid"
-==> "InstallDotNetCore"
 ==> "Restore"
 ==> "CompileForTest"
 ==> "AssembleForTest"
-==> "BuildTests"
+==> "ExecuteTests"
 ==> "RunTests"
 ==> "Default"
 ==> "BuildRelease"
@@ -340,4 +350,4 @@ Target "Default" DoNothing
 "SetVersionAndroid"
 ==> "PrepareRelease"
 
-RunTargetOrDefault "Default"
+Target.runOrDefaultWithArguments "Default"
