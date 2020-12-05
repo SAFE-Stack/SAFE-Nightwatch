@@ -269,7 +269,7 @@ Target.create "PrepareRelease" (fun _ ->
 
 Target.create "CompileForTest" (fun _ ->
     Target.activateFinal "KillProcess"
-    DotNet.exec id "fable" "watch src/ --outDir ./output/Nightwatch --define TEST"
+    DotNet.exec id "fable" "watch src/ --outDir ./out --define TEST"
             |> ignore
 )
 

@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "fable-splitter -c splitter.config.js --define RELEASE",
-    "start": "fable-splitter -c splitter.config.js -w --define DEBUG",
-    "compile-for-test": "fable-splitter -c splitter.config.js --define TEST",
-    "cold-start": "fable-splitter -c splitter.config.js --define DEBUG",
     "test": "jest",
     "lint": "eslint ."
   },
