@@ -183,22 +183,22 @@ Target.create "Restore" (fun _ ->
     runTool npmTool "--version" __SOURCE_DIRECTORY__
     runTool npmTool "install" __SOURCE_DIRECTORY__
     dotnet "restore" srcDir
-    dotnet "restore" testDir
+    // dotnet "restore" testDir
 )
 
 Target.create "BuildTests" (fun _ ->
     dotnet "build" testDir
 )
 
-Target.create "ExecuteTests" (fun _ ->
-    Environment.setEnvironVar "status" "Development"
-    dotnet "build" sharedTestsPath
-    [ async { dotnet "run" serverTestsPath }
-      async { npm "run test:build" "." } ]
-    |> Async.Parallel
-    |> Async.RunSynchronously
-    |> ignore
-)
+// Target.create "ExecuteTests" (fun _ ->
+//     Environment.setEnvironVar "status" "Development"
+//     dotnet "build" sharedTestsPath
+//     [ async { dotnet "run" serverTestsPath }
+//       async { npm "run test:build" "." } ]
+//     |> Async.Parallel
+//     |> Async.RunSynchronously
+//     |> ignore
+// )
 
 
 let gradleFile = "./android/app/build.gradle"
@@ -269,7 +269,7 @@ Target.create "PrepareRelease" (fun _ ->
 
 Target.create "CompileForTest" (fun _ ->
     Target.activateFinal "KillProcess"
-    DotNet.exec id "fable" "watch src/ --outDir src/output --define TEST"
+    DotNet.exec id "fable" "watch src/ --outDir ./output/Nightwatch --define TEST"
             |> ignore
 )
 
@@ -338,8 +338,7 @@ Target.create "Default" ignore
 ==> "Restore"
 ==> "CompileForTest"
 ==> "AssembleForTest"
-==> "ExecuteTests"
-==> "RunTests"
+// ==> "ExecuteTests"
 ==> "Default"
 ==> "BuildRelease"
 ==> "Deploy"

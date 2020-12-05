@@ -3,4 +3,4 @@
  */
 
 import {AppRegistry} from 'react-native';
-import Nightwatch from './out/Nightwatch';
+import Nightwatch from './out/Nightwatch/';

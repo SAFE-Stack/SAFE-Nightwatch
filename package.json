@@ -24,8 +24,6 @@
     "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
-    "fable-compiler": "2.4.9",
-    "fable-splitter": "2.1.11",
     "metro-react-native-babel-preset": "^0.56.0",
     "react-test-renderer": "16.9.0"
   },
