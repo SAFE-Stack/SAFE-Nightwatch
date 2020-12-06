@@ -32,9 +32,9 @@ let [<Literal>] borderRadius = 4.
 let renderText fontSize =
     TextProperties.Style [ 
         TextStyle.Color textColor
-        TextStyle.TextAlign TextAlignment.Center
-        FlexStyle.Margin (unbox 3.)
-        TextStyle.FontSize fontSize
+        TextAlign TextAlignment.Center
+        Margin (unbox 3.)
+        FontSize fontSize
       ]
 
 let defaultText<'a> = renderText fontSizeBase
@@ -46,13 +46,13 @@ let whitespace<'a> = text [ smallText ] ""
 
 let sceneBackground<'a> =
     ViewProperties.Style [ 
-        FlexStyle.AlignSelf Alignment.Stretch
-        FlexStyle.Padding (unbox 20.)
-        ViewStyle.ShadowColor shadowColor
-        ViewStyle.ShadowOpacity 0.8
-        ViewStyle.ShadowRadius 3.
-        FlexStyle.JustifyContent JustifyContent.Center
-        FlexStyle.Flex 1.
+        AlignSelf Alignment.Stretch
+        Padding (unbox 20.)
+        ShadowColor shadowColor
+        ShadowOpacity 0.8
+        ShadowRadius 3.
+        JustifyContent JustifyContent.Center
+        Flex 1.
         ViewStyle.BackgroundColor backgroundColor
       ]
       

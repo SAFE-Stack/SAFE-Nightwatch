@@ -3,12 +3,10 @@ module CheckLocation
 open System
 open Fable.ReactNative
 open Fable.ReactNative.Props
-open Fable.ReactNativeSqlite
 open Fable.ReactNativeImagePicker
 open Fable.ReactNativeImagePicker.Props
 open Elmish
 open Fable.ReactNative.Props.TextInput
-open Fable.ReactNativeSimpleStore.KeyValueStore
 open Fable.ReactNative.SimpleStore.DB
 // Model
 type Status =
@@ -87,15 +85,15 @@ let view (model:Model) (dispatch: Msg -> unit) =
         match model.PictureUri with
         | Some uri ->
             image
-                [ Source (remoteImage [ImageURISourceProperties.Uri uri])
+                [ Source (remoteImage [Uri uri])
                   ImageProperties.Style [
-                    ImageStyle.BorderColor "#000000"
-                    FlexStyle.Flex 3.
+                    BorderColor "#000000"
+                    Flex 3.
                   ]
                 ]
         | None ->
             image
-                [ Source (localImage "${entryDir}/../images/snow.jpg")
+                [ Source (localImage "../../images/snow.jpg")
                   ImageProperties.Style [
                     BorderColor "#000000"
                     Flex 3.
