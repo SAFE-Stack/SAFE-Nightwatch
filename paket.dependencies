@@ -15,7 +15,7 @@ group Stack
     nuget Fable.Elmish.Browser 
     nuget Fable.Elmish.Debugger
     nuget Fable.Elmish.HMR
-
+    nuget Thoth.Json
 group Test
 
     source https://api.nuget.org/v3/index.json
