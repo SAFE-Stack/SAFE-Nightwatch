@@ -28,6 +28,7 @@ nuget Fake.DotNet.Testing.Expecto
 #r "Facades/netstandard" // https://github.com/ionide/ionide-vscode-fsharp/issues/839#issuecomment-396296095
 #endif
 
+open System
 open System.IO
 open Fake.Core
 open Fake.DotNet
@@ -117,17 +118,17 @@ let reactNativeTool = platformTool "react-native" "react-native.cmd"
 let androidSDKPath =
     match Environment.environVarOrNone "ANDROID_HOME" with
     | Some path -> path
-    | None -> ""
-        // if Environment.isWindows then
-        //     let p1 = Environment.ProgramFilesX86 </> "Android" </> "android-sdk"
-        //     if Directory.Exists p1 then Path.getFullName p1 else
-        //     let p2 = Environment.GetFolderPath(Environment.SpecialFolder.) </> "Android" </> "sdk"
-        //     if Directory.Exists p2 then FullName p2 else
-        //     failwithf "Can't find Android SDK in %s or %s" p1 p2
-        // else
-        //     let p3 = Environment.GetFolderPath(Environment.SpecialFolder.Personal) </> "Library/Android/sdk"
-        //     if Directory.Exists p3 then FullName p3 else
-        //     failwithf "Can't find Android SDK in %s, please set ANDROID_HOME enviromental variable" p3
+    | None -> 
+        if Environment.isWindows then
+            let p1 = Environment.ProgramFilesX86 </> "Android" </> "android-sdk"
+            if Directory.Exists p1 then Path.getFullName p1 else
+            let p2 = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) </> "Android" </> "sdk"
+            if Directory.Exists p2 then Path.getFullName p2 else
+            failwithf "Can't find Android SDK in %s or %s" p1 p2
+        else
+            let p3 = Environment.GetFolderPath(Environment.SpecialFolder.Personal) </> "Library/Android/sdk"
+            if Directory.Exists p3 then Path.getFullName p3 else
+            failwithf "Can't find Android SDK in %s, please set ANDROID_HOME enviromental variable" p3
 
 // let adbTool = platformTool (androidSDKPath </> "platform-tools/adb") (androidSDKPath </> "platform-tools/adb.exe")
 
@@ -282,18 +283,22 @@ type NativeApps =
 | Android
 | IOs
 
-let nativeApp =
-    if Environment.hasEnvironVar "ios" then IOs
-    elif Environment.hasEnvironVar "android" then Android
-    elif Environment.isMacOS then
-        IOs
-    else
-        Android
+Target.initEnvironment()
+
+let nativeApp = 
+    match Environment.environVarOrNone "native" with
+    | Some "ios" -> IOs
+    | Some "android" -> Android
+    | _ ->
+        if Environment.isMacOS then
+            IOs
+        else
+            Android
 
 let reactiveCmd =
     match nativeApp with
-    | Android -> "react-native run-android"
-    | IOs -> "react-native run-ios"
+    | Android -> "run-android"
+    | IOs -> "run-ios"
 
 Target.create "BuildRelease" (fun _ ->
     Target.activateFinal "KillProcess"
@@ -310,11 +315,11 @@ Target.create "BuildRelease" (fun _ ->
 )
 
 Target.create "Debug" (fun _ ->
-    dotnet "run fable-splitter -c splitter.config.js --define DEBUG" srcDir
 
-    let fablewatch = async { dotnet "run fable-splitter -c splitter.config.js -w --define DEBUG" srcDir }
+    let fablewatch = async { DotNet.exec id "fable" "watch src/ --outDir ./out --define DEBUG" |> ignore }
+    
 
-    let reactNativeTool = async { runTool npmTool reactiveCmd "" }
+    let reactNativeTool = async { runTool reactNativeTool reactiveCmd "" }
 
     Async.Parallel [| fablewatch; reactNativeTool |]
     |> Async.RunSynchronously
