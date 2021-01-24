@@ -295,10 +295,10 @@ let nativeApp =
         else
             Android
 
-let reactiveCmd =
-    match nativeApp with
-    | Android -> "run-android"
-    | IOs -> "run-ios"
+let reactiveCmd = "run-android"
+    // match nativeApp with
+    // | Android -> "run-android"
+    // | IOs -> "run-ios"
 
 Target.create "BuildRelease" (fun _ ->
     Target.activateFinal "KillProcess"
