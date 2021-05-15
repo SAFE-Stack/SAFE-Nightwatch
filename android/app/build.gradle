@@ -131,7 +131,7 @@ android {
         applicationId "com.nightwatch"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 88
+        versionCode 92
         versionName "1.0.1-alpha"
     }
     splits {

@@ -1,26 +1,25 @@
 source https://api.nuget.org/v3/index.json
+framework: net5.0
+storage: none
+
+nuget Fable.Remoting.Giraffe prerelease
+nuget Saturn prerelease
+nuget Expecto
+
 nuget FSharp.Core
+nuget Fable.Core
+nuget Fable.React
+nuget Fable.React.Native prerelease
+nuget Fable.Browser.Dom
+nuget Fable.Elmish
+nuget Fable.Elmish.React
+nuget Fable.Elmish.Browser 
+nuget Fable.Elmish.Debugger
+nuget Fable.Elmish.HMR
+nuget Thoth.Json
+nuget Canopy.Mobile 
+nuget Appium.WebDriver prerelease
 
-group Stack
-    source https://api.nuget.org/v3/index.json
-    framework:net5.0
-
-    nuget FSharp.Core == 5.0.0
-    nuget Fable.Core
-    nuget Fable.React
-    nuget Fable.React.Native prerelease
-    nuget Fable.Browser.Dom
-    nuget Fable.Elmish
-    nuget Fable.Elmish.React
-    nuget Fable.Elmish.Browser 
-    nuget Fable.Elmish.Debugger
-    nuget Fable.Elmish.HMR
-    nuget Thoth.Json
-group Test
-
-    source https://api.nuget.org/v3/index.json
-    framework:net5.0
-    nuget FSharp.Core == 5.0.0
-    nuget Canopy.Mobile 
-    nuget Expecto
-    nuget Appium.WebDriver prerelease
+nuget Fake.Core.Target
+nuget Fake.IO.FileSystem
+nuget Farmer
