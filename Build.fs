@@ -43,10 +43,46 @@ Target.create "Azure" (fun _ ->
     |> ignore
 )
 
+
+type NativeApps =
+| Android
+| IOs
+
+Target.initEnvironment()
+
+let nativeApp = 
+    match Environment.environVarOrNone "native" with
+    | Some "ios" -> IOs
+    | Some "android" -> Android
+    | _ ->
+        if Environment.isMacOS then
+            IOs
+        else
+            Android
+
+let reactiveCmd = 
+    match nativeApp with
+    | Android -> "run-android"
+    | IOs -> "run-ios"
+
+// Target.create "Debug" (fun _ ->
+
+//     let fablewatch = async { DotNet.exec id "fable" "watch src/App --outDir ./out --define DEBUG" |> ignore }
+    
+
+//     let reactNativeTool = async { runTool reactNativeTool reactiveCmd "" }
+
+//     Async.Parallel [| fablewatch; reactNativeTool |]
+//     |> Async.RunSynchronously
+//     |> ignore
+// )
+
+
 Target.create "Run" (fun _ ->
     run dotnet "build" sharedPath
     [ "server", dotnet "watch run" serverPath
-      "client", dotnet "fable watch --run webpack-dev-server" clientPath ]
+      "client", dotnet "fable watch --outDir ./../../out --define DEBUG" clientPath
+      "reactNativeTool", reactNative reactiveCmd "."]
     |> runParallel
 )
 
@@ -153,16 +189,7 @@ let main args = runOrDefault args
 //     |> Proc.run
 //     |> ignore
 
-// let runTool cmd args workingDir =
-//     let arguments =
-//         args |> String.split ' ' |> Arguments.OfArgs
 
-//     RawCommand(cmd, arguments)
-//     |> CreateProcess.fromCommand
-//     |> CreateProcess.withWorkingDirectory workingDir
-//     |> CreateProcess.ensureExitCode
-//     |> Proc.run
-//     |> ignore
 // let srcDir = __SOURCE_DIRECTORY__ </> "src"
 
 // let testDir = __SOURCE_DIRECTORY__ </> "tests" </> "IntegrationTests"
@@ -333,26 +360,6 @@ let main args = runOrDefault args
 // )
 
 
-// type NativeApps =
-// | Android
-// | IOs
-
-// Target.initEnvironment()
-
-// let nativeApp = 
-//     match Environment.environVarOrNone "native" with
-//     | Some "ios" -> IOs
-//     | Some "android" -> Android
-//     | _ ->
-//         if Environment.isMacOS then
-//             IOs
-//         else
-//             Android
-
-// let reactiveCmd = 
-//     match nativeApp with
-//     | Android -> "run-android"
-//     | IOs -> "run-ios"
 
 // Target.create "BuildRelease" (fun _ ->
 //     Target.activateFinal "KillProcess"
@@ -365,20 +372,10 @@ let main args = runOrDefault args
 
 //     Shell.copy deployDir [outFile]
 //     let fi = FileInfo (deployDir </> "app-release.apk")
-//     fi.MoveTo (deployDir </> sprintf "Nightwatch.%s.apk" release.NugetVersion)
+//     fi.MoveTo (deployDir </> sprintf "Client.%s.apk" release.NugetVersion)
 // )
 
-// Target.create "Debug" (fun _ ->
 
-//     let fablewatch = async { DotNet.exec id "fable" "watch src/App --outDir ./out --define DEBUG" |> ignore }
-    
-
-//     let reactNativeTool = async { runTool reactNativeTool reactiveCmd "" }
-
-//     Async.Parallel [| fablewatch; reactNativeTool |]
-//     |> Async.RunSynchronously
-//     |> ignore
-// )
 
 // Target.createFinal "KillProcess" (fun _ ->
 //     killDotnetCli()

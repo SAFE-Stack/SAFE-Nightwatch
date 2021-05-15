@@ -3,16 +3,24 @@ module Home
 open Fable.ReactNative
 open Fable.ReactNative.Props
 open Elmish
-open Styles
+open Fable.Remoting.Client
+open Shared
 
 // Model
+
+type Model = { StatusText : string  }
+
 type Msg =
 | GetDemoData
 | NewDemoData of int
 | BeginWatch
 | Error of exn
 
-type Model = { StatusText : string  }
+
+let todosApi =
+    Remoting.createApi ()
+    |> Remoting.withRouteBuilder Route.builder
+    |> Remoting.buildProxy<ITodosApi>
 
 // Update
 let update (msg:Msg) model : Model*Cmd<Msg> =
@@ -47,7 +55,7 @@ let view (model:Model) (dispatch: Msg -> unit) =
               ]
  
       view [ Styles.sceneBackground ]
-        [ text [ Styles.titleText ] "Nightwatch"
+        [ text [ Styles.titleText ] "Client"
           logo
           Styles.button "Begin watch" (fun () -> dispatch BeginWatch)
           Styles.whitespace

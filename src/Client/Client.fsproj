@@ -14,7 +14,10 @@
     <Compile Include="Scenes/LocationList.fs" />
     <Compile Include="Scenes/Home.fs" />
     <Compile Include="Scenes/App.fs" />
-    <Compile Include="Nightwatch.fs" />
+    <Compile Include="Client.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.fsproj" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

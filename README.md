@@ -32,7 +32,7 @@ Other tools like [Paket](https://fsprojects.github.io/Paket/) or [FAKE](https://
 * Run `build.cmd debug` from command prompt
 * Go to android device simulator and you should see something like
 
-![Device Running](http://www.navision-blog.de/images/nightwatchapp.gif)
+![Device Running](http://www.navision-blog.de/images/Clientapp.gif)
 
 * Go to the F# source in VS Code make a change and save the file
 * Fable watch should pick up this change automatically and compile it

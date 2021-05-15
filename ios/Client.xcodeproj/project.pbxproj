@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		002943EC2ED092EC73BB46A1 /* libPods-Nightwatch-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CCD8B1FE91EF24F85403E95 /* libPods-Nightwatch-tvOSTests.a */; };
-		00E356F31AD99517003FC87E /* NightwatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NightwatchTests.m */; };
+		002943EC2ED092EC73BB46A1 /* libPods-Client-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CCD8B1FE91EF24F85403E95 /* libPods-Client-tvOSTests.a */; };
+		00E356F31AD99517003FC87E /* ClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ClientTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -16,10 +16,10 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* NightwatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NightwatchTests.m */; };
-		77564A96CBCABB2E0515537A /* libPods-Nightwatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4086C24F961423872FFB1F69 /* libPods-Nightwatch.a */; };
-		9E1CE35B6D98144CD937518A /* libPods-NightwatchTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A0BFC3730AA4739A7018A9 /* libPods-NightwatchTests.a */; };
-		D44A4C032C3626EF1AA277E1 /* libPods-Nightwatch-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F30345A02D49A0BC35AF203E /* libPods-Nightwatch-tvOS.a */; };
+		2DCD954D1E0B4F2C00145EB5 /* ClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ClientTests.m */; };
+		77564A96CBCABB2E0515537A /* libPods-Client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4086C24F961423872FFB1F69 /* libPods-Client.a */; };
+		9E1CE35B6D98144CD937518A /* libPods-ClientTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A0BFC3730AA4739A7018A9 /* libPods-ClientTests.a */; };
+		D44A4C032C3626EF1AA277E1 /* libPods-Client-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F30345A02D49A0BC35AF203E /* libPods-Client-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,45 +28,45 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = Nightwatch;
+			remoteInfo = Client;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "Nightwatch-tvOS";
+			remoteInfo = "Client-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* NightwatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NightwatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* ClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* NightwatchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NightwatchTests.m; sourceTree = "<group>"; };
-		03B1EDC4206F9F84BA128D4D /* Pods-Nightwatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nightwatch.debug.xcconfig"; path = "Target Support Files/Pods-Nightwatch/Pods-Nightwatch.debug.xcconfig"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Nightwatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nightwatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Nightwatch/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Nightwatch/AppDelegate.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* ClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClientTests.m; sourceTree = "<group>"; };
+		03B1EDC4206F9F84BA128D4D /* Pods-Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Client.debug.xcconfig"; path = "Target Support Files/Pods-Client/Pods-Client.debug.xcconfig"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Client.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Client/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Client/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Nightwatch/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Nightwatch/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Nightwatch/main.m; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* Nightwatch-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nightwatch-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* Nightwatch-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nightwatch-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3258C315452DF2434CA862CB /* Pods-NightwatchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NightwatchTests.release.xcconfig"; path = "Target Support Files/Pods-NightwatchTests/Pods-NightwatchTests.release.xcconfig"; sourceTree = "<group>"; };
-		37A0BFC3730AA4739A7018A9 /* libPods-NightwatchTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NightwatchTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4086C24F961423872FFB1F69 /* libPods-Nightwatch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nightwatch.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6589D8C6A32EC0CABB3956C2 /* Pods-Nightwatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nightwatch.release.xcconfig"; path = "Target Support Files/Pods-Nightwatch/Pods-Nightwatch.release.xcconfig"; sourceTree = "<group>"; };
-		8CCD8B1FE91EF24F85403E95 /* libPods-Nightwatch-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nightwatch-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		91C39CD8F5CBBDC7520873D1 /* Pods-Nightwatch-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nightwatch-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Nightwatch-tvOSTests/Pods-Nightwatch-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		9E6AD248645FE23AE74FC6F1 /* Pods-Nightwatch-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nightwatch-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Nightwatch-tvOS/Pods-Nightwatch-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		A2E4170EC33B04170B4B883A /* Pods-Nightwatch-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nightwatch-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Nightwatch-tvOS/Pods-Nightwatch-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		C357C43F8D647AFEA17BF76D /* Pods-NightwatchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NightwatchTests.debug.xcconfig"; path = "Target Support Files/Pods-NightwatchTests/Pods-NightwatchTests.debug.xcconfig"; sourceTree = "<group>"; };
-		D2809CD12F58843DBEA92B49 /* Pods-Nightwatch-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nightwatch-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Nightwatch-tvOSTests/Pods-Nightwatch-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Client/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Client/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Client/main.m; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* Client-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Client-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* Client-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Client-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3258C315452DF2434CA862CB /* Pods-ClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClientTests.release.xcconfig"; path = "Target Support Files/Pods-ClientTests/Pods-ClientTests.release.xcconfig"; sourceTree = "<group>"; };
+		37A0BFC3730AA4739A7018A9 /* libPods-ClientTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ClientTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4086C24F961423872FFB1F69 /* libPods-Client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6589D8C6A32EC0CABB3956C2 /* Pods-Client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Client.release.xcconfig"; path = "Target Support Files/Pods-Client/Pods-Client.release.xcconfig"; sourceTree = "<group>"; };
+		8CCD8B1FE91EF24F85403E95 /* libPods-Client-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Client-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		91C39CD8F5CBBDC7520873D1 /* Pods-Client-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Client-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Client-tvOSTests/Pods-Client-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		9E6AD248645FE23AE74FC6F1 /* Pods-Client-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Client-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Client-tvOS/Pods-Client-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		A2E4170EC33B04170B4B883A /* Pods-Client-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Client-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Client-tvOS/Pods-Client-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		C357C43F8D647AFEA17BF76D /* Pods-ClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClientTests.debug.xcconfig"; path = "Target Support Files/Pods-ClientTests/Pods-ClientTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D2809CD12F58843DBEA92B49 /* Pods-Client-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Client-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Client-tvOSTests/Pods-Client-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F30345A02D49A0BC35AF203E /* libPods-Nightwatch-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nightwatch-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F30345A02D49A0BC35AF203E /* libPods-Client-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Client-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E1CE35B6D98144CD937518A /* libPods-NightwatchTests.a in Frameworks */,
+				9E1CE35B6D98144CD937518A /* libPods-ClientTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77564A96CBCABB2E0515537A /* libPods-Nightwatch.a in Frameworks */,
+				77564A96CBCABB2E0515537A /* libPods-Client.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D44A4C032C3626EF1AA277E1 /* libPods-Nightwatch-tvOS.a in Frameworks */,
+				D44A4C032C3626EF1AA277E1 /* libPods-Client-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,20 +98,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				002943EC2ED092EC73BB46A1 /* libPods-Nightwatch-tvOSTests.a in Frameworks */,
+				002943EC2ED092EC73BB46A1 /* libPods-Client-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* NightwatchTests */ = {
+		00E356EF1AD99517003FC87E /* ClientTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* NightwatchTests.m */,
+				00E356F21AD99517003FC87E /* ClientTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = NightwatchTests;
+			path = ClientTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -125,20 +125,20 @@
 		0170D1BBA4EB946A97A7EB04 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				03B1EDC4206F9F84BA128D4D /* Pods-Nightwatch.debug.xcconfig */,
-				6589D8C6A32EC0CABB3956C2 /* Pods-Nightwatch.release.xcconfig */,
-				9E6AD248645FE23AE74FC6F1 /* Pods-Nightwatch-tvOS.debug.xcconfig */,
-				A2E4170EC33B04170B4B883A /* Pods-Nightwatch-tvOS.release.xcconfig */,
-				D2809CD12F58843DBEA92B49 /* Pods-Nightwatch-tvOSTests.debug.xcconfig */,
-				91C39CD8F5CBBDC7520873D1 /* Pods-Nightwatch-tvOSTests.release.xcconfig */,
-				C357C43F8D647AFEA17BF76D /* Pods-NightwatchTests.debug.xcconfig */,
-				3258C315452DF2434CA862CB /* Pods-NightwatchTests.release.xcconfig */,
+				03B1EDC4206F9F84BA128D4D /* Pods-Client.debug.xcconfig */,
+				6589D8C6A32EC0CABB3956C2 /* Pods-Client.release.xcconfig */,
+				9E6AD248645FE23AE74FC6F1 /* Pods-Client-tvOS.debug.xcconfig */,
+				A2E4170EC33B04170B4B883A /* Pods-Client-tvOS.release.xcconfig */,
+				D2809CD12F58843DBEA92B49 /* Pods-Client-tvOSTests.debug.xcconfig */,
+				91C39CD8F5CBBDC7520873D1 /* Pods-Client-tvOSTests.release.xcconfig */,
+				C357C43F8D647AFEA17BF76D /* Pods-ClientTests.debug.xcconfig */,
+				3258C315452DF2434CA862CB /* Pods-ClientTests.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* Nightwatch */ = {
+		13B07FAE1A68108700A75B9A /* Client */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -149,7 +149,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = Nightwatch;
+			name = Client;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -157,10 +157,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				4086C24F961423872FFB1F69 /* libPods-Nightwatch.a */,
-				F30345A02D49A0BC35AF203E /* libPods-Nightwatch-tvOS.a */,
-				8CCD8B1FE91EF24F85403E95 /* libPods-Nightwatch-tvOSTests.a */,
-				37A0BFC3730AA4739A7018A9 /* libPods-NightwatchTests.a */,
+				4086C24F961423872FFB1F69 /* libPods-Client.a */,
+				F30345A02D49A0BC35AF203E /* libPods-Client-tvOS.a */,
+				8CCD8B1FE91EF24F85403E95 /* libPods-Client-tvOSTests.a */,
+				37A0BFC3730AA4739A7018A9 /* libPods-ClientTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -175,9 +175,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* Nightwatch */,
+				13B07FAE1A68108700A75B9A /* Client */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* NightwatchTests */,
+				00E356EF1AD99517003FC87E /* ClientTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				0170D1BBA4EB946A97A7EB04 /* Pods */,
@@ -190,10 +190,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Nightwatch.app */,
-				00E356EE1AD99517003FC87E /* NightwatchTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* Nightwatch-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* Nightwatch-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* Client.app */,
+				00E356EE1AD99517003FC87E /* ClientTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* Client-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* Client-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,9 +201,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* NightwatchTests */ = {
+		00E356ED1AD99517003FC87E /* ClientTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "NightwatchTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "ClientTests" */;
 			buildPhases = (
 				1B61F1699626B8E173D69FEB /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -215,14 +215,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = NightwatchTests;
-			productName = NightwatchTests;
-			productReference = 00E356EE1AD99517003FC87E /* NightwatchTests.xctest */;
+			name = ClientTests;
+			productName = ClientTests;
+			productReference = 00E356EE1AD99517003FC87E /* ClientTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* Nightwatch */ = {
+		13B07F861A680F5B00A75B9A /* Client */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Nightwatch" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Client" */;
 			buildPhases = (
 				02E452EB5ABD21909201FBD4 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -236,14 +236,14 @@
 			);
 			dependencies = (
 			);
-			name = Nightwatch;
-			productName = Nightwatch;
-			productReference = 13B07F961A680F5B00A75B9A /* Nightwatch.app */;
+			name = Client;
+			productName = Client;
+			productReference = 13B07F961A680F5B00A75B9A /* Client.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* Nightwatch-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* Client-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Nightwatch-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Client-tvOS" */;
 			buildPhases = (
 				EBF96BD321E8393CD9038EE2 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -256,14 +256,14 @@
 			);
 			dependencies = (
 			);
-			name = "Nightwatch-tvOS";
-			productName = "Nightwatch-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* Nightwatch-tvOS.app */;
+			name = "Client-tvOS";
+			productName = "Client-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* Client-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* Nightwatch-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* Client-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Nightwatch-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Client-tvOSTests" */;
 			buildPhases = (
 				50E8B5C67B8E8A312EE4F4C8 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -275,9 +275,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "Nightwatch-tvOSTests";
-			productName = "Nightwatch-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* Nightwatch-tvOSTests.xctest */;
+			name = "Client-tvOSTests";
+			productName = "Client-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* Client-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -304,7 +304,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Nightwatch" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Client" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -317,10 +317,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* Nightwatch */,
-				00E356ED1AD99517003FC87E /* NightwatchTests */,
-				2D02E47A1E0B4A5D006451C7 /* Nightwatch-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* Nightwatch-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* Client */,
+				00E356ED1AD99517003FC87E /* ClientTests */,
+				2D02E47A1E0B4A5D006451C7 /* Client-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* Client-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -389,7 +389,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Nightwatch-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Client-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -402,7 +402,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Nightwatch/Pods-Nightwatch-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Client/Pods-Client-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -411,7 +411,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Nightwatch/Pods-Nightwatch-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Client/Pods-Client-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1B61F1699626B8E173D69FEB /* [CP] Check Pods Manifest.lock */ = {
@@ -429,7 +429,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NightwatchTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ClientTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -465,7 +465,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Nightwatch-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Client-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -487,7 +487,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Nightwatch-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Client-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -539,7 +539,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* NightwatchTests.m in Sources */,
+				00E356F31AD99517003FC87E /* ClientTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,7 +565,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* NightwatchTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* ClientTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,12 +574,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* Nightwatch */;
+			target = 13B07F861A680F5B00A75B9A /* Client */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* Nightwatch-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* Client-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -591,7 +591,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = Nightwatch;
+			path = Client;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -599,14 +599,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C357C43F8D647AFEA17BF76D /* Pods-NightwatchTests.debug.xcconfig */;
+			baseConfigurationReference = C357C43F8D647AFEA17BF76D /* Pods-ClientTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = NightwatchTests/Info.plist;
+				INFOPLIST_FILE = ClientTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -616,17 +616,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nightwatch.app/Nightwatch";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Client.app/Client";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3258C315452DF2434CA862CB /* Pods-NightwatchTests.release.xcconfig */;
+			baseConfigurationReference = 3258C315452DF2434CA862CB /* Pods-ClientTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = NightwatchTests/Info.plist;
+				INFOPLIST_FILE = ClientTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -636,18 +636,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nightwatch.app/Nightwatch";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Client.app/Client";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03B1EDC4206F9F84BA128D4D /* Pods-Nightwatch.debug.xcconfig */;
+			baseConfigurationReference = 03B1EDC4206F9F84BA128D4D /* Pods-Client.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				INFOPLIST_FILE = Nightwatch/Info.plist;
+				INFOPLIST_FILE = Client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -655,18 +655,18 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Nightwatch;
+				PRODUCT_NAME = Client;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6589D8C6A32EC0CABB3956C2 /* Pods-Nightwatch.release.xcconfig */;
+			baseConfigurationReference = 6589D8C6A32EC0CABB3956C2 /* Pods-Client.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = Nightwatch/Info.plist;
+				INFOPLIST_FILE = Client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -674,14 +674,14 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Nightwatch;
+				PRODUCT_NAME = Client;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E6AD248645FE23AE74FC6F1 /* Pods-Nightwatch-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 9E6AD248645FE23AE74FC6F1 /* Pods-Client-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -692,14 +692,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Nightwatch-tvOS/Info.plist";
+				INFOPLIST_FILE = "Client-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Nightwatch-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Client-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -709,7 +709,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2E4170EC33B04170B4B883A /* Pods-Nightwatch-tvOS.release.xcconfig */;
+			baseConfigurationReference = A2E4170EC33B04170B4B883A /* Pods-Client-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -720,14 +720,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Nightwatch-tvOS/Info.plist";
+				INFOPLIST_FILE = "Client-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Nightwatch-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Client-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -737,7 +737,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D2809CD12F58843DBEA92B49 /* Pods-Nightwatch-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = D2809CD12F58843DBEA92B49 /* Pods-Client-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -747,24 +747,24 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Nightwatch-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "Client-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Nightwatch-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Client-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nightwatch-tvOS.app/Nightwatch-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Client-tvOS.app/Client-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91C39CD8F5CBBDC7520873D1 /* Pods-Nightwatch-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 91C39CD8F5CBBDC7520873D1 /* Pods-Client-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -774,17 +774,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Nightwatch-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "Client-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Nightwatch-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Client-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nightwatch-tvOS.app/Nightwatch-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Client-tvOS.app/Client-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -891,7 +891,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "NightwatchTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "ClientTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -900,7 +900,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Nightwatch" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Client" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -909,7 +909,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Nightwatch-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Client-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -918,7 +918,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Nightwatch-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Client-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -927,7 +927,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Nightwatch" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Client" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

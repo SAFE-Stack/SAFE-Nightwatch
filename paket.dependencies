@@ -16,6 +16,7 @@ nuget Fable.Elmish.React
 nuget Fable.Elmish.Browser 
 nuget Fable.Elmish.Debugger
 nuget Fable.Elmish.HMR
+nuget Fable.Remoting.Client
 nuget Thoth.Json
 nuget Canopy.Mobile 
 nuget Appium.WebDriver prerelease

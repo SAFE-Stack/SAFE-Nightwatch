@@ -1,4 +1,4 @@
-module Nightwatch
+module Client
 
 open Elmish
 open Elmish.React
@@ -24,5 +24,5 @@ Program.mkProgram App.init App.update App.view
 #else
 |> Program.withConsoleTrace
 #endif
-|> Program.withReactNative "Nightwatch"
+|> Program.withReactNative "Client"
 |> Program.run
