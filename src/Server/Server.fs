@@ -6,45 +6,31 @@ open Saturn
 
 open Shared
 
-type Storage() =
-    let todos = ResizeArray<_>()
+let locations () =
+    [| { LocationId = "X1"
+         Name = "Bell tower"
+         Address = "Market place" }
+       { LocationId = "X2"
+         Name = "Graveyard"
+         Address = "Right next to church" }
+       { LocationId = "X3"
+         Name = "Castle black"
+         Address = "The wall" }
 
-    member __.GetTodos() = List.ofSeq todos
+       |]
 
-    member __.AddTodo(todo: Todo) =
-        if Todo.isValid todo.Description then
-            todos.Add todo
-            Ok()
-        else
-            Error "Invalid todo"
-
-let storage = Storage()
-
-storage.AddTodo(Todo.create "Create new SAFE project")
-|> ignore
-
-storage.AddTodo(Todo.create "Write your app")
-|> ignore
-
-storage.AddTodo(Todo.create "Ship it !!!")
-|> ignore
-
-let todosApi =
-    { getTodos = fun () -> async { return storage.GetTodos() }
-      addTodo =
-          fun todo ->
-              async {
-                  match storage.AddTodo todo with
-                  | Ok () -> return todo
-                  | Error e -> return failwith e
-              } }
+let locationApi =
+    { getLocation = fun () -> 
+        async { 
+            printfn "got request"
+            return locations () } }
 
 let webApp =
     Remoting.createApi ()
     |> Remoting.withRouteBuilder Route.builder
-    |> Remoting.fromValue todosApi
+    |> Remoting.fromValue locationApi
     |> Remoting.buildHttpHandler
-   
+
 let app =
     application {
         url "http://0.0.0.0:8085"

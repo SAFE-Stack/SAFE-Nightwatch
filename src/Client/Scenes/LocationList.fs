@@ -1,6 +1,5 @@
 module LocationList
 
-open System
 open Fable.ReactNative
 open Fable.ReactNative.Props
 open Elmish

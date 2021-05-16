@@ -8,6 +8,7 @@ open Fable.ReactNativeImagePicker.Props
 open Elmish
 open Fable.ReactNative.Props.TextInput
 open Fable.ReactNative.SimpleStore.DB
+open Fable.ReactNative.SimpleToast
 // Model
 type Status =
 | Unchanged
@@ -71,7 +72,7 @@ let update msg model : Model*Cmd<Msg> =
             Status = Changed }, Cmd.none
 
     | Error e ->
-        Toast.showShort e.Message
+        Toaster.showShort e.Message
         { model with
             Status = Status.Error e.Message }, Cmd.none
 

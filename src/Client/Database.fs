@@ -3,22 +3,20 @@ module Database
 open Fable.Core
 open Fable.ReactNative.SimpleStore.DB
 open Model
-[<Emit("require($0)")>]
-let private localResource(path:string): 'T = jsNative
 
-let createDemoData() =
+[<Emit("require($0)")>]
+let private localResource (path: string) : 'T = jsNative
+
+let createDemoData (data: Shared.LocationCheckRequest []) =
     promise {
         try
-            do! clear<LocationCheckRequest>()
+            do! clear<LocationCheckRequest> ()
             // Fetch demo data
-            let requests: LocationCheckRequest[] =
-                localResource ("../demodata/LocationCheckRequests.json")
-            do! addMultiple requests 
-            return requests.Length 
-        with
-        | _ -> return 0
+            do! addMultiple data
+            return data.Length
+        with _ -> return 0
     }
 
-let getIndexedCheckRequests () = 
-    getAll<Model.LocationCheckRequest>()
-    |> Promise.map (Array.mapi (fun i r -> i,r))
+let getIndexedCheckRequests () =
+    getAll<Model.LocationCheckRequest> ()
+    |> Promise.map (Array.mapi (fun i r -> i, r))

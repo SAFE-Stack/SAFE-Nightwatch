@@ -13,7 +13,7 @@ let setupBackHandler dispatch =
 
     setOnHardwareBackPressHandler backHandler
 
-
+ 
 let subscribe (model:App.Model) =
     Cmd.batch [
         Cmd.ofSub setupBackHandler ]

@@ -5,9 +5,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ReleaseNotes.fs" />
+    <Compile Include="SimpleToast/Fable.ReactNative.SimpleToast.fs" />
     <Compile Include="SimpleStore/Fable.ReactNative.SimpleStore.DB.fs" />
     <Compile Include="SimpleStore/Fable.ReactNative.SimpleStore.KeyValueStore.fs" />
     <Compile Include="Model.fs" />
+    <Compile Include="FetchData.fs" />
     <Compile Include="Database.fs" />
     <Compile Include="Styles.fs" />
     <Compile Include="Scenes/CheckLocation.fs" />

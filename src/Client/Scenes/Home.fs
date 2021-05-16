@@ -3,43 +3,49 @@ module Home
 open Fable.ReactNative
 open Fable.ReactNative.Props
 open Elmish
-open Fable.Remoting.Client
 open Shared
-
+open SimpleToast
 // Model
 
-type Model = { StatusText : string  }
+type Model = { 
+    StatusText : string
+    Data : LocationCheckRequest []  }
 
 type Msg =
 | GetDemoData
-| NewDemoData of int
+| NewDemoData of LocationCheckRequest []
+| AddedDemoDataToLocalStore of int
 | BeginWatch
 | Error of exn
-
-
-let todosApi =
-    Remoting.createApi ()
-    |> Remoting.withRouteBuilder Route.builder
-    |> Remoting.buildProxy<ITodosApi>
 
 // Update
 let update (msg:Msg) model : Model*Cmd<Msg> =
     match msg with
     | GetDemoData ->
+        printfn "Getting data"
         { model with StatusText = "Syncing..." },
-        Cmd.OfPromise.either Database.createDemoData () NewDemoData Error
+        Cmd.OfAsync.either FetchData.locationApi.getLocation () NewDemoData Error
 
-    | NewDemoData count ->
-        { model with StatusText = sprintf "Locations: %d" count }, Cmd.none
+    | NewDemoData locations ->
+        printfn "Got Locations from Server"
+        { model with 
+            StatusText = "Got Data"
+            Data = locations }, 
+        Cmd.OfPromise.either Database.createDemoData locations AddedDemoDataToLocalStore Error
+
+    | AddedDemoDataToLocalStore i ->
+        { model with 
+            StatusText = sprintf "Locations: %d" i},  Cmd.none 
 
     | BeginWatch ->
         model, Cmd.none // Handled one level above
 
     | Error e ->
+        // Toaster.showShort e.Message
         { model with StatusText = string e.Message }, Cmd.none
 
 
-let init () = { StatusText = "" }, Cmd.ofMsg GetDemoData
+let init () = { StatusText = ""; Data =[||] }, Cmd.ofMsg GetDemoData
 
 // View
 
